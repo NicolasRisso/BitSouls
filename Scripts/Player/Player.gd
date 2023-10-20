@@ -17,6 +17,9 @@ export var AFTER_ROLL_MOMENTUM = 0.5
 export(float) var INVINCIBILITY_DURATION = 0.5
 export(int) var MAX_ATTACK_BUFFER = 1
 export(int) var MAX_ROLL_BUFFER = 1
+#STAMINA CONSUPTION
+export(int) var staminaPerAttack = 15
+export(int) var staminaPerRoll = 30
 
 var state = MOVE
 
@@ -53,9 +56,9 @@ func states():
 	if (rollbuffering > 0): state = ROLL
 	
 func bufferRead():
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") and stats.stamina >= staminaPerAttack:
 		increaseAttackBuffering()
-	if Input.is_action_just_pressed("roll"):
+	if Input.is_action_just_pressed("roll") and stats.stamina >= staminaPerRoll:
 		increaseRollBuffering()
 
 func move_state(delta):
@@ -112,7 +115,15 @@ func decreaseAttackBuffering():
 func decreaseRollBuffering():
 	if (rollbuffering > 0):
 		rollbuffering -= 1
-	
+
+func useStaminaAttack():
+	stats.stamina -= staminaPerAttack
+	stats.regenOn = false
+
+func useStaminaRoll():
+	stats.stamina -= staminaPerRoll
+	stats.regenOn = false
+
 func move():
 	velocity = move_and_slide(velocity)
 
