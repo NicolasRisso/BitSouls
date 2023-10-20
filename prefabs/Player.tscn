@@ -1,9 +1,10 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://prefabs/Collision/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://prefabs/Mechanics/Stats.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefabs/Collision/Hurtbox.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.09381
@@ -62,6 +63,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "decreaseAttackBuffering"
+} ]
+}
 
 [sub_resource type="Animation" id=26]
 resource_name = "AttackLeft"
@@ -85,9 +100,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "decreaseAttackBuffering"
+}, {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
@@ -139,9 +157,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "decreaseAttackBuffering"
+}, {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
@@ -193,9 +214,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "decreaseAttackBuffering"
+}, {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
@@ -342,9 +366,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "decreaseRollBuffering"
+}, {
 "args": [  ],
 "method": "roll_animation_finished"
 } ]
@@ -372,9 +399,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "decreaseRollBuffering"
+}, {
 "args": [  ],
 "method": "roll_animation_finished"
 } ]
@@ -402,9 +432,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "decreaseRollBuffering"
+}, {
 "args": [  ],
 "method": "roll_animation_finished"
 } ]
@@ -433,9 +466,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "decreaseRollBuffering"
+}, {
 "args": [  ],
 "method": "roll_animation_finished"
 } ]
@@ -639,6 +675,10 @@ graph_offset = Vector2( -289.438, -14 )
 [sub_resource type="CapsuleShape2D" id=36]
 height = 12.0
 
+[sub_resource type="CapsuleShape2D" id=49]
+radius = 5.0
+height = 7.0
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -697,4 +737,14 @@ disabled = true
 [node name="Stats" parent="." instance=ExtResource( 4 )]
 damage = 15.0
 
+[node name="Hurtbox" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -5 )
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 49 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+
 [editable path="HitboxPivot/Hitbox"]
+[editable path="Hurtbox"]
