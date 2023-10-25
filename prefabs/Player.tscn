@@ -468,7 +468,6 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=39]
 resource_name = "RollUp"
 length = 0.5
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -772,6 +771,10 @@ collision_layer = 4
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 49 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

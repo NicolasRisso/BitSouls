@@ -37,6 +37,7 @@ onready var hurtbox = $Hurtbox
 onready var animationState = animationTree.get("parameters/playback")
 
 func _ready():
+	randomize()
 	stats.connect("no_health", self, "queue_free")
 	animationTree.active = true
 
@@ -47,9 +48,9 @@ func _physics_process(delta):
 			move_state(delta)
 			states()
 		ROLL:
-			roll_state(delta)
+			roll_state()
 		ATTACK:
-			attack_state(delta)
+			attack_state()
 
 func states():
 	if (attackbuffering > 0): state = ATTACK
@@ -83,11 +84,11 @@ func move_state(delta):
 	
 	move()
 	
-func attack_state(delta):
+func attack_state():
 	velocity = Vector2.ZERO
 	animationState.travel("Attack")
 
-func roll_state(delta):
+func roll_state():
 	velocity = rollVector * ROLL_SPEED 
 	animationState.travel("Roll")
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)

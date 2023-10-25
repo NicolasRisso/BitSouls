@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Art/Enemies/Bat.png" type="Texture" id=1]
 [ext_resource path="res://Art/Shadows/SmallShadow.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://prefabs/Mechanics/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefabs/Mechanics/PlayerDetectionZone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://prefabs/Collision/Hitbox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://prefabs/Collision/SoftCollision.tscn" type="PackedScene" id=8]
+[ext_resource path="res://prefabs/Enemies/WanderController.tscn" type="PackedScene" id=9]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -49,6 +51,9 @@ radius = 80.0
 [sub_resource type="CircleShape2D" id=10]
 radius = 4.0
 
+[sub_resource type="CircleShape2D" id=11]
+radius = 3.0
+
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 4 )
@@ -57,7 +62,7 @@ KNOCKBACK_SPEED = 120
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Fly"
-frame = 2
+frame = 4
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -90,9 +95,18 @@ collision_mask = 4
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 shape = SubResource( 10 )
 
+[node name="SoftCollision" parent="." instance=ExtResource( 8 )]
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 11 )
+
+[node name="WanderController" parent="." instance=ExtResource( 9 )]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 
 [editable path="Hurtbox"]
 [editable path="PlayerDetectionZone"]
 [editable path="Hitbox"]
+[editable path="SoftCollision"]
+[editable path="WanderController"]

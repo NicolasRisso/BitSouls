@@ -1,10 +1,10 @@
 extends Node
 
-export(float) var max_health = 100
-export(float) var damage = 10
-export(float) var max_stamina = 100
-export(float) var staminaRegenDelay = 1
-export(float) var staminaRegenPerSecond = 45
+export(float) var max_health = 100.0
+export(float) var damage = 10.0
+export(float) var max_stamina = 100.0
+export(float) var staminaRegenDelay = 1.0
+export(float) var staminaRegenPerSecond = 45.0
 export(bool) var useStamina = true
 
 onready var health = max_health setget set_health
