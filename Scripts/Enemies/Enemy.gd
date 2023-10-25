@@ -7,6 +7,8 @@ export var ACCELERATION = 300
 export var MAX_SPEED = 50
 export var FRICTION = 200
 
+export var INVINCIBILITY_DURATION = 0.3
+
 export var SOFT_COLLISION_MODIFIER = 400
 
 export var TIME_RANGE = [1.0, 3.0] 
@@ -30,6 +32,7 @@ onready var playerDetectionZone = $PlayerDetectionZone
 onready var hurtbox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
+onready var animationPlayer = $AnimationPlayer
 
 func _ready():
 	state = pickRandomState([IDLE, WANDER])
@@ -91,9 +94,17 @@ func _on_Hurtbox_area_entered(area):
 	knockback(area)
 	stats.health -= area.damage
 	hurtbox.create_hitEffect()
+	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 
 func _on_Stats_no_health():
 	var deathEffect = DeathEffect.instance()
 	get_parent().add_child(deathEffect)
 	deathEffect.global_position = global_position
 	queue_free()
+
+
+func _on_Hurtbox_invencibility_ended():
+	animationPlayer.play("Stop")
+
+func _on_Hurtbox_invencibility_started():
+	animationPlayer.play("Start")

@@ -21,6 +21,8 @@ export(int) var MAX_ROLL_BUFFER = 1
 export(int) var staminaPerAttack = 15
 export(int) var staminaPerRoll = 30
 
+const PlayerHurtSound = preload("res://prefabs/PlayerHurtSound.tscn")
+
 var state = MOVE
 
 var velocity = Vector2.ZERO
@@ -34,6 +36,7 @@ var rollbuffering = 0
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var hurtbox = $Hurtbox
+onready var blinkAnimationPlayer = $BlinkAnimation
 onready var animationState = animationTree.get("parameters/playback")
 
 func _ready():
@@ -132,3 +135,13 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 	hurtbox.create_hitEffect()
+	if (stats.health <= 0):
+		var playerHurtSound = PlayerHurtSound.instance()
+		get_tree().current_scene.add_child(playerHurtSound)
+
+func _on_Hurtbox_invencibility_ended():
+	blinkAnimationPlayer.play("Stop")
+
+func _on_Hurtbox_invencibility_started():
+	if(state != ROLL):
+		blinkAnimationPlayer.play("Start")
