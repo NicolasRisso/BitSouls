@@ -1,9 +1,10 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://prefabs/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/World/GrassBackground.png" type="Texture" id=3]
 [ext_resource path="res://Art/World/DirtTileset.png" type="Texture" id=4]
+[ext_resource path="res://Art/PathFinding/PathFindingTile.png" type="Texture" id=5]
 [ext_resource path="res://prefabs/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://prefabs/Enemies/Bat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://prefabs/UI/HealthBar.tscn" type="PackedScene" id=8]
@@ -507,33 +508,76 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 2/shapes = [  ]
 2/z_index = 0
 
+[sub_resource type="NavigationPolygon" id=103]
+vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 ) ]
+
+[sub_resource type="TileSet" id=102]
+resource_local_to_scene = true
+0/name = "PathFindingTile.png 0"
+0/texture = ExtResource( 5 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 1
+0/autotile/bitmask_mode = 0
+0/autotile/bitmask_flags = [  ]
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 16, 16 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [ Vector2( 0, 0 ), SubResource( 103 ) ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
 [sub_resource type="AnimationNodeStateMachinePlayback" id=100]
+
+[sub_resource type="NavigationPolygon" id=104]
+vertices = PoolVector2Array( 82, 111, 94, 93, 93, 127, 78, 118, 80, 101, 3, 125, 62, 119, 50, 117, 42, 104, 3, 68, 31, 67, 46, 97, 60, 91, 36, 65, 165, 38, 253, 38, 253, 70, 219, 93, 215, 68, 219, 36, 213, 60, 202, 55, 166, 4, 219, 4, 219, 154, 163, 153, 164, 133, 168, 121, 211, 78, 164, 106, 203, 82, 36, 36, 72, 92, 158, 94, 182, 60, 181, 72, 191, 55, 283, 71, 283, 122, 260, 122, 259, 93, 189, 80 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 1, 0, 4 ), PoolIntArray( 3, 2, 5, 6 ), PoolIntArray( 7, 6, 5 ), PoolIntArray( 8, 7, 5, 9 ), PoolIntArray( 8, 9, 10, 11 ), PoolIntArray( 12, 11, 10, 13, 14 ), PoolIntArray( 15, 16, 17, 18, 19 ), PoolIntArray( 19, 18, 20 ), PoolIntArray( 19, 20, 21, 14, 22, 23 ), PoolIntArray( 17, 24, 25, 26, 27 ), PoolIntArray( 28, 17, 27, 29, 30 ), PoolIntArray( 13, 31, 14 ), PoolIntArray( 32, 12, 14 ), PoolIntArray( 4, 32, 14, 1 ), PoolIntArray( 33, 1, 14, 34, 35 ), PoolIntArray( 14, 21, 36 ), PoolIntArray( 14, 36, 34 ), PoolIntArray( 37, 38, 39, 40 ), PoolIntArray( 16, 37, 40, 17 ), PoolIntArray( 28, 18, 17 ), PoolIntArray( 41, 30, 29, 33 ), PoolIntArray( 33, 35, 41 ) ]
+outlines = [ PoolVector2Array( 36, 36, 36, 65, 31, 67, 3, 68, 3, 125, 93, 127, 94, 93, 158, 94, 164, 106, 168, 121, 164, 133, 163, 153, 219, 154, 219, 93, 259, 93, 260, 122, 283, 122, 283, 71, 253, 70, 253, 38, 219, 36, 219, 4, 166, 4, 165, 38 ), PoolVector2Array( 46, 97, 60, 91, 72, 92, 80, 101, 82, 111, 78, 118, 62, 119, 50, 117, 42, 104 ), PoolVector2Array( 189, 80, 181, 72, 182, 60, 191, 55, 202, 55, 213, 60, 215, 68, 211, 78, 203, 82 ) ]
 
 [node name="World" type="Node2D"]
 
 [node name="Background" type="Sprite" parent="."]
+position = Vector2( -32, -32 )
 texture = ExtResource( 3 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 1600, 900 )
+region_rect = Rect2( 0, 0, 1632, 932 )
 
 [node name="DirtPathTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( -65525, 0, 0, -65524, 0, 2, 11, 0, 65536, 12, 0, 65538, 65546, 0, 0, 65547, 0, 65545, 65548, 0, 131074, 131081, 0, 0, 131082, 0, 65545, 131083, 0, 131074, 196611, 0, 4, 196612, 0, 196609, 196613, 0, 7, 196615, 0, 0, 196616, 0, 1, 196617, 0, 131078, 196618, 0, 65538, 262146, 0, 0, 262147, 0, 131079, 262149, 0, 131076, 262150, 0, 5, 262151, 0, 196614, 262152, 0, 131073, 262153, 0, 65542, 262154, 0, 131077, 262155, 0, 2, 262157, 0, 4, 262158, 0, 196610, 393215, 0, 0, 327680, 0, 1, 327681, 0, 1, 327682, 0, 65545, 327683, 0, 196613, 327684, 0, 8, 327685, 0, 196614, 327686, 0, 131074, 327689, 0, 131072, 327690, 0, 65542, 327691, 0, 131077, 327692, 0, 5, 327693, 0, 196615, 327698, 0, 0, 327699, 0, 1, 327700, 0, 2, 458751, 0, 65536, 393216, 0, 65537, 393217, 0, 65541, 393218, 0, 131074, 393220, 0, 131075, 393226, 0, 131072, 393227, 0, 65542, 393228, 0, 65538, 393233, 0, 0, 393234, 0, 131078, 393235, 0, 65537, 393236, 0, 65538, 524287, 0, 131072, 458752, 0, 131073, 458753, 0, 131074, 458763, 0, 131072, 458764, 0, 65543, 458768, 0, 196608, 458769, 0, 196614, 458770, 0, 131073, 458771, 0, 131073, 458772, 0, 131074, 524300, 0, 131075, 589835, 0, 196611, 720908, 0, 196611 )
+tile_data = PoolIntArray( -65525, 0, 0, -65524, 0, 2, 11, 0, 65536, 12, 0, 65538, 65546, 0, 0, 65547, 0, 65545, 65548, 0, 131074, 131081, 0, 0, 131082, 0, 65545, 131083, 0, 131074, 196611, 0, 4, 196612, 0, 196609, 196613, 0, 7, 196615, 0, 0, 196616, 0, 1, 196617, 0, 131078, 196618, 0, 65538, 262146, 0, 0, 262147, 0, 131079, 262149, 0, 131076, 262150, 0, 5, 262151, 0, 196614, 262152, 0, 131073, 262153, 0, 65542, 262154, 0, 131077, 262155, 0, 2, 262157, 0, 4, 262158, 0, 196610, 327680, 0, 0, 327681, 0, 1, 327682, 0, 65545, 327683, 0, 196613, 327684, 0, 8, 327685, 0, 196614, 327686, 0, 131074, 327689, 0, 131072, 327690, 0, 65542, 327691, 0, 131077, 327692, 0, 5, 327693, 0, 196615, 327698, 0, 0, 327699, 0, 1, 327700, 0, 2, 393216, 0, 65536, 393217, 0, 65541, 393218, 0, 131074, 393220, 0, 131075, 393226, 0, 131072, 393227, 0, 65542, 393228, 0, 65538, 393233, 0, 0, 393234, 0, 131078, 393235, 0, 65537, 393236, 0, 65538, 458752, 0, 131072, 458753, 0, 131074, 458763, 0, 131072, 458764, 0, 65543, 458768, 0, 196608, 458769, 0, 196614, 458770, 0, 131073, 458771, 0, 131073, 458772, 0, 131074, 524300, 0, 131075, 589835, 0, 196611, 720908, 0, 196611 )
 
 [node name="DirtCliffTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( -1, 1, 0, -65536, 1, 1, -65535, 1, 1, -65534, 1, 1, -65533, 1, 1, -65532, 1, 2, -65529, 1, 0, -65528, 1, 2, 65535, 1, 65536, 0, 1, 65541, 1, 1, 131073, 2, 1, 131073, 3, 1, 131073, 4, 1, 131074, 7, 1, 131072, 8, 1, 65543, 131071, 1, 131072, 65536, 1, 131074, 65544, 1, 196612, 65545, 1, 6, 65546, 1, 2, 131081, 1, 131072, 131082, 1, 131074, 196611, 1, 3, 196615, 1, 3, 262144, 1, 0, 262145, 1, 5, 262146, 1, 196609, 262147, 1, 196616, 262148, 1, 196610, 262151, 1, 196612, 262152, 1, 6, 262153, 1, 2, 327680, 1, 131072, 327681, 1, 131074, 327688, 1, 131072, 327689, 1, 131074 )
+tile_data = PoolIntArray( -65538, 1, 0, -65537, 1, 1, -131072, 1, 1, -131071, 1, 1, -131070, 1, 1, -131069, 1, 1, -131068, 1, 1, -131067, 1, 1, -131066, 1, 1, -131065, 1, 1, -131064, 1, 2, -2, 1, 65536, -1, 1, 65537, -65536, 1, 65537, -65535, 1, 65537, -65534, 1, 65537, -65533, 1, 65537, -65532, 1, 65541, -65531, 1, 131073, -65530, 1, 131073, -65529, 1, 65542, -65528, 1, 65538, 65534, 1, 65536, 65535, 1, 65537, 0, 1, 65541, 1, 1, 131073, 2, 1, 131073, 3, 1, 131073, 4, 1, 131074, 7, 1, 131072, 8, 1, 65543, 131070, 1, 65536, 131071, 1, 65541, 65536, 1, 131074, 65544, 1, 196612, 65545, 1, 6, 65546, 1, 2, 196606, 1, 65536, 196607, 1, 65538, 131081, 1, 131072, 131082, 1, 131074, 262142, 1, 65536, 262143, 1, 65538, 196611, 1, 3, 196615, 1, 3, 327678, 1, 131072, 327679, 1, 196613, 262144, 1, 6, 262145, 1, 5, 262146, 1, 196609, 262147, 1, 196616, 262148, 1, 196610, 262151, 1, 196612, 262152, 1, 6, 262153, 1, 2, 327680, 1, 131072, 327681, 1, 131074, 327688, 1, 131072, 327689, 1, 131074 )
+
+[node name="PathFinding" type="TileMap" parent="."]
+tile_set = SubResource( 102 )
+cell_size = Vector2( 16, 16 )
+bake_navigation = true
+format = 1
 
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 104, 64 )
+position = Vector2( 21, 69 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -541,6 +585,10 @@ staminaPerRoll = 25
 
 [node name="AnimationTree" parent="YSort/Player" index="4"]
 parameters/playback = SubResource( 100 )
+
+[node name="Camera2D" parent="YSort/Player" index="8"]
+limit_left = -32
+limit_top = -32
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -551,7 +599,7 @@ position = Vector2( 150, 118 )
 position = Vector2( 144, 104 )
 
 [node name="Bush2" parent="YSort/Bushes" instance=ExtResource( 1 )]
-position = Vector2( 68, 109 )
+position = Vector2( 65, 107 )
 
 [node name="Bush3" parent="YSort/Bushes" instance=ExtResource( 1 )]
 position = Vector2( 273, 37 )
@@ -570,6 +618,12 @@ position = Vector2( 199, 71 )
 
 [node name="Tree3" parent="YSort/Bushes" instance=ExtResource( 9 )]
 position = Vector2( 288, 155 )
+
+[node name="Tree4" parent="YSort/Bushes" instance=ExtResource( 9 )]
+position = Vector2( 256, -2 )
+
+[node name="Tree5" parent="YSort/Bushes" instance=ExtResource( 9 )]
+position = Vector2( 4, 33 )
 
 [node name="Grass" type="YSort" parent="YSort"]
 
@@ -597,16 +651,19 @@ position = Vector2( 81, 161 )
 [node name="Grass8" parent="YSort/Grass" instance=ExtResource( 6 )]
 position = Vector2( 174, 5 )
 
+[node name="Grass9" parent="YSort/Grass" instance=ExtResource( 6 )]
+position = Vector2( 80, -11 )
+
 [node name="Enemies" type="YSort" parent="YSort"]
 
 [node name="Bat" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( 188, 48 )
+position = Vector2( 203, 88 )
 
 [node name="Bat2" parent="YSort/Enemies" instance=ExtResource( 7 )]
 position = Vector2( 202, 134 )
 
 [node name="Bat3" parent="YSort/Enemies" instance=ExtResource( 7 )]
-position = Vector2( -3, 120 )
+position = Vector2( 143, 68 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -615,6 +672,10 @@ margin_left = 3.0
 margin_top = 3.0
 margin_right = 103.0
 margin_bottom = 11.0
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+position = Vector2( 2, 0 )
+navpoly = SubResource( 104 )
 
 [editable path="YSort/Player"]
 [editable path="YSort/Player/HitboxPivot/Hitbox"]

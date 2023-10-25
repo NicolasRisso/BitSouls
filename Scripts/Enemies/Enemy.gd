@@ -23,6 +23,7 @@ enum{
 
 var velocity = Vector2.ZERO
 var knockbackVector = Vector2.ZERO
+var target = Vector2.ZERO
 
 var state = IDLE
 
@@ -33,6 +34,7 @@ onready var hurtbox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
+onready var navigationAgent = $NavigationAgent2D
 
 func _ready():
 	state = pickRandomState([IDLE, WANDER])
@@ -43,6 +45,10 @@ func _physics_process(delta):
 	
 	states(delta)
 
+	if softCollision.is_colliding():
+		velocity+= softCollision.get_push_vector() * delta * SOFT_COLLISION_MODIFIER
+	velocity = move_and_slide(velocity)
+	
 func states(delta):
 	match state:
 		IDLE:
@@ -51,20 +57,18 @@ func states(delta):
 			setState(true)
 		WANDER:
 			setState(true)
-			setTarget(wanderController.target_position, delta)
+			target = wanderController.target_position
+			setTarget(delta)
 			if global_position.distance_to(wanderController.target_position) <= MAX_SPEED * delta:
 				setState(false)
 			sprite.flip_h = velocity.x < 0
 		CHASE:
 			var player = playerDetectionZone.player
 			if player != null:
-				setTarget(player.global_position, delta)
+				target = player.global_position
+				setTarget(delta)
 			else: state = IDLE
 			sprite.flip_h = velocity.x < 0
-		
-	if softCollision.is_colliding():
-		velocity+= softCollision.get_push_vector() * delta * SOFT_COLLISION_MODIFIER
-	velocity = move_and_slide(velocity)
 
 func seekPlayer():
 	if playerDetectionZone.can_see_player():
@@ -82,9 +86,12 @@ func setState(compare):
 		state = pickRandomState([IDLE, WANDER])
 		wanderController.start_wander_timer(rand_range(TIME_RANGE[0], TIME_RANGE[1]))
 
-func setTarget(target, delta):
-	var direction = (target - global_position).normalized()
+func setTarget(delta):
+	var direction = to_local(navigationAgent.get_next_location()).normalized()
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+
+func makePath(target):
+	navigationAgent.set_target_location(target)
 	
 func knockback(area):
 	var direction = (position - area.owner.position).normalized()
@@ -108,3 +115,8 @@ func _on_Hurtbox_invencibility_ended():
 
 func _on_Hurtbox_invencibility_started():
 	animationPlayer.play("Start")
+
+
+func _on_Timer_timeout():
+	if (state != IDLE):
+		makePath(target)

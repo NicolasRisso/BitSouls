@@ -108,7 +108,6 @@ texture = ExtResource( 2 )
 material = SubResource( 14 )
 frames = SubResource( 1 )
 animation = "Fly"
-frame = 4
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -150,10 +149,18 @@ anims/RESET = SubResource( 15 )
 anims/Start = SubResource( 12 )
 anims/Stop = SubResource( 13 )
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 32.0
+
+[node name="Timer" type="Timer" parent="NavigationAgent2D"]
+wait_time = 0.5
+autostart = true
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invencibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invencibility_ended"]
 [connection signal="invencibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invencibility_started"]
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="timeout" from="NavigationAgent2D/Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="PlayerDetectionZone"]

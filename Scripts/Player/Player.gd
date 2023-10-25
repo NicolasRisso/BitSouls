@@ -95,6 +95,7 @@ func roll_state():
 	velocity = rollVector * ROLL_SPEED 
 	animationState.travel("Roll")
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
+	blinkAnimationPlayer.play("Stop")
 	move()
 	
 func attack_animation_finished():
