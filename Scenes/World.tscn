@@ -539,7 +539,7 @@ resource_local_to_scene = true
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=100]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=105]
 
 [sub_resource type="NavigationPolygon" id=104]
 vertices = PoolVector2Array( 82, 111, 94, 93, 93, 127, 78, 118, 80, 101, 3, 125, 62, 119, 50, 117, 42, 104, 3, 68, 31, 67, 46, 97, 60, 91, 36, 65, 165, 38, 253, 38, 253, 70, 219, 93, 215, 68, 219, 36, 213, 60, 202, 55, 166, 4, 219, 4, 219, 154, 163, 153, 164, 133, 168, 121, 211, 78, 164, 106, 203, 82, 36, 36, 72, 92, 158, 94, 182, 60, 181, 72, 191, 55, 283, 71, 283, 122, 260, 122, 259, 93, 189, 80 )
@@ -584,11 +584,7 @@ __meta__ = {
 staminaPerRoll = 25
 
 [node name="AnimationTree" parent="YSort/Player" index="4"]
-parameters/playback = SubResource( 100 )
-
-[node name="Camera2D" parent="YSort/Player" index="8"]
-limit_left = -32
-limit_top = -32
+parameters/playback = SubResource( 105 )
 
 [node name="Bushes" type="YSort" parent="YSort"]
 

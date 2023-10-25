@@ -5,6 +5,7 @@ export(float) var damage = 10.0
 export(float) var max_stamina = 100.0
 export(float) var staminaRegenDelay = 1.0
 export(float) var staminaRegenPerSecond = 45.0
+export(float) var physicalDamageNegation = 0.2
 export(bool) var useStamina = true
 
 onready var health = max_health setget set_health

@@ -931,7 +931,8 @@ shape = SubResource( 36 )
 disabled = true
 
 [node name="Stats" parent="." instance=ExtResource( 4 )]
-damage = 15.0
+damage = 8.0
+physicalDamageNegation = 0.9
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -5 )
@@ -942,8 +943,8 @@ shape = SubResource( 49 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-limit_left = 0
-limit_top = 0
+limit_left = -32
+limit_top = -32
 limit_right = 1600
 limit_bottom = 900
 smoothing_enabled = true
