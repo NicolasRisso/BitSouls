@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Inventory.gd"
+}, {
+"base": "Resource",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Item.gd"
+} ]
+_global_script_class_icons={
+"Inventory": "",
+"Item": ""
+}
+
 [application]
 
 config/name="BitSouls"
@@ -22,8 +38,9 @@ PlayerStats="*res://prefabs/Mechanics/PlayerStats.tscn"
 
 window/size/width=320
 window/size/height=180
-window/size/test_width=1920
-window/size/test_height=1080
+window/size/fullscreen=true
+window/size/test_width=1600
+window/size/test_height=900
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
@@ -105,6 +122,16 @@ heal={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+ui_left_mouse={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+FullScreen={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777254,"unicode":0,"echo":false,"script":null)
  ]
 }
 

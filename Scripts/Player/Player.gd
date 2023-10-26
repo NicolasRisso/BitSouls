@@ -43,6 +43,8 @@ var healBuffering = 0
 
 var healCounted = false
 
+var fullscreen = true
+
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var hurtbox = $Hurtbox
@@ -80,6 +82,10 @@ func bufferRead():
 		increaseRollBuffering()
 	if Input.is_action_just_pressed("heal") and healsLeft > 0:
 		increaseHealBuffering()
+	if Input.is_action_just_pressed("FullScreen"):
+		fullscreen = !fullscreen
+		OS.set_window_fullscreen(fullscreen)
+		
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
