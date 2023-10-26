@@ -3,7 +3,8 @@ extends KinematicBody2D
 enum {
 	MOVE,
 	ROLL,
-	ATTACK
+	ATTACK,
+	HEAL
 }
 
 #MOVEMENT
@@ -17,9 +18,13 @@ export var AFTER_ROLL_MOMENTUM = 0.5
 export(float) var INVINCIBILITY_DURATION = 0.5
 export(int) var MAX_ATTACK_BUFFER = 1
 export(int) var MAX_ROLL_BUFFER = 1
+export(int) var MAX_HEAL_BUFFER = 1
 #STAMINA CONSUPTION
 export(int) var staminaPerAttack = 15
 export(int) var staminaPerRoll = 30
+#HEALING
+export(int) var maxHealingPotions = 5
+export(float) var healAmmount = 50
 
 const PlayerHurtSound = preload("res://prefabs/PlayerHurtSound.tscn")
 
@@ -30,8 +35,13 @@ var rollVector = Vector2.DOWN
 
 var stats = PlayerStats
 
+var healsLeft = 0
+
 var attackbuffering = 0
 var rollbuffering = 0
+var healBuffering = 0
+
+var healCounted = false
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -41,6 +51,7 @@ onready var animationState = animationTree.get("parameters/playback")
 
 func _ready():
 	randomize()
+	healsLeft = maxHealingPotions
 	stats.connect("no_health", self, "reloadScene")
 	animationTree.active = true
 
@@ -54,16 +65,21 @@ func _physics_process(delta):
 			roll_state()
 		ATTACK:
 			attack_state()
+		HEAL:
+			heal_state()
 
 func states():
 	if (attackbuffering > 0): state = ATTACK
 	if (rollbuffering > 0): state = ROLL
+	if (healBuffering > 0): state = HEAL
 	
 func bufferRead():
 	if Input.is_action_just_pressed("attack") and stats.stamina >= staminaPerAttack:
 		increaseAttackBuffering()
 	if Input.is_action_just_pressed("roll") and stats.stamina >= staminaPerRoll:
 		increaseRollBuffering()
+	if Input.is_action_just_pressed("heal") and healsLeft > 0:
+		increaseHealBuffering()
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -79,6 +95,7 @@ func move_state(delta):
 		animationTree.set("parameters/Run/blend_position", input_vector)
 		animationTree.set("parameters/Attack/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
+		animationTree.set("parameters/Heal/blend_position", input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 	else:
@@ -86,6 +103,10 @@ func move_state(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	move()
+	
+func heal_state():
+	velocity = Vector2.ZERO
+	animationState.travel("Heal")
 	
 func attack_state():
 	velocity = Vector2.ZERO
@@ -100,10 +121,15 @@ func roll_state():
 	
 func attack_animation_finished():
 	state = MOVE
+	healCounted = false
 	
 func roll_animation_finished():
 	velocity *= AFTER_ROLL_MOMENTUM
 	state = MOVE
+
+func increaseHealBuffering():
+	if (healBuffering < MAX_HEAL_BUFFER):
+		healBuffering += 1
 
 func increaseAttackBuffering():
 	if (attackbuffering < MAX_ATTACK_BUFFER):
@@ -112,6 +138,13 @@ func increaseAttackBuffering():
 func increaseRollBuffering():
 	if (rollbuffering < MAX_ROLL_BUFFER):
 		rollbuffering += 1
+
+func decreaseHealBuffering():
+	if (healBuffering > 0):
+		healBuffering -= 1
+	if (!healCounted):
+		healsLeft -= 1
+		healCounted = true
 
 func decreaseAttackBuffering():
 	if (attackbuffering > 0):
@@ -128,6 +161,9 @@ func useStaminaAttack():
 func useStaminaRoll():
 	stats.stamina -= staminaPerRoll
 	stats.regenOn = false
+
+func startHealing():
+	stats.heal(healAmmount)
 
 func move():
 	velocity = move_and_slide(velocity)

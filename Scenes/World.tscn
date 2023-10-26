@@ -586,6 +586,7 @@ staminaPerRoll = 25
 
 [node name="AnimationTree" parent="YSort/Player" index="4"]
 parameters/playback = SubResource( 105 )
+parameters/Heal/blend_position = Vector2( 0, 0 )
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
