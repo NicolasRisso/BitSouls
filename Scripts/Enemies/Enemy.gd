@@ -35,9 +35,12 @@ onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
 onready var navigationAgent = $NavigationAgent2D
+onready var healthBar = $ExtraHealthBar
 
 func _ready():
 	state = pickRandomState([IDLE, WANDER])
+	healthBar.stats = stats
+	healthBar.loaded()
 
 func _physics_process(delta):
 	knockbackVector = knockbackVector.move_toward(Vector2.ZERO, KNOCKBACK_FORCE * delta)
@@ -99,7 +102,6 @@ func knockback(area):
 
 func _on_Hurtbox_area_entered(area):
 	knockback(area)
-	print(stats.physicalDamageNegation)
 	stats.health -= area.damage * (1 - stats.physicalDamageNegation)
 	hurtbox.create_hitEffect()
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)

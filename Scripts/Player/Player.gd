@@ -133,7 +133,6 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func _on_Hurtbox_area_entered(area):
-	print(stats.physicalDamageNegation)
 	stats.health -= area.damage * (1 - stats.physicalDamageNegation)
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 	hurtbox.create_hitEffect()
