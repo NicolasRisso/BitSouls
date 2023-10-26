@@ -41,7 +41,7 @@ onready var animationState = animationTree.get("parameters/playback")
 
 func _ready():
 	randomize()
-	stats.connect("no_health", self, "queue_free")
+	stats.connect("no_health", self, "reloadScene")
 	animationTree.active = true
 
 func _physics_process(delta):
@@ -131,6 +131,10 @@ func useStaminaRoll():
 
 func move():
 	velocity = move_and_slide(velocity)
+
+func reloadScene():
+	PlayerStats.health = PlayerStats.max_health
+	get_tree().reload_current_scene()
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage * (1 - stats.physicalDamageNegation)
