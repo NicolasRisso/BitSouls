@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://prefabs/Itens/Ring.tres" type="Resource" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://prefabs/Itens/Estus.tres" type="Resource" id=5]
 [ext_resource path="res://prefabs/Itens/RustySword.tres" type="Resource" id=6]
 [ext_resource path="res://prefabs/Itens/Meat.tres" type="Resource" id=7]
+[ext_resource path="res://prefabs/Itens/KnightsRing.tres" type="Resource" id=8]
 
 [resource]
 script = ExtResource( 1 )
-items = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), null, ExtResource( 5 ), null, null, null, ExtResource( 7 ), null, ExtResource( 4 ), null, null, null, ExtResource( 6 ) ]
+items = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), null, ExtResource( 5 ), null, null, ExtResource( 8 ), ExtResource( 7 ), null, ExtResource( 4 ), null, null, null, ExtResource( 6 ) ]

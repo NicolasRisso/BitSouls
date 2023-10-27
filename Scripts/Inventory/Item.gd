@@ -4,6 +4,11 @@ class_name Item
 enum ItemType{
 	SWORD,
 	POTION,
+	HELMET,
+	CHESTPLATE,
+	GLOVES,
+	SHOES,
+	ARTIFACT,
 	ALL
 }
 

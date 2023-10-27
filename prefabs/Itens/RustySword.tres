@@ -1,15 +1,15 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Inventory/Sword.gd" type="Script" id=1]
-[ext_resource path="res://Art/Itens/Sword.png" type="Texture" id=2]
+[ext_resource path="res://Art/Itens/RustySword.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
 name = "Rusty Sword"
-description = ""
+description = "An old sword with an rusty blade. Even thought it is aged it is not bad at all."
 texture = ExtResource( 2 )
 type = 0
 isStackable = false
 amount = 1
 damage = 8.0
-armorPierce = 0.5
+armorPierce = -0.1

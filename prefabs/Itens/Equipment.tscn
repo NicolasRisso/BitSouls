@@ -25,6 +25,7 @@ anchor_bottom = 0.0
 margin_top = 30.0
 margin_right = 320.0
 margin_bottom = 60.0
+type_acceptable = 2
 
 [node name="InventorySlotDisplay3" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
@@ -32,6 +33,7 @@ anchor_bottom = 0.0
 margin_top = 60.0
 margin_right = 320.0
 margin_bottom = 90.0
+type_acceptable = 3
 
 [node name="InventorySlotDisplay4" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
@@ -39,6 +41,7 @@ anchor_bottom = 0.0
 margin_top = 90.0
 margin_right = 320.0
 margin_bottom = 120.0
+type_acceptable = 4
 
 [node name="InventorySlotDisplay5" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
@@ -46,6 +49,7 @@ anchor_bottom = 0.0
 margin_top = 120.0
 margin_right = 320.0
 margin_bottom = 150.0
+type_acceptable = 5
 
 [node name="InventorySlotDisplay6" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0

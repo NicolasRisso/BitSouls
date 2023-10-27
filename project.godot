@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Item",
+"class": "Artifact",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Artifact.gd"
+}, {
 "base": "Resource",
 "class": "Inventory",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Inventory/Sword.gd"
 } ]
 _global_script_class_icons={
+"Artifact": "",
 "Inventory": "",
 "Item": "",
 "Potion": "",

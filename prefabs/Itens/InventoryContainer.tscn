@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://prefabs/Itens/Equipment.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/Itens/InventoryDisplay.tscn" type="PackedScene" id=2]
+[ext_resource path="res://prefabs/Itens/Artfacts.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefabs/Itens/Artifacts.tres" type="Resource" id=4]
 
 [node name="InventoryContainer" type="ColorRect"]
 anchor_right = 1.0
@@ -34,3 +36,18 @@ margin_left = 88.0
 margin_top = 36.0
 margin_right = 106.0
 margin_bottom = 144.0
+
+[node name="ArtifactContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -100.0
+mouse_filter = 2
+
+[node name="ArtifactDisplay" parent="ArtifactContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 142.0
+margin_top = 31.0
+margin_right = 178.0
+margin_bottom = 49.0
+inventory = ExtResource( 4 )

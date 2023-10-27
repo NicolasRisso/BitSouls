@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Inventory/Artifact.gd" type="Script" id=1]
+[ext_resource path="res://Art/Itens/KnightsRing.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Knight's Ring"
+description = "Increase the base damage by 10%."
+texture = ExtResource( 2 )
+type = 6
+isStackable = false
+amount = 1
