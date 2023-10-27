@@ -1,9 +1,16 @@
 extends Resource
 class_name Item
 
+enum ItemType{
+	SWORD,
+	POTION,
+	ALL
+}
+
 export(String) var name = ""
 export(String) var description = ""
 export(Texture) var texture
-export(bool) var isStackable = false
+export(ItemType) var type = ItemType.ALL
 
-var amount = 1
+export(bool) var isStackable = false
+export(int) var amount = 1

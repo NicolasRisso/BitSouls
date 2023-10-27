@@ -2,13 +2,16 @@ extends Node
 
 export(float) var max_health = 100.0
 export(float) var damage = 10.0
+export(float) var armorPierce = 0
 export(float) var max_stamina = 100.0
 export(float) var staminaRegenDelay = 1.0
 export(float) var staminaRegenPerSecond = 45.0
 export(float) var physicalDamageNegation = 0.2
+export(bool) var useEquipment = false
 export(bool) var useStamina = true
 export(bool) var useHealling = false
 export(float) var HealVelocity = 1.5
+export(Resource) var equipment
 
 onready var health = max_health setget set_health
 onready var stamina = max_stamina setget set_stamina
@@ -58,11 +61,26 @@ func set_stamina(value):
 	
 #Encontra a hitbox e salva o dano nela
 func _ready():
+	if equipment is Inventory and useEquipment:
+		equipment.connect("items_changed", self, "_updateItemStats")
+	_updateItemStats([])
+	
+func _updateItemStats(indexes):
+	if equipment is Inventory and useEquipment:
+		if equipment.items[0] is Sword:
+			damage = equipment.items[0].damage
+			if (damage < 1): damage = 1
+			armorPierce = equipment.items[0].armorPierce
+		else:
+			damage = 1
+			armorPierce = 0
+
 	var hitbox = get_node_or_null("../Hitbox")
 	if !hitbox: hitbox = get_node_or_null("../HitboxPivot/Hitbox")
-	if hitbox: hitbox.damage = damage
-	print(hitbox)	
-	
+	if hitbox:
+		hitbox.damage = damage
+		hitbox.armorPierce = armorPierce
+
 func callStaminaRegen():
 	timer.start(staminaRegenDelay)
 	waitingTimer = true

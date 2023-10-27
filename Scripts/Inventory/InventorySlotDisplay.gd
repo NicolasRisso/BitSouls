@@ -2,12 +2,13 @@ extends CenterContainer
 
 var inventory
 
+export(Item.ItemType) var type_acceptable = Item.ItemType.ALL
+
 onready var itemTextureRect = $ItemTextureRect
 onready var itemAmountLabel = $ItemTextureRect/ItemAmount
 
 func setInventory(invent):
 	inventory = invent
-	print(inventory)
 
 func display_item(item):
 	if item is Item:
@@ -26,6 +27,7 @@ func get_drag_data(_position):
 		data.item = item
 		data.item_index = item_index
 		data.inventory = inventory
+		data.originalSlotType = type_acceptable
 		var dragPreview = TextureRect.new()
 		dragPreview.texture = item.texture
 		
@@ -35,7 +37,13 @@ func get_drag_data(_position):
 		return data
 
 func can_drop_data(position, data):
-	return data is Dictionary and data.has("item")
+	if data is Dictionary and data.has("item"):
+		if data.item.type == type_acceptable or type_acceptable == Item.ItemType.ALL:
+			if inventory.items[get_index()] is Item:
+				if inventory.items[get_index()].type == data.originalSlotType or data.originalSlotType == Item.ItemType.ALL:
+					return true
+			else: return true
+	return false
 
 func drop_data(_position, data):
 	var my_item_index = get_index()

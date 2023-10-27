@@ -4,9 +4,11 @@ enum {
 	MOVE,
 	ROLL,
 	ATTACK,
-	HEAL
+	HEAL,
+	INVENTORY
 }
 
+export(Resource) var equipment
 #MOVEMENT
 export var ACCELERATION = 1000
 export var MAX_SPEED = 80
@@ -24,7 +26,8 @@ export(int) var staminaPerAttack = 15
 export(int) var staminaPerRoll = 30
 #HEALING
 export(int) var maxHealingPotions = 5
-export(float) var healAmmount = 50
+
+export(NodePath) var inventoryContainer_path
 
 const PlayerHurtSound = preload("res://prefabs/PlayerHurtSound.tscn")
 
@@ -36,6 +39,7 @@ var rollVector = Vector2.DOWN
 var stats = PlayerStats
 
 var healsLeft = 0
+var healAmmount = 0
 
 var attackbuffering = 0
 var rollbuffering = 0
@@ -44,18 +48,32 @@ var healBuffering = 0
 var healCounted = false
 
 var fullscreen = true
+var inventory = false
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var hurtbox = $Hurtbox
 onready var blinkAnimationPlayer = $BlinkAnimation
 onready var animationState = animationTree.get("parameters/playback")
+onready var inventoryContainer = get_node(inventoryContainer_path)
 
 func _ready():
+	if equipment is Inventory:
+		equipment.connect("items_changed", self, "_updateItemStats")
+	_updateItemStats([])
+	
 	randomize()
-	healsLeft = maxHealingPotions
 	stats.connect("no_health", self, "reloadScene")
 	animationTree.active = true
+
+func _updateItemStats(indexes):
+	print("equipment.items[5].amount")
+	if equipment is Inventory:
+		if equipment.items[5] is Potion:
+			healsLeft = equipment.items[5].amount
+			healAmmount = equipment.items[5].healAmount
+		else: healsLeft = 0
+	else: healsLeft = 0
 
 func _physics_process(delta):
 	bufferRead()
@@ -69,6 +87,8 @@ func _physics_process(delta):
 			attack_state()
 		HEAL:
 			heal_state()
+		INVENTORY:
+			inventory_state()
 
 func states():
 	if (attackbuffering > 0): state = ATTACK
@@ -76,15 +96,20 @@ func states():
 	if (healBuffering > 0): state = HEAL
 	
 func bufferRead():
+	if Input.is_action_just_pressed("FullScreen"):
+		fullscreen = !fullscreen
+		OS.set_window_fullscreen(fullscreen)
+	if Input.is_action_just_pressed("inventory") or (Input.is_action_just_pressed("close_inventory") and inventory):
+		inventory = !inventory
+		inventoryContainer.visible = inventory
+		
+	if inventory: return
 	if Input.is_action_just_pressed("attack") and stats.stamina >= staminaPerAttack:
 		increaseAttackBuffering()
 	if Input.is_action_just_pressed("roll") and stats.stamina >= staminaPerRoll:
 		increaseRollBuffering()
 	if Input.is_action_just_pressed("heal") and healsLeft > 0:
 		increaseHealBuffering()
-	if Input.is_action_just_pressed("FullScreen"):
-		fullscreen = !fullscreen
-		OS.set_window_fullscreen(fullscreen)
 		
 
 func move_state(delta):
@@ -109,7 +134,11 @@ func move_state(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	move()
-	
+
+func inventory_state():
+	velocity = Vector2.ZERO
+	pass
+
 func heal_state():
 	velocity = Vector2.ZERO
 	animationState.travel("Heal")
@@ -151,6 +180,10 @@ func decreaseHealBuffering():
 	if (!healCounted):
 		healsLeft -= 1
 		healCounted = true
+		if equipment is Inventory:
+			if equipment.items[5] is Potion:
+				equipment.items[5].amount = healsLeft
+				equipment.emit_signal("items_changed", [5])
 
 func decreaseAttackBuffering():
 	if (attackbuffering > 0):
@@ -179,7 +212,7 @@ func reloadScene():
 	get_tree().reload_current_scene()
 
 func _on_Hurtbox_area_entered(area):
-	stats.health -= area.damage * (1 - stats.physicalDamageNegation)
+	stats.health -= area.damage * (1 - stats.physicalDamageNegation + area.armorPierce)
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 	hurtbox.create_hitEffect()
 	if (stats.health <= 0):

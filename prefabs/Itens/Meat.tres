@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Inventory/Potion.gd" type="Script" id=1]
+[ext_resource path="res://Art/Itens/Meat.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Meat"
+description = ""
+texture = ExtResource( 2 )
+type = 1
+isStackable = true
+amount = 3
+healAmount = 5.0

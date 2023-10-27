@@ -1,11 +1,14 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://Scripts/Inventory/Item.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Inventory/Potion.gd" type="Script" id=1]
 [ext_resource path="res://Art/Itens/Potion.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
-name = "Heal Stone"
+name = "Estus"
 description = ""
 texture = ExtResource( 2 )
+type = 1
 isStackable = true
+amount = 5
+healAmount = 50.0
