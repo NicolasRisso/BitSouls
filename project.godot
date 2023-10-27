@@ -38,7 +38,6 @@ PlayerStats="*res://prefabs/Mechanics/PlayerStats.tscn"
 
 window/size/width=320
 window/size/height=180
-window/size/fullscreen=true
 window/size/test_width=1600
 window/size/test_height=900
 window/stretch/mode="2d"
