@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://prefabs/Itens/InventorySlotDisplay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Inventory/InventoryDisplay.gd" type="Script" id=2]
 [ext_resource path="res://prefabs/Itens/Equipment.tres" type="Resource" id=3]
+[ext_resource path="res://Art/Itens/Format_Artifact.png" type="Texture" id=4]
 
 [node name="ArtifactDisplay" type="GridContainer"]
 anchor_right = 1.0
@@ -19,6 +20,7 @@ anchor_bottom = 0.0
 margin_right = 160.0
 margin_bottom = 180.0
 type_acceptable = 6
+formatTexture = ExtResource( 4 )
 
 [node name="InventorySlotDisplay2" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
@@ -27,3 +29,4 @@ margin_left = 160.0
 margin_right = 320.0
 margin_bottom = 180.0
 type_acceptable = 6
+formatTexture = ExtResource( 4 )

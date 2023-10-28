@@ -3,6 +3,7 @@ extends CenterContainer
 var inventory
 
 export(Item.ItemType) var type_acceptable = Item.ItemType.ALL
+export(Texture) var formatTexture = null
 
 onready var itemTextureRect = $ItemTextureRect
 onready var itemAmountLabel = $ItemTextureRect/ItemAmount
@@ -16,7 +17,9 @@ func display_item(item):
 		if (item.isStackable): itemAmountLabel.text = str(item.amount)
 		else: itemAmountLabel.text = ""
 	else:
-		itemTextureRect.texture = load("res://Art/Itens/EmptyInventorySlot.png")
+		if (formatTexture is Texture):
+			itemTextureRect.texture = formatTexture
+		else: itemTextureRect.texture = load("res://Art/Itens/EmptyInventorySlot.png")
 		itemAmountLabel.text = ""
 
 func get_drag_data(_position):

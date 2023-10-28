@@ -62,12 +62,12 @@ func _ready():
 		equipment.connect("items_changed", self, "_updateItemStats")
 	_updateItemStats([])
 	
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	randomize()
 	stats.connect("no_health", self, "reloadScene")
 	animationTree.active = true
 
 func _updateItemStats(indexes):
-	print("equipment.items[5].amount")
 	if equipment is Inventory:
 		if equipment.items[5] is Potion:
 			healsLeft = equipment.items[5].amount
@@ -102,6 +102,8 @@ func bufferRead():
 	if Input.is_action_just_pressed("inventory") or (Input.is_action_just_pressed("close_inventory") and inventory):
 		inventory = !inventory
 		inventoryContainer.visible = inventory
+		if(!inventory): Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		else: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 	if inventory: return
 	if Input.is_action_just_pressed("attack") and stats.stamina >= staminaPerAttack:
