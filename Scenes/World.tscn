@@ -1,9 +1,10 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://prefabs/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/World/GrassBackground.png" type="Texture" id=3]
 [ext_resource path="res://Art/World/DirtTileset.png" type="Texture" id=4]
+[ext_resource path="res://prefabs/Mechanics/ItemDrop.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefabs/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://prefabs/Enemies/Bat.tscn" type="PackedScene" id=7]
 [ext_resource path="res://prefabs/UI/HealthBar.tscn" type="PackedScene" id=8]
@@ -1206,6 +1207,10 @@ position = Vector2( 377, 599 )
 
 [node name="Grass73" parent="YSort/Grass" instance=ExtResource( 6 )]
 position = Vector2( 182, 736 )
+
+[node name="ItemDrop" parent="YSort/Grass" instance=ExtResource( 5 )]
+position = Vector2( 277, 597 )
+frame = 8
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
