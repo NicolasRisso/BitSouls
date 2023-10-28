@@ -6,7 +6,7 @@ export(Item.ItemType) var type_acceptable = Item.ItemType.ALL
 export(Texture) var formatTexture = null
 
 onready var itemTextureRect = $ItemTextureRect
-onready var itemAmountLabel = $ItemTextureRect/ItemAmount
+onready var itemAmountLabel = $ItemTextureRect/Node2D/ItemAmount
 
 func setInventory(invent):
 	inventory = invent

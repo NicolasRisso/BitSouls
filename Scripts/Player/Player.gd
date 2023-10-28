@@ -28,6 +28,7 @@ export(int) var staminaPerRoll = 30
 export(int) var maxHealingPotions = 5
 
 export(NodePath) var inventoryContainer_path
+export(NodePath) var inventoryUI_path
 
 const PlayerHurtSound = preload("res://prefabs/PlayerHurtSound.tscn")
 
@@ -56,6 +57,7 @@ onready var hurtbox = $Hurtbox
 onready var blinkAnimationPlayer = $BlinkAnimation
 onready var animationState = animationTree.get("parameters/playback")
 onready var inventoryContainer = get_node(inventoryContainer_path)
+onready var inventoryUI = get_node(inventoryUI_path)
 
 func _ready():
 	if equipment is Inventory:
@@ -102,6 +104,7 @@ func bufferRead():
 	if Input.is_action_just_pressed("inventory") or (Input.is_action_just_pressed("close_inventory") and inventory):
 		inventory = !inventory
 		inventoryContainer.visible = inventory
+		inventoryUI.visible = !inventory
 		if(!inventory): Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		

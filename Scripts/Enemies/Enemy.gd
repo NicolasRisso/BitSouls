@@ -102,7 +102,9 @@ func knockback(area):
 
 func _on_Hurtbox_area_entered(area):
 	knockback(area)
-	stats.health -= area.damage * (1 - stats.physicalDamageNegation + area.armorPierce)
+	var damageNegation = 1 - stats.physicalDamageNegation + area.armorPierce
+	if (damageNegation > 1): damageNegation = 1
+	stats.health -= area.damage * (damageNegation)
 	hurtbox.create_hitEffect()
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 

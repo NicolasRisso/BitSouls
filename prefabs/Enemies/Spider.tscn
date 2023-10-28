@@ -107,7 +107,7 @@ texture = ExtResource( 2 )
 material = SubResource( 14 )
 frames = SubResource( 1 )
 animation = "Walk"
-frame = 2
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -123,7 +123,7 @@ shape = SubResource( 8 )
 [node name="Stats" parent="." instance=ExtResource( 5 )]
 max_health = 40.0
 damage = 15.0
-physicalDamageNegation = 0.4
+physicalDamageNegation = 0.45
 useStamina = false
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]

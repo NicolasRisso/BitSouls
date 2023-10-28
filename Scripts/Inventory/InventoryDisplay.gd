@@ -3,8 +3,9 @@ extends GridContainer
 export(Resource) var inventory
 
 func _ready():
-	for i in range(get_child_count()):		
-		get_child(i).setInventory(inventory)
+	for i in range(get_child_count()):
+		if (get_child(i) is CenterContainer):
+			get_child(i).setInventory(inventory)
 		
 	inventory.displayRect = rect_min_size
 	inventory.connect("items_changed", self, "_on_itens_changed")

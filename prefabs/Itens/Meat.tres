@@ -10,5 +10,5 @@ description = ""
 texture = ExtResource( 2 )
 type = 1
 isStackable = true
-amount = 3
+amount = 17
 healAmount = 5.0

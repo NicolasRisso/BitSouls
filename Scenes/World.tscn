@@ -567,6 +567,7 @@ __meta__ = {
 }
 staminaPerRoll = 25
 inventoryContainer_path = NodePath("../../CanvasLayer/InventoryContainer")
+inventoryUI_path = NodePath("../../CanvasLayer/InventoryUI")
 
 [node name="AnimationTree" parent="YSort/Player" index="4"]
 parameters/playback = SubResource( 105 )
@@ -1210,7 +1211,7 @@ position = Vector2( 182, 736 )
 
 [node name="ItemDrop" parent="YSort/Grass" instance=ExtResource( 5 )]
 position = Vector2( 277, 597 )
-frame = 8
+frame = 4
 
 [node name="Enemies" type="YSort" parent="YSort"]
 
@@ -1270,31 +1271,33 @@ margin_bottom = 11.0
 [node name="InventoryContainer" parent="CanvasLayer" instance=ExtResource( 12 )]
 visible = false
 
-[node name="ItemSlot" parent="CanvasLayer" instance=ExtResource( 16 )]
+[node name="InventoryUI" type="Node2D" parent="CanvasLayer"]
+
+[node name="ItemSlot" parent="CanvasLayer/InventoryUI" instance=ExtResource( 16 )]
 margin_left = 23.0
 margin_top = 159.0
-margin_right = -279.0
-margin_bottom = -3.0
+margin_right = 41.0
+margin_bottom = 177.0
 item_index = 5
 
-[node name="SwordSlot" parent="CanvasLayer" instance=ExtResource( 16 )]
+[node name="SwordSlot" parent="CanvasLayer/InventoryUI" instance=ExtResource( 16 )]
 margin_left = 43.0
 margin_top = 149.0
-margin_right = -259.0
-margin_bottom = -13.0
+margin_right = 61.0
+margin_bottom = 167.0
 item_index = 0
 
-[node name="WandSlot" parent="CanvasLayer" instance=ExtResource( 16 )]
+[node name="WandSlot" parent="CanvasLayer/InventoryUI" instance=ExtResource( 16 )]
 margin_left = 3.0
 margin_top = 149.0
-margin_right = -299.0
-margin_bottom = -13.0
+margin_right = 21.0
+margin_bottom = 167.0
 
-[node name="SpellSlot" parent="CanvasLayer" instance=ExtResource( 16 )]
+[node name="SpellSlot" parent="CanvasLayer/InventoryUI" instance=ExtResource( 16 )]
 margin_left = 23.0
 margin_top = 139.0
-margin_right = -279.0
-margin_bottom = -23.0
+margin_right = 41.0
+margin_bottom = 157.0
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
 position = Vector2( 2, 0 )
