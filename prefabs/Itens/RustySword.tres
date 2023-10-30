@@ -10,6 +10,7 @@ description = "An old sword with an rusty blade. Even thought it is aged it is n
 texture = ExtResource( 2 )
 type = 0
 isStackable = false
+isCleanable = true
 amount = 1
 weight = 6.0
 damage = 8.0

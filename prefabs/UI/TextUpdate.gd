@@ -8,10 +8,14 @@ export(String, "damage,armorPierce,physicalDamageNegation,health,max_health,stam
 export(String, "damage,armorPierce,physicalDamageNegation,health,max_health,stamina,max_stamina,weight,max_weight") var selectedVariable2 : String = "physicalDamageNegation"
 
 var equipment = preload("res://prefabs/Itens/Equipment.tres")
+var extraSword = preload("res://prefabs/Itens/ExtraSword.tres")
+var extraUsable = preload("res://prefabs/Itens/ExtraUsable.tres")
 
 func _ready():
 	if (typeOfUpdate == "ItemChanged"):
 		equipment.connect("items_changed", self, "_updateText")
+		extraSword.connect("items_changed", self, "_updateText")
+		extraUsable.connect("items_changed", self, "_updateText")
 	elif (typeOfUpdate == "HealthChanged"):
 		PlayerStats.connect("health_changed", self, "_updateText")
 	elif (typeOfUpdate == "StaminaChanged"):

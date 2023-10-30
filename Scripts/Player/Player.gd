@@ -55,6 +55,7 @@ onready var blinkAnimationPlayer = $BlinkAnimation
 onready var animationState = animationTree.get("parameters/playback")
 onready var inventoryContainer = get_node(inventoryContainer_path)
 onready var inventoryUI = get_node(inventoryUI_path)
+onready var itemBox = $ItemBox
 
 func _ready():
 	if equipment is Inventory:
@@ -114,6 +115,8 @@ func bufferRead():
 		increaseRollBuffering()
 	if Input.is_action_just_pressed("heal") and healsLeft > 0:
 		increaseHealBuffering()
+	if Input.is_action_just_pressed("grab_item"):
+		itemBox.enableForTime(0.1)
 		
 
 func move_state(delta):
@@ -145,7 +148,7 @@ func inventory_state():
 func heal_state():
 	velocity = Vector2.ZERO
 	animationState.travel("Heal")
-	
+
 func attack_state():
 	velocity = Vector2.ZERO
 	animationState.travel("Attack")

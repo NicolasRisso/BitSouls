@@ -10,6 +10,7 @@ description = ""
 texture = ExtResource( 2 )
 type = 1
 isStackable = true
+isCleanable = false
 amount = 5
 weight = 0.0
 usableType = 0

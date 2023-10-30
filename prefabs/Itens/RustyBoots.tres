@@ -10,6 +10,7 @@ description = ""
 texture = ExtResource( 2 )
 type = 5
 isStackable = false
+isCleanable = true
 amount = 1
 weight = 4.0
 armorType = 3

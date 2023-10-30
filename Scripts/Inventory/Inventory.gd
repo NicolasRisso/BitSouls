@@ -40,3 +40,9 @@ func make_items_unique():
 		else:
 			unique_items.append(null)
 	items = unique_items
+	
+func get_first_slot_available():
+	for i in range (items.size()):
+		if !(items[i] is Item):
+			return i
+	return -1

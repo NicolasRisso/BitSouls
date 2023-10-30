@@ -10,6 +10,7 @@ description = "Rapiers are efficient agains enemies with heavy armor or with a t
 texture = ExtResource( 2 )
 type = 0
 isStackable = false
+isCleanable = true
 amount = 1
 weight = 4.0
 damage = 5.0

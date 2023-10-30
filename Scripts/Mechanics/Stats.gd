@@ -17,6 +17,9 @@ export(bool) var useHealling = false
 export(float) var HealVelocity = 1.5
 export(Resource) var equipment
 
+var extraSword = preload("res://prefabs/Itens/ExtraSword.tres")
+var extraUsable = preload("res://prefabs/Itens/ExtraUsable.tres")
+
 onready var health = max_health setget set_health
 onready var stamina = max_stamina setget set_stamina
 onready var weight = 0 setget set_weight
@@ -78,7 +81,6 @@ func set_weight(value):
 	adjustRoll()
 
 func adjustRoll():
-	print(weight)
 	if weight <= 0.3 * max_weight:
 		rollInvulnerabilityDuration = rollInvulnerability[0]
 		maxSpeed = speedAdjustment[0]
@@ -95,7 +97,6 @@ func adjustRoll():
 		rollInvulnerabilityDuration = 0.0
 		maxSpeed = speedAdjustment[3]
 		rollSpeed = rollSpeedAdjustment[3]
-	print(str(rollInvulnerabilityDuration) + " | " + str(maxSpeed) + " | " + str(rollSpeed))
 		
 #Encontra a hitbox e salva o dano nela
 func _ready():
@@ -104,6 +105,8 @@ func _ready():
 		adjustRoll()
 	if equipment is Inventory and useEquipment:
 		equipment.connect("items_changed", self, "_updateItemStats")
+		extraSword.connect("items_changed", self, "_updateItemStats")
+		extraUsable.connect("items_changed", self, "_updateItemStats")
 	_updateItemStats([])
 	
 func _updateItemStats(indexes):
@@ -139,6 +142,12 @@ func itemRead():
 		for i in range(equipment.items.size()):
 			if equipment.items[i] is Item:
 				totalWeight += equipment.items[i].weight
+		for i in range(extraSword.items.size()):
+			if extraSword.items[i] is Item:
+				totalWeight += extraSword.items[i].weight
+		for i in range(extraUsable.items.size()):
+			if extraUsable.items[i] is Item:
+				totalWeight += extraUsable.items[i].weight
 		self.weight = totalWeight
 
 func callStaminaRegen():

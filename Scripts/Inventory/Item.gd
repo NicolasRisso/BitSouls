@@ -18,6 +18,7 @@ export(Texture) var texture
 export(ItemType) var type = ItemType.ALL
 
 export(bool) var isStackable = false
+export(bool) var isCleanable = true
 export(int) var amount = 1
 
 export(float) var weight = 0.0
