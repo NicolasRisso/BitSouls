@@ -1211,7 +1211,7 @@ position = Vector2( 182, 736 )
 
 [node name="ItemDrop" parent="YSort/Grass" instance=ExtResource( 5 )]
 position = Vector2( 277, 597 )
-frame = 4
+frame = 20
 
 [node name="Enemies" type="YSort" parent="YSort"]
 

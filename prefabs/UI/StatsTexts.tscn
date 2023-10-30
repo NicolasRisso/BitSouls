@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://prefabs/Fonts/PixelRPG.tres" type="DynamicFont" id=1]
+[ext_resource path="res://prefabs/UI/TextUpdate.gd" type="Script" id=2]
+[ext_resource path="res://prefabs/Itens/Equipment.tres" type="Resource" id=3]
+
+[node name="Texts" type="Control"]
+margin_left = 180.0
+margin_top = 30.0
+margin_right = 220.0
+margin_bottom = 70.0
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+text = "Damage Negation: 8%"
+script = ExtResource( 2 )
+equipment = ExtResource( 3 )

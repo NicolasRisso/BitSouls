@@ -71,9 +71,11 @@ func _ready():
 
 func _updateItemStats(indexes):
 	if equipment is Inventory:
-		if equipment.items[5] is Potion:
-			healsLeft = equipment.items[5].amount
-			healAmmount = equipment.items[5].healAmount
+		var tmp = equipment.items[5]
+		if tmp is Usable:
+			if tmp.usableType == Usable.UsableType.HEAL:
+				healsLeft = equipment.items[5].amount
+				healAmmount = equipment.items[5].healAmount
 		else: healsLeft = 0
 	else: healsLeft = 0
 
@@ -142,7 +144,6 @@ func move_state(delta):
 
 func inventory_state():
 	velocity = Vector2.ZERO
-	pass
 
 func heal_state():
 	velocity = Vector2.ZERO

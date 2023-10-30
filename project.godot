@@ -10,9 +10,24 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Item",
+"class": "Armor",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Armor.gd"
+}, {
+"base": "Item",
 "class": "Artifact",
 "language": "GDScript",
 "path": "res://Scripts/Inventory/Artifact.gd"
+}, {
+"base": "Armor",
+"class": "Chestplate",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Chestplate.gd"
+}, {
+"base": "Armor",
+"class": "Helmet",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Helmet.gd"
 }, {
 "base": "Resource",
 "class": "Inventory",
@@ -24,7 +39,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Inventory/Item.gd"
 }, {
-"base": "Item",
+"base": "Usable",
 "class": "Potion",
 "language": "GDScript",
 "path": "res://Scripts/Inventory/Potion.gd"
@@ -33,13 +48,22 @@ _global_script_classes=[ {
 "class": "Sword",
 "language": "GDScript",
 "path": "res://Scripts/Inventory/Sword.gd"
+}, {
+"base": "Item",
+"class": "Usable",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Usable.gd"
 } ]
 _global_script_class_icons={
+"Armor": "",
 "Artifact": "",
+"Chestplate": "",
+"Helmet": "",
 "Inventory": "",
 "Item": "",
 "Potion": "",
-"Sword": ""
+"Sword": "",
+"Usable": ""
 }
 
 [application]

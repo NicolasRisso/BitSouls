@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Inventory/Helmet.gd" type="Script" id=1]
+[ext_resource path="res://Art/Itens/RustyHelmet.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Rusty Helmet"
+description = ""
+texture = ExtResource( 2 )
+type = 2
+isStackable = false
+amount = 1
+armorType = 0
+damageNegation = 0.04

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Inventory/Chestplate.gd" type="Script" id=1]
+[ext_resource path="res://Art/Itens/RustyChestplate.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Rusty Chestplate"
+description = ""
+texture = ExtResource( 2 )
+type = 3
+isStackable = false
+amount = 1
+armorType = 1
+damageNegation = 0.08

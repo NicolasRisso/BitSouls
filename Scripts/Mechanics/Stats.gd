@@ -61,11 +61,21 @@ func set_stamina(value):
 	
 #Encontra a hitbox e salva o dano nela
 func _ready():
+	if useEquipment:
+		physicalDamageNegation = 0
 	if equipment is Inventory and useEquipment:
 		equipment.connect("items_changed", self, "_updateItemStats")
 	_updateItemStats([])
 	
 func _updateItemStats(indexes):
+	itemRead()
+	var hitbox = get_node_or_null("../Hitbox")
+	if !hitbox: hitbox = get_node_or_null("../HitboxPivot/Hitbox")
+	if hitbox:
+		hitbox.damage = damage
+		hitbox.armorPierce = armorPierce
+
+func itemRead():
 	if equipment is Inventory and useEquipment:
 		if equipment.items[0] is Sword:
 			damage = equipment.items[0].damage
@@ -74,12 +84,14 @@ func _updateItemStats(indexes):
 		else:
 			damage = 1
 			armorPierce = 0
-
-	var hitbox = get_node_or_null("../Hitbox")
-	if !hitbox: hitbox = get_node_or_null("../HitboxPivot/Hitbox")
-	if hitbox:
-		hitbox.damage = damage
-		hitbox.armorPierce = armorPierce
+		var totalDamageNegation = 0
+		if equipment.items[1] is Helmet:
+			totalDamageNegation += equipment.items[1].damageNegation
+		if equipment.items[2] is Chestplate:
+			totalDamageNegation += equipment.items[2].damageNegation
+		print(totalDamageNegation)
+		physicalDamageNegation = totalDamageNegation
+		print(physicalDamageNegation)
 
 func callStaminaRegen():
 	timer.start(staminaRegenDelay)

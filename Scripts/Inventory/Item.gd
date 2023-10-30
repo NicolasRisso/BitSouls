@@ -3,7 +3,7 @@ class_name Item
 
 enum ItemType{
 	SWORD,
-	POTION,
+	USABLE,
 	HELMET,
 	CHESTPLATE,
 	GLOVES,
