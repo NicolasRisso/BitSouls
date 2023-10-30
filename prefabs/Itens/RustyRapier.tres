@@ -11,5 +11,6 @@ texture = ExtResource( 2 )
 type = 0
 isStackable = false
 amount = 1
+weight = 4.0
 damage = 5.0
 armorPierce = 0.45

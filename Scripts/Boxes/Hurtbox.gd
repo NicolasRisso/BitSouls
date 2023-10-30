@@ -20,8 +20,9 @@ func create_hitEffect():
 	effect.global_position = global_position - offset
 
 func start_invincibility(duration):
-	self.invincible = true
-	timer.start(duration)
+	if(duration > 0):
+		self.invincible = true
+		timer.start(duration)
 
 func set_invincible(value):
 	invincible = value

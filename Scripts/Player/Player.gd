@@ -11,13 +11,10 @@ enum {
 export(Resource) var equipment
 #MOVEMENT
 export var ACCELERATION = 1000
-export var MAX_SPEED = 80
-export var FRICTION = 500
+export var FRICTION = 500 #MAX_SPEED = 80, 75, 70, 35
 #ROLL
-export var ROLL_SPEED = 90
 export var AFTER_ROLL_MOMENTUM = 0.5
 #INVINCIBILITY DURATION
-export(float) var INVINCIBILITY_DURATION = 0.5
 export(int) var MAX_ATTACK_BUFFER = 1
 export(int) var MAX_ROLL_BUFFER = 1
 export(int) var MAX_HEAL_BUFFER = 1
@@ -135,7 +132,7 @@ func move_state(delta):
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationTree.set("parameters/Heal/blend_position", input_vector)
 		animationState.travel("Run")
-		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
+		velocity = velocity.move_toward(input_vector * PlayerStats.maxSpeed, ACCELERATION * delta)
 	else:
 		animationState.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
@@ -154,9 +151,9 @@ func attack_state():
 	animationState.travel("Attack")
 
 func roll_state():
-	velocity = rollVector * ROLL_SPEED 
+	velocity = rollVector * stats.rollSpeed 
 	animationState.travel("Roll")
-	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
+	hurtbox.start_invincibility(PlayerStats.rollInvulnerabilityDuration)
 	blinkAnimationPlayer.play("Stop")
 	move()
 	
@@ -219,7 +216,7 @@ func reloadScene():
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage * (1 - stats.physicalDamageNegation + area.armorPierce)
-	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
+	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hitEffect()
 	if (stats.health <= 0):
 		var playerHurtSound = PlayerHurtSound.instance()

@@ -19,3 +19,5 @@ export(ItemType) var type = ItemType.ALL
 
 export(bool) var isStackable = false
 export(int) var amount = 1
+
+export(float) var weight = 0.0

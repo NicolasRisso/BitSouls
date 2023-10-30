@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Inventory/Boots.gd" type="Script" id=1]
+[ext_resource path="res://Art/Itens/RustyBoots.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Rusty Boots"
+description = ""
+texture = ExtResource( 2 )
+type = 5
+isStackable = false
+amount = 1
+weight = 4.0
+armorType = 3
+damageNegation = 0.04

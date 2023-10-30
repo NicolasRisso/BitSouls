@@ -20,9 +20,19 @@ _global_script_classes=[ {
 "path": "res://Scripts/Inventory/Artifact.gd"
 }, {
 "base": "Armor",
+"class": "Boots",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Boots.gd"
+}, {
+"base": "Armor",
 "class": "Chestplate",
 "language": "GDScript",
 "path": "res://Scripts/Inventory/Chestplate.gd"
+}, {
+"base": "Armor",
+"class": "Gloves",
+"language": "GDScript",
+"path": "res://Scripts/Inventory/Gloves.gd"
 }, {
 "base": "Armor",
 "class": "Helmet",
@@ -57,7 +67,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Armor": "",
 "Artifact": "",
+"Boots": "",
 "Chestplate": "",
+"Gloves": "",
 "Helmet": "",
 "Inventory": "",
 "Item": "",

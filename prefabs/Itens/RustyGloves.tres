@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Inventory/Gloves.gd" type="Script" id=1]
+[ext_resource path="res://Art/Itens/RustyGloves.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Rusty Gloves"
+description = ""
+texture = ExtResource( 2 )
+type = 4
+isStackable = false
+amount = 1
+weight = 3.0
+armorType = 2
+damageNegation = 0.03

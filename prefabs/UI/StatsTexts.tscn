@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://prefabs/Fonts/PixelRPG.tres" type="DynamicFont" id=1]
 [ext_resource path="res://prefabs/UI/TextUpdate.gd" type="Script" id=2]
-[ext_resource path="res://prefabs/Itens/Equipment.tres" type="Resource" id=3]
 
 [node name="Texts" type="Control"]
 margin_left = 180.0
@@ -10,10 +9,70 @@ margin_top = 30.0
 margin_right = 220.0
 margin_bottom = 70.0
 
-[node name="Label" type="Label" parent="."]
-margin_right = 40.0
+[node name="DamageNegation" type="Label" parent="."]
+margin_top = 38.0
+margin_right = 81.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 1 )
+text = "Damage Negation: 8%"
+script = ExtResource( 2 )
+usePercentage = true
+textBase = "Physical Negation: "
+
+[node name="Damage" type="Label" parent="."]
+margin_top = 24.0
+margin_right = 81.0
+margin_bottom = 38.0
+custom_fonts/font = ExtResource( 1 )
+text = "Damage Negation: 8%"
+script = ExtResource( 2 )
+textBase = "Total Damage: "
+selectedVariable = "damage"
+
+[node name="Armor Pierce" type="Label" parent="."]
+margin_top = 31.0
+margin_right = 81.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 1 )
+text = "Damage Negation: 8%"
+script = ExtResource( 2 )
+usePercentage = true
+textBase = "Armor Pierce: "
+selectedVariable = "armorPierce"
+
+[node name="Health" type="Label" parent="."]
+margin_right = 81.0
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 1 )
 text = "Damage Negation: 8%"
 script = ExtResource( 2 )
-equipment = ExtResource( 3 )
+useTwoVariables = true
+typeOfUpdate = "HealthChanged"
+textBase = "Health: "
+selectedVariable = "health"
+selectedVariable2 = "max_health"
+
+[node name="Stamina" type="Label" parent="."]
+margin_top = 7.0
+margin_right = 81.0
+margin_bottom = 21.0
+custom_fonts/font = ExtResource( 1 )
+text = "Damage Negation: 8%"
+script = ExtResource( 2 )
+useTwoVariables = true
+typeOfUpdate = "StaminaChanged"
+textBase = "Stamina: "
+selectedVariable = "stamina"
+selectedVariable2 = "max_stamina"
+
+[node name="Weight" type="Label" parent="."]
+margin_top = 14.0
+margin_right = 81.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 1 )
+text = "Damage Negation: 8%"
+script = ExtResource( 2 )
+useTwoVariables = true
+textBase = "Weight: "
+selectedVariable = "weight"
+selectedVariable2 = "max_weight"

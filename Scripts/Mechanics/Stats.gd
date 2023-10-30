@@ -7,20 +7,29 @@ export(float) var max_stamina = 100.0
 export(float) var staminaRegenDelay = 1.0
 export(float) var staminaRegenPerSecond = 45.0
 export(float) var physicalDamageNegation = 0.2
+export(float) var max_weight = 50
+export(PoolRealArray) var rollInvulnerability = PoolRealArray([0.5, 0.35, 0.2])
+export(PoolRealArray) var speedAdjustment = PoolRealArray([80, 75, 70, 35])
+export(PoolRealArray) var rollSpeedAdjustment = PoolRealArray([90, 82.25, 75, 45])
 export(bool) var useEquipment = false
-export(bool) var useStamina = true
+export(bool) var useStamina = false
 export(bool) var useHealling = false
 export(float) var HealVelocity = 1.5
 export(Resource) var equipment
 
 onready var health = max_health setget set_health
 onready var stamina = max_stamina setget set_stamina
+onready var weight = 0 setget set_weight
 
 onready var timer = $Timer
 
 var regenOn = false
 var waitingTimer = false
 var healRegenOn = false
+
+var rollInvulnerabilityDuration = 0
+var maxSpeed = 0
+var rollSpeed = 0
 var healLeft = 0
 
 var totalHealled = 0
@@ -46,23 +55,53 @@ func heal_state(delta):
 			totalHealled = 0
 
 func set_health(value):
-	health = value
+	if (value > max_health):
+		health = max_health
+	else:
+		health = value
 	emit_signal("health_changed", health)
 	if health <= 0: emit_signal("no_health")
-	if health > max_health: health = max_health
 
 func set_stamina(value):
-	stamina = value
+	if (value > max_stamina):
+		stamina = max_stamina
+		regenOn = false
+	else:
+		stamina = value
 	callStaminaRegen()
 	emit_signal("stamina_changed", stamina)
-	if(stamina >= max_stamina):
+	if(stamina > max_stamina):
 		regenOn = false
-		stamina = max_stamina
-	
+
+func set_weight(value):
+	weight = value
+	adjustRoll()
+
+func adjustRoll():
+	print(weight)
+	if weight <= 0.3 * max_weight:
+		rollInvulnerabilityDuration = rollInvulnerability[0]
+		maxSpeed = speedAdjustment[0]
+		rollSpeed = rollSpeedAdjustment[0]
+	elif weight > 0.3 * max_weight and weight <= 0.7 * max_weight:
+		rollInvulnerabilityDuration = rollInvulnerability[1]
+		maxSpeed = speedAdjustment[1]
+		rollSpeed = rollSpeedAdjustment[1]
+	elif weight > 0.7 * max_weight and weight <= max_weight:
+		rollInvulnerabilityDuration = rollInvulnerability[2]
+		maxSpeed = speedAdjustment[2]
+		rollSpeed = rollSpeedAdjustment[2]
+	else:
+		rollInvulnerabilityDuration = 0.0
+		maxSpeed = speedAdjustment[3]
+		rollSpeed = rollSpeedAdjustment[3]
+	print(str(rollInvulnerabilityDuration) + " | " + str(maxSpeed) + " | " + str(rollSpeed))
+		
 #Encontra a hitbox e salva o dano nela
 func _ready():
 	if useEquipment:
 		physicalDamageNegation = 0
+		adjustRoll()
 	if equipment is Inventory and useEquipment:
 		equipment.connect("items_changed", self, "_updateItemStats")
 	_updateItemStats([])
@@ -84,14 +123,23 @@ func itemRead():
 		else:
 			damage = 1
 			armorPierce = 0
+			
 		var totalDamageNegation = 0
 		if equipment.items[1] is Helmet:
 			totalDamageNegation += equipment.items[1].damageNegation
 		if equipment.items[2] is Chestplate:
 			totalDamageNegation += equipment.items[2].damageNegation
-		print(totalDamageNegation)
+		if equipment.items[3] is Gloves:
+			totalDamageNegation += equipment.items[3].damageNegation
+		if equipment.items[4] is Boots:
+			totalDamageNegation += equipment.items[4].damageNegation
 		physicalDamageNegation = totalDamageNegation
-		print(physicalDamageNegation)
+		
+		var totalWeight = 0
+		for i in range(equipment.items.size()):
+			if equipment.items[i] is Item:
+				totalWeight += equipment.items[i].weight
+		self.weight = totalWeight
 
 func callStaminaRegen():
 	timer.start(staminaRegenDelay)

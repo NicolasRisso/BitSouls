@@ -11,3 +11,4 @@ texture = ExtResource( 2 )
 type = 7
 isStackable = false
 amount = 1
+weight = 0.0
