@@ -2,6 +2,8 @@ extends CenterContainer
 
 var inventory
 
+const selectedItemTexts = preload("res://prefabs/UI/SelectedItem.tres")
+
 export(Item.ItemType) var type_acceptable = Item.ItemType.ALL
 export(Texture) var formatTexture = null
 
@@ -33,6 +35,11 @@ func get_drag_data(_position):
 		data.originalSlotType = type_acceptable
 		var dragPreview = TextureRect.new()
 		dragPreview.texture = item.texture
+		
+		selectedItemTexts.name = item.name
+		selectedItemTexts.description = item.description
+		
+		print(selectedItemTexts.name + " | " + selectedItemTexts.description)
 		
 		set_drag_preview(dragPreview)
 		

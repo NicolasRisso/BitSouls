@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Common Sword"
-description = ""
+description = "Man, this shit is heavy as fuck. For real, who made that crap?"
 texture = ExtResource( 2 )
 type = 0
 isStackable = false

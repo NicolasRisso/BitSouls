@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Rusty Sword"
-description = "An old sword with an rusty blade. Even thought it is aged it is not bad at all."
+description = "An old sword with a rusty blade. Even though it is aged, it is not bad at all."
 texture = ExtResource( 2 )
 type = 0
 isStackable = false

@@ -16,6 +16,7 @@ func _ready():
 		equipment.connect("items_changed", self, "_updateText")
 		extraSword.connect("items_changed", self, "_updateText")
 		extraUsable.connect("items_changed", self, "_updateText")
+		PlayerStats.connect("damage_changed", self, "_updateText")
 	elif (typeOfUpdate == "HealthChanged"):
 		PlayerStats.connect("health_changed", self, "_updateText")
 	elif (typeOfUpdate == "StaminaChanged"):
@@ -28,4 +29,4 @@ func _updateText(_indexes):
 		text = textBase + str(PlayerStats[selectedVariable]).pad_decimals(2) + "/" + str(PlayerStats[selectedVariable2])
 	else:
 		if (usePercentage): text = textBase + str(PlayerStats[selectedVariable] * 100) + "%"
-		else: text = textBase + str(PlayerStats[selectedVariable])
+		else: text = textBase + str(PlayerStats[selectedVariable]).pad_decimals(2)

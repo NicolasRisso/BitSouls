@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Torch"
-description = ""
+description = "Not the greatest weapon, but can deal fire damage."
 texture = ExtResource( 2 )
 type = 0
 isStackable = false

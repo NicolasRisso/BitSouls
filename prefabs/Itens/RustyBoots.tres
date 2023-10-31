@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Rusty Boots"
-description = ""
+description = "Boots of an old knight, rusted by usage. But, surprisingly, they don't look as bad as expected."
 texture = ExtResource( 2 )
 type = 5
 isStackable = false

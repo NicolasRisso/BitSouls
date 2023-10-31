@@ -20,8 +20,9 @@ export(bool) var useHealling = false
 export(float) var HealVelocity = 1.5
 export(Resource) var equipment
 
-var extraSword = preload("res://prefabs/Itens/ExtraSword.tres")
-var extraUsable = preload("res://prefabs/Itens/ExtraUsable.tres")
+const extraSword = preload("res://prefabs/Itens/ExtraSword.tres")
+const extraUsable = preload("res://prefabs/Itens/ExtraUsable.tres")
+const artifacts = preload("res://prefabs/Itens/Artifacts.tres")
 
 onready var health = max_health setget set_health
 onready var stamina = max_stamina setget set_stamina
@@ -40,9 +41,12 @@ var healLeft = 0
 
 var totalHealled = 0
 
+var damage_before_buffs = 0
+
 signal no_health
 signal health_changed(value)
 signal stamina_changed(value)
+signal damage_changed
 
 func _physics_process(delta):
 	if (useHealling): heal_state(delta)	
@@ -111,6 +115,7 @@ func _ready():
 		equipment.connect("items_changed", self, "_updateItemStats")
 		extraSword.connect("items_changed", self, "_updateItemStats")
 		extraUsable.connect("items_changed", self, "_updateItemStats")
+		artifacts.connect("items_changed", self, "_updateItemStats")
 	_updateItemStats([])
 	
 func _updateItemStats(indexes):
@@ -126,13 +131,13 @@ func _updateItemStats(indexes):
 func itemRead():
 	if equipment is Inventory and useEquipment:
 		if equipment.items[0] is Sword:
-			damage = equipment.items[0].damage
-			if (damage < 1): damage = 1
+			damage_before_buffs = equipment.items[0].damage
+			if (damage < 1): damage_before_buffs = 1
 			armorPierce = equipment.items[0].armorPierce
 			fireDamage = equipment.items[0].fireDamage
 			fireArmorPierce = equipment.items[0].firePierce
 		else:
-			damage = 1
+			damage_before_buffs = 1
 			armorPierce = 0
 			fireDamage = 0
 			fireArmorPierce = 0
@@ -165,6 +170,20 @@ func itemRead():
 			if extraUsable.items[i] is Item:
 				totalWeight += extraUsable.items[i].weight
 		self.weight = totalWeight
+		
+		if !(artifacts.items[0] is Item) and !(artifacts.items[1] is Item):
+			damage = damage_before_buffs
+		else:
+			var damageAfterBuffs = damage_before_buffs
+			if artifacts.items[0] is Item:
+				if artifacts.items[0].buffType == Artifact.BuffType.DAMAGE:
+					damageAfterBuffs = artifacts.items[0].damageBuffs(artifacts.items[0].effect_index, damageAfterBuffs)
+					emit_signal("damage_changed")
+			if artifacts.items[1] is Item:
+				if artifacts.items[1].buffType == Artifact.BuffType.DAMAGE:
+					damageAfterBuffs = artifacts.items[1].damageBuffs(artifacts.items[1].effect_index, damageAfterBuffs)
+					emit_signal("damage_changed")
+			damage = damageAfterBuffs
 
 func callStaminaRegen():
 	timer.start(staminaRegenDelay)

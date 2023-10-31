@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Rusty Chestplate"
-description = ""
+description = "A heavy and powerful gear of protection, slightly rusted."
 texture = ExtResource( 2 )
 type = 3
 isStackable = false

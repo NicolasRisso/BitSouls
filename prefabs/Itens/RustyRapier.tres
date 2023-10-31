@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Rusty Rapier"
-description = "Rapiers are efficient agains enemies with heavy armor or with a tuff skin to slice throught."
+description = "Rapiers are efficient against enemies with heavy armor or tough skin to slice through. "
 texture = ExtResource( 2 )
 type = 0
 isStackable = false

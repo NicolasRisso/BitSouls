@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Rusty Gloves"
-description = ""
+description = "Once used by an honorable knight. Time has surely put these iron gloves to the test of toughness."
 texture = ExtResource( 2 )
 type = 4
 isStackable = false

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Rusty Helmet"
-description = ""
+description = "The most simbolic part of an knight, its helmet. Representing for which honor he fights for."
 texture = ExtResource( 2 )
 type = 2
 isStackable = false

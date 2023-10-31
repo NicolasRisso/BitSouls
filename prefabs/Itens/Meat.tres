@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "Meat"
-description = ""
+description = "Raw meat of dubious quality, but better than nothing when hunger strikes."
 texture = ExtResource( 2 )
 type = 1
 isStackable = true
