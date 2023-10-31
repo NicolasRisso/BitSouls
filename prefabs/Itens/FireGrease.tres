@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Inventory/Grease.gd" type="Script" id=1]
+[ext_resource path="res://Art/Itens/FireGrease.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Fire Grease"
+description = "Enhances your weapon with fire temporarily."
+texture = ExtResource( 2 )
+type = 1
+isStackable = true
+isCleanable = true
+amount = 69
+weight = 0.0
+usableType = 1
+bonusFireDamage = 3.0
+bonusDuration = 30.0

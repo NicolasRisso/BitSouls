@@ -4,7 +4,7 @@ enum {
 	MOVE,
 	ROLL,
 	ATTACK,
-	HEAL,
+	USE,
 	INVENTORY
 }
 
@@ -36,15 +36,20 @@ var rollVector = Vector2.DOWN
 
 var stats = PlayerStats
 
-var healsLeft = 0
+var usesLeft = 0
 var healAmmount = 0
 
 var attackbuffering = 0
 var rollbuffering = 0
 var healBuffering = 0
 
+var bonusFireGreaseDamage = 0
+var bonusGreaseDuration = 0
+
 var healCounted = false
 var isDrinkable = false
+
+var fireGrease = false
 
 var fullscreen = true
 var inventory = false
@@ -57,6 +62,7 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var inventoryContainer = get_node(inventoryContainer_path)
 onready var inventoryUI = get_node(inventoryUI_path)
 onready var itemBox = $ItemBox
+onready var hitbox = $HitboxPivot/Hitbox
 
 func _ready():
 	if equipment is Inventory:
@@ -66,18 +72,34 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	randomize()
 	stats.connect("no_health", self, "reloadScene")
+	stats.connect("update_hitbox", self, "_update_hitbox")
 	animationTree.active = true
+	_update_hitbox()
 
 func _updateItemStats(indexes):
 	if equipment is Inventory:
 		var tmp = equipment.items[5]
 		if tmp is Usable:
 			if tmp.usableType == Usable.UsableType.HEAL:
-				healsLeft = equipment.items[5].amount
+				usesLeft = equipment.items[5].amount
 				healAmmount = equipment.items[5].healAmount
 				isDrinkable = equipment.items[5].drinkable
-		else: healsLeft = 0
-	else: healsLeft = 0
+				fireGrease = false
+				bonusFireGreaseDamage = 0
+				bonusGreaseDuration = 0
+			elif tmp.usableType == Usable.UsableType.BUFF:
+				fireGrease = true
+				if (tmp is Grease):
+					bonusFireGreaseDamage = tmp.bonusFireDamage
+					bonusGreaseDuration = tmp.bonusDuration
+				usesLeft = tmp.amount
+			else:
+				fireGrease = false
+				bonusFireGreaseDamage = 0
+				bonusGreaseDuration = 0
+				usesLeft = 0
+		else: usesLeft = 0
+	else: usesLeft = 0
 
 func _physics_process(delta):
 	bufferRead()
@@ -89,7 +111,7 @@ func _physics_process(delta):
 			roll_state()
 		ATTACK:
 			attack_state()
-		HEAL:
+		USE:
 			heal_state()
 		INVENTORY:
 			inventory_state()
@@ -97,7 +119,7 @@ func _physics_process(delta):
 func states():
 	if (attackbuffering > 0): state = ATTACK
 	if (rollbuffering > 0): state = ROLL
-	if (healBuffering > 0): state = HEAL
+	if (healBuffering > 0): state = USE
 	
 func bufferRead():
 	if Input.is_action_just_pressed("FullScreen"):
@@ -115,7 +137,7 @@ func bufferRead():
 		increaseAttackBuffering()
 	if Input.is_action_just_pressed("roll") and stats.stamina >= staminaPerRoll:
 		increaseRollBuffering()
-	if Input.is_action_just_pressed("heal") and healsLeft > 0:
+	if Input.is_action_just_pressed("heal") and usesLeft > 0:
 		increaseHealBuffering()
 	if Input.is_action_just_pressed("grab_item"):
 		itemBox.enableForTime(0.1)
@@ -138,6 +160,7 @@ func move_state(delta):
 		animationTree.set("parameters/Heal/blend_position", input_vector)
 		animationTree.set("parameters/Eat/blend_position", input_vector)
 		animationTree.set("parameters/FireAttack/blend_position", input_vector)
+		animationTree.set("parameters/FireGrease/blend_position", input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * PlayerStats.maxSpeed, ACCELERATION * delta)
 	else:
@@ -151,16 +174,20 @@ func inventory_state():
 
 func heal_state():
 	velocity = Vector2.ZERO
-	if (isDrinkable): animationState.travel("Heal")
+	print(fireGrease)
+	if (fireGrease): animationState.travel("FireGrease")
+	elif (isDrinkable): animationState.travel("Heal")
 	else: animationState.travel("Eat")
 
 func attack_state():
 	velocity = Vector2.ZERO
-	if (stats.damage > stats.fireDamage): animationState.travel("Attack")
+	setInAnimation(true)
+	if (stats.damage > stats.fireDamage) and !stats.greaseBuffed: animationState.travel("Attack")
 	else: animationState.travel("FireAttack")
 
 func roll_state():
 	velocity = rollVector * stats.rollSpeed 
+	setInAnimation(true)
 	animationState.travel("Roll")
 	hurtbox.start_invincibility(PlayerStats.rollInvulnerabilityDuration)
 	blinkAnimationPlayer.play("Stop")
@@ -168,10 +195,12 @@ func roll_state():
 	
 func attack_animation_finished():
 	state = MOVE
+	setInAnimation(false)
 	healCounted = false
 	
 func roll_animation_finished():
 	velocity *= AFTER_ROLL_MOMENTUM
+	setInAnimation(false)
 	state = MOVE
 
 func increaseHealBuffering():
@@ -190,11 +219,11 @@ func decreaseHealBuffering():
 	if (healBuffering > 0):
 		healBuffering -= 1
 	if (!healCounted):
-		healsLeft -= 1
+		usesLeft -= 1
 		healCounted = true
 		if equipment is Inventory:
-			if equipment.items[5] is Potion:
-				equipment.items[5].amount = healsLeft
+			if equipment.items[5] is Potion or equipment.items[5] is Grease:
+				equipment.items[5].amount = usesLeft
 				equipment.emit_signal("items_changed", [5])
 
 func decreaseAttackBuffering():
@@ -216,12 +245,25 @@ func useStaminaRoll():
 func startHealing():
 	stats.heal(healAmmount)
 
+func startGrease():
+	if (equipment.items[5] is Grease):
+		PlayerStats.callGreaseTimer(bonusFireGreaseDamage, bonusGreaseDuration)
+
+func setInAnimation(value):
+	stats.inAnimation = value
+	
 func move():
 	velocity = move_and_slide(velocity)
 
 func reloadScene():
 	PlayerStats.health = PlayerStats.max_health
 	get_tree().reload_current_scene()
+
+func _update_hitbox():
+	hitbox.damage = stats.damage
+	hitbox.armorPierce = stats.armorPierce
+	hitbox.fireDamage = stats.fireDamage
+	hitbox.firePierce = stats.fireArmorPierce
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage * (1 - stats.physicalDamageNegation + area.armorPierce)

@@ -7,6 +7,7 @@ onready var extraInventory = get_parent().inventory
 onready var equipment = preload("res://prefabs/Itens/Equipment.tres")
 
 func _process(_delta):
+	if PlayerStats.inAnimation: return
 	if Input.is_action_just_pressed(input_action_name):
 		var my_item = equipment.items[item_index]
 		var target_item = extraInventory.items[0]

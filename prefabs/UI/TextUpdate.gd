@@ -7,16 +7,17 @@ export(String) var textBase = ""
 export(String, "damage,armorPierce,physicalDamageNegation,health,max_health,stamina,max_stamina,weight,max_weight,fireDamage,fireArmorPierce,fireDamageNegation") var selectedVariable : String = "physicalDamageNegation"
 export(String, "damage,armorPierce,physicalDamageNegation,health,max_health,stamina,max_stamina,weight,max_weight,fireDamage,fireArmorPierce,fireDamageNegation") var selectedVariable2 : String = "physicalDamageNegation"
 
-var equipment = preload("res://prefabs/Itens/Equipment.tres")
-var extraSword = preload("res://prefabs/Itens/ExtraSword.tres")
-var extraUsable = preload("res://prefabs/Itens/ExtraUsable.tres")
+const equipment = preload("res://prefabs/Itens/Equipment.tres")
+const extraSword = preload("res://prefabs/Itens/ExtraSword.tres")
+const extraUsable = preload("res://prefabs/Itens/ExtraUsable.tres")
+const artifacts = preload("res://prefabs/Itens/Artifacts.tres")
 
 func _ready():
 	if (typeOfUpdate == "ItemChanged"):
 		equipment.connect("items_changed", self, "_updateText")
 		extraSword.connect("items_changed", self, "_updateText")
 		extraUsable.connect("items_changed", self, "_updateText")
-		PlayerStats.connect("damage_changed", self, "_updateText")
+		artifacts.connect("items_changed", self, "_updateText")
 	elif (typeOfUpdate == "HealthChanged"):
 		PlayerStats.connect("health_changed", self, "_updateText")
 	elif (typeOfUpdate == "StaminaChanged"):

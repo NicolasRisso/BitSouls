@@ -101,6 +101,7 @@ tracks/0/keys = {
 collision_layer = 16
 script = ExtResource( 4 )
 KNOCKBACK_SPEED = 120
+MAX_SPEED = 65
 
 [node name="ShadowSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -109,7 +110,6 @@ texture = ExtResource( 2 )
 material = SubResource( 14 )
 frames = SubResource( 1 )
 animation = "Fly"
-frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 

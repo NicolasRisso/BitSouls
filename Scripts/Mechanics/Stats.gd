@@ -1,16 +1,16 @@
 extends Node
 
 export(float) var max_health = 100.0
-export(float) var damage = 10.0
-export(float) var armorPierce = 0
-export(float) var fireDamage = 0
-export(float) var fireArmorPierce = 0
+export(float) var damage = 0.0
+export(float) var armorPierce = 0.0
+export(float) var fireDamage = 0.0
+export(float) var fireArmorPierce = 0.0
 export(float) var max_stamina = 100.0
 export(float) var staminaRegenDelay = 1.0
 export(float) var staminaRegenPerSecond = 45.0
 export(float) var physicalDamageNegation = 0.2
-export(float) var fireDamageNegation = 0
-export(float) var max_weight = 50
+export(float) var fireDamageNegation = 0.0
+export(float) var max_weight = 50.0
 export(PoolRealArray) var rollInvulnerability = PoolRealArray([0.5, 0.35, 0.2])
 export(PoolRealArray) var speedAdjustment = PoolRealArray([80, 75, 70, 35])
 export(PoolRealArray) var rollSpeedAdjustment = PoolRealArray([90, 82.25, 75, 45])
@@ -29,10 +29,15 @@ onready var stamina = max_stamina setget set_stamina
 onready var weight = 0 setget set_weight
 
 onready var timer = $Timer
+onready var greaseTimer = $GreaseTimer
 
 var regenOn = false
 var waitingTimer = false
 var healRegenOn = false
+
+var inAnimation = false
+
+var greaseBuffed = false
 
 var rollInvulnerabilityDuration = 0
 var maxSpeed = 0
@@ -42,11 +47,13 @@ var healLeft = 0
 var totalHealled = 0
 
 var damage_before_buffs = 0
+var fire_damage_before_buffs = 0
+var fire_damage_grease_buffs = 0
 
 signal no_health
 signal health_changed(value)
 signal stamina_changed(value)
-signal damage_changed
+signal update_hitbox
 
 func _physics_process(delta):
 	if (useHealling): heal_state(delta)	
@@ -117,9 +124,11 @@ func _ready():
 		extraUsable.connect("items_changed", self, "_updateItemStats")
 		artifacts.connect("items_changed", self, "_updateItemStats")
 	_updateItemStats([])
+	emit_signal("update_hitbox")
 	
-func _updateItemStats(indexes):
+func _updateItemStats(_indexes):
 	itemRead()
+	emit_signal("update_hitbox")
 	var hitbox = get_node_or_null("../Hitbox")
 	if !hitbox: hitbox = get_node_or_null("../HitboxPivot/Hitbox")
 	if hitbox:
@@ -134,12 +143,12 @@ func itemRead():
 			damage_before_buffs = equipment.items[0].damage
 			if (damage < 1): damage_before_buffs = 1
 			armorPierce = equipment.items[0].armorPierce
-			fireDamage = equipment.items[0].fireDamage
+			fire_damage_before_buffs = equipment.items[0].fireDamage
 			fireArmorPierce = equipment.items[0].firePierce
 		else:
 			damage_before_buffs = 1
 			armorPierce = 0
-			fireDamage = 0
+			fire_damage_before_buffs = 0
 			fireArmorPierce = 0
 			
 		var totalDamageNegation = 0
@@ -169,21 +178,24 @@ func itemRead():
 		for i in range(extraUsable.items.size()):
 			if extraUsable.items[i] is Item:
 				totalWeight += extraUsable.items[i].weight
+		for i in range(artifacts.items.size()):
+			if artifacts.items[i] is Item:
+				totalWeight += artifacts.items[i].weight
 		self.weight = totalWeight
 		
 		if !(artifacts.items[0] is Item) and !(artifacts.items[1] is Item):
-			damage = damage_before_buffs
+			self.damage = damage_before_buffs
+			self.fireDamage = fire_damage_before_buffs + fire_damage_grease_buffs
 		else:
 			var damageAfterBuffs = damage_before_buffs
 			if artifacts.items[0] is Item:
 				if artifacts.items[0].buffType == Artifact.BuffType.DAMAGE:
 					damageAfterBuffs = artifacts.items[0].damageBuffs(artifacts.items[0].effect_index, damageAfterBuffs)
-					emit_signal("damage_changed")
 			if artifacts.items[1] is Item:
 				if artifacts.items[1].buffType == Artifact.BuffType.DAMAGE:
 					damageAfterBuffs = artifacts.items[1].damageBuffs(artifacts.items[1].effect_index, damageAfterBuffs)
-					emit_signal("damage_changed")
-			damage = damageAfterBuffs
+			self.damage = damageAfterBuffs
+			self.fireDamage = fire_damage_before_buffs + fire_damage_grease_buffs
 
 func callStaminaRegen():
 	timer.start(staminaRegenDelay)
@@ -191,6 +203,14 @@ func callStaminaRegen():
 
 func staminaRegen(delta):
 	self.stamina += staminaRegenPerSecond * delta
+
+func callGreaseTimer(damageBonus, duration):
+	greaseTimer.start(duration)
+	fire_damage_grease_buffs = damageBonus
+	fireDamage = fire_damage_before_buffs + fire_damage_grease_buffs
+	greaseBuffed = true
+	_updateItemStats([])
+	equipment.emit_signal("items_changed", [0])
 
 func heal(value):
 	healLeft = value
@@ -200,3 +220,12 @@ func _on_Timer_timeout():
 	if waitingTimer:
 		regenOn = true
 		waitingTimer = false
+
+func _on_GreaseTimer_timeout():
+	if greaseBuffed:
+		fireDamage += fire_damage_before_buffs
+		fire_damage_grease_buffs = 0
+		greaseBuffed = false
+		print("cabou-se")
+		_updateItemStats([])
+		equipment.emit_signal("items_changed", [0])

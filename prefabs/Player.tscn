@@ -1,9 +1,8 @@
-[gd_scene load_steps=101 format=2]
+[gd_scene load_steps=112 format=2]
 
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://prefabs/Collision/Hitbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://prefabs/Mechanics/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://prefabs/Collision/Hurtbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Art/Shadows/MediumShadow.png" type="Texture" id=6]
 [ext_resource path="res://Art/Music and Sounds/Evade.wav" type="AudioStream" id=7]
@@ -14,6 +13,7 @@
 [ext_resource path="res://prefabs/Collision/ItemBox.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Art/Music and Sounds/eatting.wav" type="AudioStream" id=13]
 [ext_resource path="res://Art/Music and Sounds/FireWeaponSwing.wav" type="AudioStream" id=14]
+[ext_resource path="res://Art/Music and Sounds/FireGrease.wav" type="AudioStream" id=15]
 
 [sub_resource type="ShaderMaterial" id=51]
 shader = ExtResource( 9 )
@@ -826,6 +826,206 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.1 )
 }
 
+[sub_resource type="Animation" id=91]
+resource_name = "FireGreaseDown"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 113, 114, 115, 116, 117 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "decreaseHealBuffering"
+}, {
+"args": [  ],
+"method": "startGrease"
+}, {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
+
+[sub_resource type="Animation" id=93]
+resource_name = "FireGreaseLeft"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 118, 119, 120, 121, 122 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "decreaseHealBuffering"
+}, {
+"args": [  ],
+"method": "startGrease"
+}, {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
+
+[sub_resource type="Animation" id=90]
+resource_name = "FireGreaseRight"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 108, 109, 110, 111, 112 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "decreaseHealBuffering"
+}, {
+"args": [  ],
+"method": "startGrease"
+}, {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
+
+[sub_resource type="Animation" id=92]
+resource_name = "FireGreaseUp"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 123, 124, 125, 126, 127 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "decreaseHealBuffering"
+}, {
+"args": [  ],
+"method": "startGrease"
+}, {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
+
 [sub_resource type="Animation" id=56]
 resource_name = "HealDown"
 length = 0.8
@@ -1465,6 +1665,31 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=94]
+animation = "FireGreaseLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "FireGreaseDown"
+
+[sub_resource type="AnimationNodeAnimation" id=96]
+animation = "FireGreaseRight"
+
+[sub_resource type="AnimationNodeAnimation" id=97]
+animation = "FireGreaseUp"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=98]
+blend_point_0/node = SubResource( 94 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 95 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 96 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 97 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=62]
 animation = "HealLeft"
 
@@ -1589,6 +1814,10 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=89]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+
 [sub_resource type="AnimationNodeStateMachine" id=11]
 states/Attack/node = SubResource( 33 )
 states/Attack/position = Vector2( 376.562, 211 )
@@ -1596,6 +1825,8 @@ states/Eat/node = SubResource( 72 )
 states/Eat/position = Vector2( 244.562, -15 )
 states/FireAttack/node = SubResource( 87 )
 states/FireAttack/position = Vector2( 197.562, 219 )
+states/FireGrease/node = SubResource( 98 )
+states/FireGrease/position = Vector2( 54.562, 27 )
 states/Heal/node = SubResource( 59 )
 states/Heal/position = Vector2( 46.562, 130 )
 states/Idle/node = SubResource( 13 )
@@ -1604,9 +1835,9 @@ states/Roll/node = SubResource( 41 )
 states/Roll/position = Vector2( 518.562, 27 )
 states/Run/node = SubResource( 22 )
 states/Run/position = Vector2( 518.562, 99 )
-transitions = [ "Idle", "Run", SubResource( 23 ), "Run", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 34 ), "Attack", "Idle", SubResource( 35 ), "Idle", "Roll", SubResource( 42 ), "Roll", "Idle", SubResource( 43 ), "Heal", "Idle", SubResource( 60 ), "Idle", "Heal", SubResource( 61 ), "Idle", "Eat", SubResource( 73 ), "Eat", "Idle", SubResource( 74 ), "FireAttack", "Idle", SubResource( 88 ), "Idle", "FireAttack", SubResource( 89 ) ]
+transitions = [ "Idle", "Run", SubResource( 23 ), "Run", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 34 ), "Attack", "Idle", SubResource( 35 ), "Idle", "Roll", SubResource( 42 ), "Roll", "Idle", SubResource( 43 ), "Heal", "Idle", SubResource( 60 ), "Idle", "Heal", SubResource( 61 ), "Idle", "Eat", SubResource( 73 ), "Eat", "Idle", SubResource( 74 ), "FireAttack", "Idle", SubResource( 88 ), "Idle", "FireAttack", SubResource( 89 ), "FireGrease", "Idle", SubResource( 99 ), "Idle", "FireGrease", SubResource( 100 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -471.438, 109 )
+graph_offset = Vector2( -546.438, -41 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
 
@@ -1680,7 +1911,7 @@ texture = ExtResource( 6 )
 material = SubResource( 51 )
 position = Vector2( 1, -9 )
 texture = ExtResource( 2 )
-hframes = 108
+hframes = 128
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1701,6 +1932,10 @@ anims/FireAttackDown = SubResource( 80 )
 anims/FireAttackLeft = SubResource( 82 )
 anims/FireAttackRight = SubResource( 79 )
 anims/FireAttackUp = SubResource( 81 )
+anims/FireGreaseDown = SubResource( 91 )
+anims/FireGreaseLeft = SubResource( 93 )
+anims/FireGreaseRight = SubResource( 90 )
+anims/FireGreaseUp = SubResource( 92 )
 anims/HealDown = SubResource( 56 )
 anims/HealLeft = SubResource( 57 )
 anims/HealRight = SubResource( 55 )
@@ -1726,6 +1961,7 @@ parameters/playback = SubResource( 12 )
 parameters/Attack/blend_position = Vector2( 0, 0 )
 parameters/Eat/blend_position = Vector2( 0, 0 )
 parameters/FireAttack/blend_position = Vector2( 0, 0 )
+parameters/FireGrease/blend_position = Vector2( 0, 0 )
 parameters/Heal/blend_position = Vector2( 0, 0 )
 parameters/Idle/blend_position = Vector2( 0, 0 )
 parameters/Roll/blend_position = Vector2( 0, 0 )
@@ -1742,12 +1978,6 @@ collision_mask = 8
 [node name="CollisionShape2D" parent="HitboxPivot/Hitbox" index="0"]
 shape = SubResource( 36 )
 disabled = true
-
-[node name="Stats" parent="." instance=ExtResource( 4 )]
-damage = 8.0
-physicalDamageNegation = 0.9
-useEquipment = true
-equipment = ExtResource( 11 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -5 )
