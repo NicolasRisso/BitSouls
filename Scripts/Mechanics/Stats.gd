@@ -3,10 +3,13 @@ extends Node
 export(float) var max_health = 100.0
 export(float) var damage = 10.0
 export(float) var armorPierce = 0
+export(float) var fireDamage = 0
+export(float) var fireArmorPierce = 0
 export(float) var max_stamina = 100.0
 export(float) var staminaRegenDelay = 1.0
 export(float) var staminaRegenPerSecond = 45.0
 export(float) var physicalDamageNegation = 0.2
+export(float) var fireDamageNegation = 0
 export(float) var max_weight = 50
 export(PoolRealArray) var rollInvulnerability = PoolRealArray([0.5, 0.35, 0.2])
 export(PoolRealArray) var speedAdjustment = PoolRealArray([80, 75, 70, 35])
@@ -102,6 +105,7 @@ func adjustRoll():
 func _ready():
 	if useEquipment:
 		physicalDamageNegation = 0
+		fireDamageNegation = 0
 		adjustRoll()
 	if equipment is Inventory and useEquipment:
 		equipment.connect("items_changed", self, "_updateItemStats")
@@ -116,6 +120,8 @@ func _updateItemStats(indexes):
 	if hitbox:
 		hitbox.damage = damage
 		hitbox.armorPierce = armorPierce
+		hitbox.fireDamage = fireDamage
+		hitbox.firePierce = fireArmorPierce
 
 func itemRead():
 	if equipment is Inventory and useEquipment:
@@ -123,20 +129,30 @@ func itemRead():
 			damage = equipment.items[0].damage
 			if (damage < 1): damage = 1
 			armorPierce = equipment.items[0].armorPierce
+			fireDamage = equipment.items[0].fireDamage
+			fireArmorPierce = equipment.items[0].firePierce
 		else:
 			damage = 1
 			armorPierce = 0
+			fireDamage = 0
+			fireArmorPierce = 0
 			
 		var totalDamageNegation = 0
+		var totalFireDamageNegation = 0
 		if equipment.items[1] is Helmet:
 			totalDamageNegation += equipment.items[1].damageNegation
+			totalFireDamageNegation += equipment.items[1].fireDamageNegation
 		if equipment.items[2] is Chestplate:
 			totalDamageNegation += equipment.items[2].damageNegation
+			totalFireDamageNegation += equipment.items[2].fireDamageNegation
 		if equipment.items[3] is Gloves:
 			totalDamageNegation += equipment.items[3].damageNegation
+			totalFireDamageNegation += equipment.items[3].fireDamageNegation
 		if equipment.items[4] is Boots:
 			totalDamageNegation += equipment.items[4].damageNegation
+			totalFireDamageNegation += equipment.items[4].fireDamageNegation
 		physicalDamageNegation = totalDamageNegation
+		fireDamageNegation = totalFireDamageNegation
 		
 		var totalWeight = 0
 		for i in range(equipment.items.size()):

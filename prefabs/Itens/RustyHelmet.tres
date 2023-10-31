@@ -15,3 +15,4 @@ amount = 1
 weight = 15.0
 armorType = 0
 damageNegation = 0.05
+fireDamageNegation = 0.03

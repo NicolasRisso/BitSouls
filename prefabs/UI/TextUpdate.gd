@@ -4,8 +4,8 @@ export(bool) var usePercentage = false
 export(bool) var useTwoVariables = false
 export(String, "ItemChanged,HealthChanged,StaminaChanged") var typeOfUpdate = "ItemChanged"
 export(String) var textBase = ""
-export(String, "damage,armorPierce,physicalDamageNegation,health,max_health,stamina,max_stamina,weight,max_weight") var selectedVariable : String = "physicalDamageNegation"
-export(String, "damage,armorPierce,physicalDamageNegation,health,max_health,stamina,max_stamina,weight,max_weight") var selectedVariable2 : String = "physicalDamageNegation"
+export(String, "damage,armorPierce,physicalDamageNegation,health,max_health,stamina,max_stamina,weight,max_weight,fireDamage,fireArmorPierce,fireDamageNegation") var selectedVariable : String = "physicalDamageNegation"
+export(String, "damage,armorPierce,physicalDamageNegation,health,max_health,stamina,max_stamina,weight,max_weight,fireDamage,fireArmorPierce,fireDamageNegation") var selectedVariable2 : String = "physicalDamageNegation"
 
 var equipment = preload("res://prefabs/Itens/Equipment.tres")
 var extraSword = preload("res://prefabs/Itens/ExtraSword.tres")

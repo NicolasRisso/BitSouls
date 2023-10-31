@@ -44,6 +44,7 @@ var rollbuffering = 0
 var healBuffering = 0
 
 var healCounted = false
+var isDrinkable = false
 
 var fullscreen = true
 var inventory = false
@@ -74,6 +75,7 @@ func _updateItemStats(indexes):
 			if tmp.usableType == Usable.UsableType.HEAL:
 				healsLeft = equipment.items[5].amount
 				healAmmount = equipment.items[5].healAmount
+				isDrinkable = equipment.items[5].drinkable
 		else: healsLeft = 0
 	else: healsLeft = 0
 
@@ -134,6 +136,8 @@ func move_state(delta):
 		animationTree.set("parameters/Attack/blend_position", input_vector)
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationTree.set("parameters/Heal/blend_position", input_vector)
+		animationTree.set("parameters/Eat/blend_position", input_vector)
+		animationTree.set("parameters/FireAttack/blend_position", input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * PlayerStats.maxSpeed, ACCELERATION * delta)
 	else:
@@ -147,11 +151,13 @@ func inventory_state():
 
 func heal_state():
 	velocity = Vector2.ZERO
-	animationState.travel("Heal")
+	if (isDrinkable): animationState.travel("Heal")
+	else: animationState.travel("Eat")
 
 func attack_state():
 	velocity = Vector2.ZERO
-	animationState.travel("Attack")
+	if (stats.damage > stats.fireDamage): animationState.travel("Attack")
+	else: animationState.travel("FireAttack")
 
 func roll_state():
 	velocity = rollVector * stats.rollSpeed 
@@ -219,8 +225,9 @@ func reloadScene():
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage * (1 - stats.physicalDamageNegation + area.armorPierce)
+	stats.health -= area.fireDamage * (1 - stats.fireDamageNegation + area.firePierce)
 	hurtbox.start_invincibility(0.5)
-	hurtbox.create_hitEffect()
+	hurtbox.create_hitEffect(area.damage, area.fireDamage)
 	if (stats.health <= 0):
 		var playerHurtSound = PlayerHurtSound.instance()
 		get_tree().current_scene.add_child(playerHurtSound)

@@ -15,3 +15,5 @@ amount = 1
 weight = 6.0
 damage = 8.0
 armorPierce = -0.1
+fireDamage = 0.0
+firePierce = 0.0

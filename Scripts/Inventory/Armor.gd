@@ -10,3 +10,4 @@ enum ArmorType {
 
 export(ArmorType) var armorType = ArmorType.HELMET
 export(float) var damageNegation = 0.0
+export(float) var fireDamageNegation = 0.0

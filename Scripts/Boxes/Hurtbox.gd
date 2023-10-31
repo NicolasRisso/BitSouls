@@ -4,6 +4,7 @@ export(bool) var showHit = true
 export(Vector2) var offset = Vector2(0, 8)
 
 const hitEffect = preload("res://prefabs/Effects/HitEffect.tscn")
+const fireHitEffect = preload("res://prefabs/Effects/FireHitEffect.tscn")
 
 onready var timer = $Timer
 
@@ -12,9 +13,13 @@ var invincible = false setget set_invincible
 signal invencibility_started
 signal invencibility_ended
 
-func create_hitEffect():
+func create_hitEffect(damage, fireDamage):
 	if !showHit: return
-	var effect = hitEffect.instance()
+	var effect
+	if damage > fireDamage:
+		effect = hitEffect.instance()
+	else:
+		effect = fireHitEffect.instance()
 	var main = get_tree().current_scene
 	main.add_child(effect)
 	effect.global_position = global_position - offset

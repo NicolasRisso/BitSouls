@@ -124,7 +124,7 @@ shape = SubResource( 8 )
 max_health = 40.0
 damage = 15.0
 physicalDamageNegation = 0.45
-useStamina = false
+fireDamageNegation = -0.2
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
 

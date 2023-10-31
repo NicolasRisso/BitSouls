@@ -1,19 +1,19 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Inventory/Sword.gd" type="Script" id=1]
-[ext_resource path="res://Art/Itens/Sword.png" type="Texture" id=2]
+[ext_resource path="res://Art/Itens/Torch.png" type="Texture" id=2]
 
 [resource]
 script = ExtResource( 1 )
-name = "Common Sword"
+name = "Torch"
 description = ""
 texture = ExtResource( 2 )
 type = 0
 isStackable = false
-isCleanable = true
+isCleanable = false
 amount = 1
-weight = 51.0
-damage = 3.0
+weight = 0.0
+damage = 1.5
 armorPierce = 0.0
-fireDamage = 0.0
+fireDamage = 3.0
 firePierce = 0.0

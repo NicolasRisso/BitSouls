@@ -105,7 +105,8 @@ func _on_Hurtbox_area_entered(area):
 	var damageNegation = 1 - stats.physicalDamageNegation + area.armorPierce
 	if (damageNegation > 1): damageNegation = 1
 	stats.health -= area.damage * (damageNegation)
-	hurtbox.create_hitEffect()
+	stats.health -= area.fireDamage * (1 - stats.fireDamageNegation + area.firePierce)
+	hurtbox.create_hitEffect(area.damage, area.fireDamage)
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 
 func _on_Stats_no_health():
