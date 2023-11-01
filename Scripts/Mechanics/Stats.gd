@@ -18,6 +18,8 @@ export(bool) var useEquipment = false
 export(bool) var useStamina = false
 export(bool) var useHealling = false
 export(float) var HealVelocity = 1.5
+export(float) var KNOCKBACK_FORCE_APPLIED = 0.0
+export(float) var KNOCKBACK_SPEED_APPLIED = 0.0
 export(Resource) var equipment
 
 const extraSword = preload("res://prefabs/Itens/ExtraSword.tres")
@@ -136,6 +138,8 @@ func _updateItemStats(_indexes):
 		hitbox.armorPierce = armorPierce
 		hitbox.fireDamage = fireDamage
 		hitbox.firePierce = fireArmorPierce
+		hitbox.knockbackForce = KNOCKBACK_FORCE_APPLIED
+		hitbox.knockbackSpeed = KNOCKBACK_SPEED_APPLIED
 
 func itemRead():
 	if equipment is Inventory and useEquipment:

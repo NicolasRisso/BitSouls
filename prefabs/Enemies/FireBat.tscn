@@ -102,6 +102,7 @@ collision_layer = 16
 script = ExtResource( 4 )
 KNOCKBACK_SPEED = 120
 MAX_SPEED = 75
+useDiferentDeathEffect = true
 
 [node name="ShadowSprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -110,7 +111,7 @@ texture = ExtResource( 2 )
 material = SubResource( 14 )
 frames = SubResource( 1 )
 animation = "Fly"
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -130,6 +131,8 @@ damage = 5.0
 fireDamage = 30.0
 physicalDamageNegation = 0.1
 fireDamageNegation = 0.8
+KNOCKBACK_FORCE_APPLIED = 60.0
+KNOCKBACK_SPEED_APPLIED = 30.0
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
 

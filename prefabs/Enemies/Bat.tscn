@@ -128,6 +128,8 @@ shape = SubResource( 8 )
 max_health = 16.0
 damage = 25.0
 physicalDamageNegation = 0.1
+KNOCKBACK_FORCE_APPLIED = 60.0
+KNOCKBACK_SPEED_APPLIED = 30.0
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
 

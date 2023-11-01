@@ -1260,20 +1260,23 @@ position = Vector2( 155, 434 )
 position = Vector2( 75, 439 )
 
 [node name="FireBat" parent="YSort/Enemies" instance=ExtResource( 15 )]
-position = Vector2( 69, 83 )
+position = Vector2( 273, 580 )
+
+[node name="FireBat2" parent="YSort/Enemies" instance=ExtResource( 15 )]
+position = Vector2( 333, 574 )
 
 [node name="Drops" type="YSort" parent="YSort"]
 
 [node name="ItemDrop" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 264, 675 )
-frame = 13
+frame = 3
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop2" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 185, 582 )
-frame = 13
+frame = 3
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop2" index="0"]
 item = ExtResource( 14 )

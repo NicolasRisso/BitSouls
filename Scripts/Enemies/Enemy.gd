@@ -13,6 +13,10 @@ export var SOFT_COLLISION_MODIFIER = 400
 
 export var TIME_RANGE = [1.0, 3.0] 
 
+export(bool) var useDiferentDeathEffect = false
+
+const AltDeathEffectPath = preload("res://prefabs/Effects/EnemyDeathEffectExplosion.tscn")
+
 const DeathEffect = preload("res://prefabs/Effects/EnemyDeathEffect.tscn")
 
 enum{
@@ -98,7 +102,7 @@ func makePath(target):
 	
 func knockback(area):
 	var direction = (position - area.owner.position).normalized()
-	knockbackVector = direction * KNOCKBACK_SPEED	
+	knockbackVector = direction * KNOCKBACK_SPEED
 
 func _on_Hurtbox_area_entered(area):
 	knockback(area)
@@ -110,7 +114,9 @@ func _on_Hurtbox_area_entered(area):
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 
 func _on_Stats_no_health():
-	var deathEffect = DeathEffect.instance()
+	var deathEffect
+	if (useDiferentDeathEffect): deathEffect = AltDeathEffectPath.instance()
+	else: deathEffect = DeathEffect.instance()
 	get_parent().add_child(deathEffect)
 	deathEffect.global_position = global_position
 	queue_free()

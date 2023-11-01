@@ -1,0 +1,83 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Scripts/Grass/Effect.gd" type="Script" id=1]
+[ext_resource path="res://Art/Effects/EnemyDeathEffect.png" type="Texture" id=2]
+[ext_resource path="res://Art/Music and Sounds/Explosion.wav" type="AudioStream" id=3]
+[ext_resource path="res://Art/Effects/ExplosionEffect.png" type="Texture" id=4]
+[ext_resource path="res://prefabs/Collision/Hitbox.tscn" type="PackedScene" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 4 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 14 ), SubResource( 15 ), null, null, null, null, null, null, null, null ],
+"loop": true,
+"name": "Animate",
+"speed": 14.0
+} ]
+
+[sub_resource type="CircleShape2D" id=16]
+radius = 25.0799
+
+[node name="EnemyDeathEffectExplosive" type="AnimatedSprite"]
+frames = SubResource( 11 )
+animation = "Animate"
+frame = 10
+offset = Vector2( 0, -8 )
+script = ExtResource( 1 )
+explosive = true
+explosionDamage = 12.5
+explosionPierce = 0.65
+knockbackForce = 350.0
+knockbackSpeed = 165.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -8.0
+autoplay = true
+
+[node name="Hitbox" parent="." instance=ExtResource( 5 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2( 0, -8 )
+shape = SubResource( 16 )
+disabled = true
+
+[connection signal="frame_changed" from="." to="." method="_on_EnemyDeathEffect_frame_changed"]
+
+[editable path="Hitbox"]

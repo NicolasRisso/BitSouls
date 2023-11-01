@@ -33,11 +33,14 @@ var state = MOVE
 
 var velocity = Vector2.ZERO
 var rollVector = Vector2.DOWN
+var knockbackVector = Vector2.ZERO
 
 var stats = PlayerStats
 
 var usesLeft = 0
 var healAmmount = 0
+
+var KNOCKBACK_FORCE = 0
 
 var attackbuffering = 0
 var rollbuffering = 0
@@ -102,6 +105,9 @@ func _updateItemStats(indexes):
 	else: usesLeft = 0
 
 func _physics_process(delta):
+	knockbackVector = knockbackVector.move_toward(Vector2.ZERO, KNOCKBACK_FORCE * delta)
+	knockbackVector = move_and_slide(knockbackVector)
+	
 	bufferRead()
 	match state:
 		MOVE:
@@ -259,6 +265,11 @@ func reloadScene():
 	PlayerStats.health = PlayerStats.max_health
 	get_tree().reload_current_scene()
 
+func knockback(area):
+	var direction = (position - area.owner.position).normalized()
+	KNOCKBACK_FORCE = area.knockbackForce
+	knockbackVector = direction * area.knockbackSpeed
+
 func _update_hitbox():
 	hitbox.damage = stats.damage
 	hitbox.armorPierce = stats.armorPierce
@@ -270,6 +281,7 @@ func _on_Hurtbox_area_entered(area):
 	stats.health -= area.fireDamage * (1 - stats.fireDamageNegation + area.firePierce)
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hitEffect(area.damage, area.fireDamage)
+	knockback(area)
 	if (stats.health <= 0):
 		var playerHurtSound = PlayerHurtSound.instance()
 		get_tree().current_scene.add_child(playerHurtSound)
