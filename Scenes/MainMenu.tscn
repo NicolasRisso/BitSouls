@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://prefabs/Fonts/PixelRPG.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/MainMenu/MainMenu.gd" type="Script" id=2]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 6, 93 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node2D"]
+margin_right = 50.0
+margin_bottom = 76.0
+
+[node name="NewGame" type="Button" parent="Node2D/VBoxContainer"]
+margin_right = 50.0
+margin_bottom = 12.0
+focus_neighbour_top = NodePath("../ExitGame")
+theme = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.243137, 0.243137, 0.243137, 1 )
+custom_colors/font_color_focus = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_pressed = Color( 0.788235, 0.407843, 0.0705882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "New Game"
+flat = true
+align = 0
+
+[node name="Continue" type="Button" parent="Node2D/VBoxContainer"]
+margin_top = 16.0
+margin_right = 50.0
+margin_bottom = 28.0
+theme = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.243137, 0.243137, 0.243137, 1 )
+custom_colors/font_color_focus = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_pressed = Color( 0.788235, 0.407843, 0.0705882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "Continue"
+flat = true
+align = 0
+
+[node name="Options" type="Button" parent="Node2D/VBoxContainer"]
+margin_top = 32.0
+margin_right = 50.0
+margin_bottom = 44.0
+theme = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.243137, 0.243137, 0.243137, 1 )
+custom_colors/font_color_focus = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_pressed = Color( 0.788235, 0.407843, 0.0705882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "Options"
+flat = true
+align = 0
+
+[node name="Credits" type="Button" parent="Node2D/VBoxContainer"]
+margin_top = 48.0
+margin_right = 50.0
+margin_bottom = 60.0
+theme = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.243137, 0.243137, 0.243137, 1 )
+custom_colors/font_color_focus = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_pressed = Color( 0.788235, 0.407843, 0.0705882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "Credits"
+flat = true
+align = 0
+
+[node name="ExitGame" type="Button" parent="Node2D/VBoxContainer"]
+margin_top = 64.0
+margin_right = 50.0
+margin_bottom = 76.0
+focus_neighbour_bottom = NodePath("../NewGame")
+theme = SubResource( 1 )
+custom_colors/font_color_disabled = Color( 0.243137, 0.243137, 0.243137, 1 )
+custom_colors/font_color_focus = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_hover = Color( 0.85098, 0.705882, 0.129412, 1 )
+custom_colors/font_color_pressed = Color( 0.788235, 0.407843, 0.0705882, 1 )
+custom_fonts/font = ExtResource( 1 )
+custom_styles/focus = SubResource( 2 )
+text = "Exit Game"
+flat = true
+align = 0
+
+[connection signal="pressed" from="Node2D/VBoxContainer/NewGame" to="." method="_on_NewGame_pressed"]
+[connection signal="pressed" from="Node2D/VBoxContainer/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="pressed" from="Node2D/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="Node2D/VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
+[connection signal="pressed" from="Node2D/VBoxContainer/ExitGame" to="." method="_on_ExitGame_pressed"]
