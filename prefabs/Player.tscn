@@ -2003,6 +2003,7 @@ anims/Start = SubResource( 52 )
 anims/Stop = SubResource( 53 )
 
 [node name="ItemBox" parent="." instance=ExtResource( 12 )]
+collision_layer = 192
 
 [node name="CollisionShape2D" parent="ItemBox" index="0"]
 shape = SubResource( 67 )

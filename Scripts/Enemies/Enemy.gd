@@ -22,12 +22,15 @@ const DeathEffect = preload("res://prefabs/Effects/EnemyDeathEffect.tscn")
 enum{
 	IDLE,
 	WANDER,
-	CHASE
+	CHASE,
+	DEAD
 }
 
 var velocity = Vector2.ZERO
 var knockbackVector = Vector2.ZERO
 var target = Vector2.ZERO
+
+var startPosition = Vector2.ZERO
 
 var state = IDLE
 
@@ -45,6 +48,8 @@ func _ready():
 	state = pickRandomState([IDLE, WANDER])
 	healthBar.stats = stats
 	healthBar.loaded()
+	startPosition = position
+	PlayerStats.connect("died", self, "respawn")
 
 func _physics_process(delta):
 	knockbackVector = knockbackVector.move_toward(Vector2.ZERO, KNOCKBACK_FORCE * delta)
@@ -76,6 +81,8 @@ func states(delta):
 				setTarget(delta)
 			else: state = IDLE
 			sprite.flip_h = velocity.x < 0
+		DEAD:
+			pass
 
 func seekPlayer():
 	if playerDetectionZone.can_see_player():
@@ -119,8 +126,18 @@ func _on_Stats_no_health():
 	else: deathEffect = DeathEffect.instance()
 	get_parent().add_child(deathEffect)
 	deathEffect.global_position = global_position
-	queue_free()
+	die()
 
+func die():
+	self.visible = false
+	state = DEAD
+
+func respawn():
+	self.visible = true
+	state = pickRandomState([IDLE, WANDER])
+	stats.minorRefreash()
+	position = startPosition
+	
 
 func _on_Hurtbox_invencibility_ended():
 	animationPlayer.play("Stop")

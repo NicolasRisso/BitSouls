@@ -239,6 +239,7 @@ grab_item={
 2d_physics/layer_5="Enemy"
 2d_physics/layer_6="SoftCollisions"
 2d_physics/layer_7="ItemPickUp"
+2d_physics/layer_8="LostTotemInteract"
 
 [physics]
 

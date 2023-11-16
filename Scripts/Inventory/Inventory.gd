@@ -46,3 +46,9 @@ func get_first_slot_available():
 		if !(items[i] is Item):
 			return i
 	return -1
+	
+func resetHealPotion():
+	for item in items:
+		if item is Potion:
+			if item.isReusable:
+				item.amount = 5

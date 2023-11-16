@@ -35,6 +35,8 @@ var velocity = Vector2.ZERO
 var rollVector = Vector2.DOWN
 var knockbackVector = Vector2.ZERO
 
+var respawnPoint = Vector2(300, 700)
+
 var stats = PlayerStats
 
 var usesLeft = 0
@@ -135,6 +137,7 @@ func bufferRead():
 		inventory = !inventory
 		inventoryContainer.visible = inventory
 		inventoryUI.visible = !inventory
+		PlayerStats.emitInventoryUpdate()
 		if(!inventory): Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
@@ -262,8 +265,8 @@ func move():
 	velocity = move_and_slide(velocity)
 
 func reloadScene():
-	PlayerStats.health = PlayerStats.max_health
-	get_tree().reload_current_scene()
+	PlayerStats.refreash()
+	position = respawnPoint
 
 func knockback(area):
 	var direction = (position - area.owner.position).normalized()

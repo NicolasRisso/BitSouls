@@ -120,7 +120,7 @@ radius = 22.0227
 
 [node name="ItemDrop" type="AnimatedSprite"]
 frames = SubResource( 27 )
-frame = 7
+frame = 12
 playing = true
 
 [node name="ItemPickUpBox" parent="." instance=ExtResource( 2 )]

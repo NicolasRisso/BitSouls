@@ -14,5 +14,6 @@ isCleanable = false
 amount = 5
 weight = 0.0
 usableType = 0
+isReusable = true
 drinkable = true
 healAmount = 50.0

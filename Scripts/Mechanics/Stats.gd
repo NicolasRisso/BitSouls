@@ -20,11 +20,12 @@ export(bool) var useHealling = false
 export(float) var HealVelocity = 1.5
 export(float) var KNOCKBACK_FORCE_APPLIED = 0.0
 export(float) var KNOCKBACK_SPEED_APPLIED = 0.0
-export(Resource) var equipment
 
 const extraSword = preload("res://prefabs/Itens/ExtraSword.tres")
 const extraUsable = preload("res://prefabs/Itens/ExtraUsable.tres")
 const artifacts = preload("res://prefabs/Itens/Artifacts.tres")
+const equipment = preload("res://prefabs/Itens/Equipment.tres")
+const inventory = preload("res://prefabs/Itens/Inventory.tres")
 
 onready var health = max_health setget set_health
 onready var stamina = max_stamina setget set_stamina
@@ -56,6 +57,7 @@ signal no_health
 signal health_changed(value)
 signal stamina_changed(value)
 signal update_hitbox
+signal died
 
 func _physics_process(delta):
 	if (useHealling): heal_state(delta)	
@@ -219,6 +221,24 @@ func callGreaseTimer(damageBonus, duration):
 func heal(value):
 	healLeft = value
 	healRegenOn = true
+	
+func emitInventoryUpdate():
+	equipment.emit_signal("items_changed", [0, 1, 2, 3, 4, 5])
+	extraSword.emit_signal("items_changed", [0, 1])
+	extraUsable.emit_signal("items_changed", [0, 1])
+	artifacts.emit_signal("items_changed", [0, 1])
+	inventory.emit_signal("items_changed", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+
+func refreash():
+	self.health = max_health
+	self.stamina = max_stamina
+	inventory.resetHealPotion()
+	extraUsable.resetHealPotion()
+	equipment.resetHealPotion()
+	emit_signal("died")
+
+func minorRefreash():
+	self.health = max_health
 
 func _on_Timer_timeout():
 	if waitingTimer:

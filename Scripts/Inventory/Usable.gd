@@ -7,3 +7,4 @@ enum UsableType {
 }
 
 export(UsableType) var usableType = UsableType.HEAL
+export(bool) var isReusable = false

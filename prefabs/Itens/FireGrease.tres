@@ -14,5 +14,6 @@ isCleanable = true
 amount = 69
 weight = 0.0
 usableType = 1
+isReusable = false
 bonusFireDamage = 3.0
 bonusDuration = 30.0
