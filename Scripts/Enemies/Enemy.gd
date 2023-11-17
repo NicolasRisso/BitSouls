@@ -82,6 +82,7 @@ func states(delta):
 			else: state = IDLE
 			sprite.flip_h = velocity.x < 0
 		DEAD:
+			velocity = Vector2.ZERO
 			pass
 
 func seekPlayer():
@@ -130,6 +131,7 @@ func _on_Stats_no_health():
 
 func die():
 	self.visible = false
+	position = Vector2(-100, 100)
 	state = DEAD
 
 func respawn():

@@ -99,6 +99,7 @@ config/icon="res://icon.png"
 [autoload]
 
 PlayerStats="*res://prefabs/Mechanics/PlayerStats.tscn"
+Signals="*res://prefabs/Mechanics/Signals.tscn"
 
 [display]
 

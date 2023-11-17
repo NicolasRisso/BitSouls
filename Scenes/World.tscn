@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://prefabs/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/Player.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://prefabs/Enemies/FireBat.tscn" type="PackedScene" id=15]
 [ext_resource path="res://prefabs/Itens/UISlot.tscn" type="PackedScene" id=16]
 [ext_resource path="res://prefabs/Mechanics/LostTotem.tscn" type="PackedScene" id=17]
+[ext_resource path="res://prefabs/UI/LostTotemFound.tscn" type="PackedScene" id=18]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -1270,14 +1271,14 @@ position = Vector2( 333, 574 )
 
 [node name="ItemDrop" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 264, 675 )
-frame = 4
+frame = 24
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop2" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 185, 582 )
-frame = 4
+frame = 24
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop2" index="0"]
 item = ExtResource( 14 )
@@ -1328,6 +1329,8 @@ margin_left = 23.0
 margin_top = 139.0
 margin_right = 41.0
 margin_bottom = 157.0
+
+[node name="LostTotemFound" parent="CanvasLayer" instance=ExtResource( 18 )]
 
 [node name="NavigationPolygonInstance2" type="NavigationPolygonInstance" parent="."]
 navpoly = SubResource( 111 )

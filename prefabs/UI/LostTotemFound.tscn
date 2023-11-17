@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://prefabs/Fonts/PixelRPGBIG.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Art/Music and Sounds/lostTotemFound.wav" type="AudioStream" id=2]
+[ext_resource path="res://Scripts/UI/LostTotemFound.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Label:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.898039, 0.788235, 0.2, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Label:custom_colors/font_outline_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Label:custom_fonts/font:outline_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "Show"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Label:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.898039, 0.788235, 0.2, 0 ), Color( 0.898039, 0.788235, 0.2, 1 ), Color( 0.898039, 0.788235, 0.2, 1 ), Color( 0.898039, 0.788235, 0.2, 0 ) ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("../AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Label:custom_fonts/font:outline_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[node name="LostTotemFound" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 320.0
+margin_bottom = 180.0
+custom_colors/font_color = Color( 0.898039, 0.788235, 0.2, 0 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "LOST TOTEM FOUND"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath(".")
+anims/RESET = SubResource( 2 )
+anims/Show = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )

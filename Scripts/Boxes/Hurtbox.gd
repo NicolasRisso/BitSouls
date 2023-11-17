@@ -15,6 +15,7 @@ signal invencibility_ended
 
 func create_hitEffect(damage, fireDamage):
 	if !showHit: return
+	if (damage + fireDamage <= 0): return
 	var effect
 	if damage > fireDamage:
 		effect = hitEffect.instance()

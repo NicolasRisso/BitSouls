@@ -235,6 +235,7 @@ func refreash():
 	inventory.resetHealPotion()
 	extraUsable.resetHealPotion()
 	equipment.resetHealPotion()
+	emitInventoryUpdate()
 	emit_signal("died")
 
 func minorRefreash():
