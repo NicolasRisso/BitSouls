@@ -1,7 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Art/World/Totem.png" type="Texture" id=1]
 [ext_resource path="res://prefabs/Mechanics/LostTotemInteract.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Mechanics/LostTotem.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -25,6 +30,11 @@ region = Rect2( 320, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
+"frames": [ SubResource( 9 ) ],
+"loop": true,
+"name": "Off",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "On",
@@ -39,11 +49,11 @@ height = 1.0
 radius = 32.0
 
 [node name="LostTotem" type="StaticBody2D"]
+script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-animation = "On"
-frame = 1
+animation = "Off"
 playing = true
 offset = Vector2( 0, -32 )
 
@@ -58,3 +68,5 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="LostTotemInteract"]
 shape = SubResource( 8 )
+
+[connection signal="area_entered" from="LostTotemInteract" to="." method="_on_LostTotemInteract_area_entered"]
