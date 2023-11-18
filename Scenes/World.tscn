@@ -1271,14 +1271,14 @@ position = Vector2( 333, 574 )
 
 [node name="ItemDrop" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 264, 675 )
-frame = 24
+frame = 11
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop2" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 185, 582 )
-frame = 24
+frame = 11
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop2" index="0"]
 item = ExtResource( 14 )
@@ -1288,7 +1288,7 @@ item = ExtResource( 14 )
 [node name="LostTotem" parent="YSort/Totens" instance=ExtResource( 17 )]
 position = Vector2( 317, 756 )
 
-[node name="LostTotemInteract" parent="YSort/Totens/LostTotem" index="2"]
+[node name="LostTotemInteract" parent="YSort/Totens/LostTotem" index="3"]
 respawnPosition = Vector2( 290, 760 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

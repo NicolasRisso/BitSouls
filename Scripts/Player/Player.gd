@@ -78,6 +78,7 @@ func _ready():
 	randomize()
 	stats.connect("no_health", self, "reloadScene")
 	stats.connect("update_hitbox", self, "_update_hitbox")
+	Signals.connect("lostTotemInteracted", self, "refreashArea")
 	animationTree.active = true
 	_update_hitbox()
 
@@ -267,6 +268,9 @@ func move():
 func reloadScene():
 	PlayerStats.refreash()
 	position = respawnPoint
+
+func refreashArea():
+	PlayerStats.refreash()
 
 func knockback(area):
 	var direction = (position - area.owner.position).normalized()

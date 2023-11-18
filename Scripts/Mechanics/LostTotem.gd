@@ -9,6 +9,7 @@ var isOn = false
 
 onready var lostTotemInteract = $LostTotemInteract
 onready var animatedSprite = $AnimatedSprite
+onready var audioStream = $AudioStreamPlayer
 
 func _ready():
 	if !useCustomRespawnPosition: respawnPosition = position + Vector2(0, 10)
@@ -17,8 +18,11 @@ func _ready():
 	animatedSprite.animation = "Off"
 
 
-func _on_LostTotemInteract_area_entered(area):
-	if isOn: return
-	animatedSprite.animation = "On"
-	Signals.emit_signal("lostTotemFound")
-	isOn = true
+func _on_LostTotemInteract_area_entered(_area):
+	if !isOn:
+		animatedSprite.animation = "On"
+		Signals.emit_signal("lostTotemFound")
+		isOn = true
+	else:
+		Signals.emit_signal("lostTotemInteracted")
+		audioStream.play()
