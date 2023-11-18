@@ -15,9 +15,11 @@ func _on_Timer_timeout():
 
 func _on_ItemBox_area_entered(area):
 	#TOTEM
-	print(area.get_collision_mask_bit(7))
 	if area.get_collision_mask_bit(7) == true:
 		player.respawnPoint = area.respawnPosition
+	#SIGN
+	elif area.get_collision_mask_bit(8) == true:
+		print(area.text)
 	#ITEM
 	else:
 		var index = inventory.get_first_slot_available()
