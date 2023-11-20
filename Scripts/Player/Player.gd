@@ -58,6 +58,7 @@ var fireGrease = false
 
 var fullscreen = true
 var inventory = false
+var reading = false
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -79,6 +80,7 @@ func _ready():
 	stats.connect("no_health", self, "reloadScene")
 	stats.connect("update_hitbox", self, "_update_hitbox")
 	Signals.connect("lostTotemInteracted", self, "refreashArea")
+	Signals.connect("signInteract", self, "setReading")
 	animationTree.active = true
 	_update_hitbox()
 
@@ -134,15 +136,17 @@ func bufferRead():
 	if Input.is_action_just_pressed("FullScreen"):
 		fullscreen = !fullscreen
 		OS.set_window_fullscreen(fullscreen)
-	if Input.is_action_just_pressed("inventory") or (Input.is_action_just_pressed("close_inventory") and inventory):
+	if Input.is_action_just_pressed("inventory") or (Input.is_action_just_pressed("close") and inventory):
 		inventory = !inventory
 		inventoryContainer.visible = inventory
 		inventoryUI.visible = !inventory
 		PlayerStats.emitInventoryUpdate()
 		if(!inventory): Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if Input.is_action_just_pressed("close") and reading:
+		Signals.emit_signal("signInteract", [false, ""])
 		
-	if inventory: return
+	if inventory or reading: return
 	if Input.is_action_just_pressed("attack") and stats.stamina >= staminaPerAttack:
 		increaseAttackBuffering()
 	if Input.is_action_just_pressed("roll") and stats.stamina >= staminaPerRoll:
@@ -181,6 +185,9 @@ func move_state(delta):
 
 func inventory_state():
 	velocity = Vector2.ZERO
+	
+func setReading(values):
+	reading = values[0]
 
 func heal_state():
 	velocity = Vector2.ZERO

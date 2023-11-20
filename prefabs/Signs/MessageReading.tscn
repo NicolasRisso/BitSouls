@@ -1,15 +1,26 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://prefabs/Fonts/PixelRPG.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Art/UI/MessageBackgroud.png" type="Texture" id=2]
+[ext_resource path="res://Art/UI/MessageOver.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Signs/MessageReading.gd" type="Script" id=4]
 
 [node name="MessageReading" type="Node2D"]
+script = ExtResource( 4 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureProgress" type="TextureProgress" parent="."]
 margin_right = 180.0
 margin_bottom = 40.0
-color = Color( 0, 0, 0, 0.596078 )
+texture_under = ExtResource( 2 )
+texture_over = ExtResource( 3 )
+tint_under = Color( 0, 0, 0, 0.596078 )
+nine_patch_stretch = true
+stretch_margin_left = 2
+stretch_margin_top = 2
+stretch_margin_right = 2
+stretch_margin_bottom = 2
 
-[node name="Label" type="Label" parent="ColorRect"]
+[node name="Label" type="Label" parent="TextureProgress"]
 margin_left = 10.0
 margin_right = 170.0
 margin_bottom = 40.0

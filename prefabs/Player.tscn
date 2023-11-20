@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=2]
+[gd_scene load_steps=113 format=2]
 
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/Player/Player.png" type="Texture" id=2]
@@ -1898,6 +1898,9 @@ tracks/0/keys = {
 
 [sub_resource type="CircleShape2D" id=67]
 
+[sub_resource type="CircleShape2D" id=101]
+radius = 5.0
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -2008,6 +2011,13 @@ collision_layer = 448
 [node name="CollisionShape2D" parent="ItemBox" index="0"]
 shape = SubResource( 67 )
 disabled = true
+
+[node name="MessageZoneDetection" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MessageZoneDetection"]
+shape = SubResource( 101 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invencibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invencibility_ended"]

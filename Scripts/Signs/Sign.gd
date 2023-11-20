@@ -19,3 +19,8 @@ func _ready():
 	if textureID < textures.size() and textureID >= 0:
 		sprite.texture = textures[textureID]
 	interactionArea.text = text
+
+
+func _on_PlayerDetection_area_exited(area):
+	Signals.emit_signal("signInteract", [false, ""])
+

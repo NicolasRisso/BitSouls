@@ -1273,14 +1273,14 @@ position = Vector2( 333, 574 )
 
 [node name="ItemDrop" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 264, 675 )
-frame = 19
+frame = 17
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop2" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 185, 582 )
-frame = 19
+frame = 17
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop2" index="0"]
 item = ExtResource( 14 )
@@ -1313,7 +1313,7 @@ visible = false
 
 [node name="MessageReading" parent="CanvasLayer" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 80, 30 )
+position = Vector2( 70, 30 )
 
 [node name="InventoryUI" type="Node2D" parent="CanvasLayer"]
 
