@@ -251,6 +251,5 @@ func _on_GreaseTimer_timeout():
 		fireDamage += fire_damage_before_buffs
 		fire_damage_grease_buffs = 0
 		greaseBuffed = false
-		print("cabou-se")
 		_updateItemStats([])
 		equipment.emit_signal("items_changed", [0])

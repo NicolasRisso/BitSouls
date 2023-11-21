@@ -35,7 +35,7 @@ var velocity = Vector2.ZERO
 var rollVector = Vector2.DOWN
 var knockbackVector = Vector2.ZERO
 
-var respawnPoint = Vector2(300, 700)
+var respawnPoint = Vector2.ZERO
 
 var stats = PlayerStats
 
@@ -82,7 +82,9 @@ func _ready():
 	Signals.connect("lostTotemInteracted", self, "refreashArea")
 	Signals.connect("signInteract", self, "setReading")
 	animationTree.active = true
+	PlayerStats.itemRead()
 	_update_hitbox()
+	respawnPoint = position
 
 func _updateItemStats(indexes):
 	if equipment is Inventory:
@@ -191,7 +193,6 @@ func setReading(values):
 
 func heal_state():
 	velocity = Vector2.ZERO
-	print(fireGrease)
 	if (fireGrease): animationState.travel("FireGrease")
 	elif (isDrinkable): animationState.travel("Heal")
 	else: animationState.travel("Eat")

@@ -7,7 +7,6 @@ func _ready():
 	visible = false
 	
 func setAnim(value):
-	print(areaCount)
 	if (value): areaCount += 1
 	else: areaCount -= 1
 	if areaCount > 1:

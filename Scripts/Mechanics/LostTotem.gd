@@ -7,9 +7,12 @@ var respawnPosition = Vector2.ZERO
 
 var isOn = false
 
+var isOnCooldown = false
+
 onready var lostTotemInteract = $LostTotemInteract
 onready var animatedSprite = $AnimatedSprite
 onready var audioStream = $AudioStreamPlayer
+onready var timer = $Timer
 
 func _ready():
 	if !useCustomRespawnPosition: respawnPosition = position + Vector2(0, 10)
@@ -24,5 +27,12 @@ func _on_LostTotemInteract_area_entered(_area):
 		Signals.emit_signal("lostTotemFound")
 		isOn = true
 	else:
+		if isOnCooldown: return
 		Signals.emit_signal("lostTotemInteracted")
 		audioStream.play()
+		isOnCooldown = true
+		timer.wait_time = 4
+		timer.start()
+
+func _on_Timer_timeout():
+	isOnCooldown = false

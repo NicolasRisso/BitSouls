@@ -20,7 +20,6 @@ func _on_ItemBox_area_entered(area):
 	#SIGN
 	elif area.get_collision_mask_bit(8) == true:
 		Signals.emit_signal("signInteract", [true, area.text])
-		print("sine")
 	#ITEM
 	else:
 		var index = inventory.get_first_slot_available()

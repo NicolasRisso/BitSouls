@@ -86,6 +86,9 @@ stream = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 shape = SubResource( 10 )
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="LostTotemInteract" to="." method="_on_LostTotemInteract_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 [editable path="PlayerDetection"]

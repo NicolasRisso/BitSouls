@@ -39,7 +39,7 @@ func get_drag_data(_position):
 		selectedItemTexts.name = item.name
 		selectedItemTexts.description = item.description
 		
-		print(selectedItemTexts.name + " | " + selectedItemTexts.description)
+		#print(selectedItemTexts.name + " | " + selectedItemTexts.description)
 		
 		set_drag_preview(dragPreview)
 		
