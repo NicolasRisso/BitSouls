@@ -1,8 +1,9 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Art/Player/Player.png" type="Texture" id=2]
 [ext_resource path="res://prefabs/Collision/Hitbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefabs/UI/KeyFeedback.tscn" type="PackedScene" id=4]
 [ext_resource path="res://prefabs/Collision/Hurtbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Art/Shadows/MediumShadow.png" type="Texture" id=6]
 [ext_resource path="res://Art/Music and Sounds/Evade.wav" type="AudioStream" id=7]
@@ -14,6 +15,7 @@
 [ext_resource path="res://Art/Music and Sounds/eatting.wav" type="AudioStream" id=13]
 [ext_resource path="res://Art/Music and Sounds/FireWeaponSwing.wav" type="AudioStream" id=14]
 [ext_resource path="res://Art/Music and Sounds/FireGrease.wav" type="AudioStream" id=15]
+[ext_resource path="res://prefabs/Collision/InteractDetect.tscn" type="PackedScene" id=16]
 
 [sub_resource type="ShaderMaterial" id=51]
 shader = ExtResource( 9 )
@@ -2018,6 +2020,12 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MessageZoneDetection"]
 shape = SubResource( 101 )
+
+[node name="KeyFeedback" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0.5, -35 )
+frame = 1
+
+[node name="InteractDetect" parent="." instance=ExtResource( 16 )]
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invencibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invencibility_ended"]

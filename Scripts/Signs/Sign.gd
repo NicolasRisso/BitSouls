@@ -20,7 +20,5 @@ func _ready():
 		sprite.texture = textures[textureID]
 	interactionArea.text = text
 
-
-func _on_PlayerDetection_area_exited(area):
+func _on_PlayerDetec_area_exited(area):
 	Signals.emit_signal("signInteract", [false, ""])
-
