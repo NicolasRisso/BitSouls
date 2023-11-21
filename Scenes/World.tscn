@@ -579,9 +579,6 @@ inventoryUI_path = NodePath("../../CanvasLayer/InventoryUI")
 [node name="AnimationTree" parent="YSort/Player" index="4"]
 parameters/playback = SubResource( 105 )
 
-[node name="KeyFeedback" parent="YSort/Player" index="12"]
-frame = 1
-
 [node name="Bushes" type="YSort" parent="YSort"]
 
 [node name="Bush" parent="YSort/Bushes" instance=ExtResource( 1 )]
@@ -1276,14 +1273,14 @@ position = Vector2( 333, 574 )
 
 [node name="ItemDrop" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 264, 675 )
-frame = 10
+frame = 15
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop2" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 185, 582 )
-frame = 10
+frame = 15
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop2" index="0"]
 item = ExtResource( 14 )
