@@ -11,6 +11,5 @@ func set_bar(value):
 func _ready():
 	PlayerStats.connect("health_changed", self, "set_bar")
 	artifacts.connect("items_changed", self, "set_max_bar")
-	print(max_Health)
 	max_value = max_Health
 	value = max_Health
