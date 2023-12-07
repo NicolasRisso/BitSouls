@@ -1991,14 +1991,6 @@ collision_layer = 4
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 shape = SubResource( 49 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-limit_left = -32
-limit_top = -32
-limit_right = 1600
-limit_bottom = 900
-smoothing_enabled = true
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 
@@ -2025,6 +2017,14 @@ shape = SubResource( 101 )
 position = Vector2( 0.5, -35 )
 
 [node name="InteractDetect" parent="." instance=ExtResource( 16 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1600
+limit_bottom = 1600
+smoothing_enabled = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invencibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invencibility_ended"]

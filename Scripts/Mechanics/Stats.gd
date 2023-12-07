@@ -52,6 +52,7 @@ var totalHealled = 0
 var damage_before_buffs = 0
 var fire_damage_before_buffs = 0
 var fire_damage_grease_buffs = 0
+var max_health_with_buffs = max_health
 
 signal no_health
 signal health_changed(value)
@@ -76,8 +77,8 @@ func heal_state(delta):
 			totalHealled = 0
 
 func set_health(value):
-	if (value > max_health):
-		health = max_health
+	if (value > max_health_with_buffs):
+		health = max_health_with_buffs
 	else:
 		health = value
 	emit_signal("health_changed", health)
@@ -192,16 +193,25 @@ func itemRead():
 		if !(artifacts.items[0] is Item) and !(artifacts.items[1] is Item):
 			self.damage = damage_before_buffs
 			self.fireDamage = fire_damage_before_buffs + fire_damage_grease_buffs
+			self.max_health_with_buffs = max_health
 		else:
 			var damageAfterBuffs = damage_before_buffs
+			var maxhealthAfterBuffs = max_health;
 			if artifacts.items[0] is Item:
 				if artifacts.items[0].buffType == Artifact.BuffType.DAMAGE:
 					damageAfterBuffs = artifacts.items[0].damageBuffs(artifacts.items[0].effect_index, damageAfterBuffs)
+				if artifacts.items[0].buffType == Artifact.BuffType.HEALTH:
+					maxhealthAfterBuffs = artifacts.items[0].healthBuffs(artifacts.items[0].effect_index, maxhealthAfterBuffs)
 			if artifacts.items[1] is Item:
 				if artifacts.items[1].buffType == Artifact.BuffType.DAMAGE:
 					damageAfterBuffs = artifacts.items[1].damageBuffs(artifacts.items[1].effect_index, damageAfterBuffs)
+				if artifacts.items[1].buffType == Artifact.BuffType.HEALTH:
+					maxhealthAfterBuffs = artifacts.items[0].healthBuffs(artifacts.items[0].effect_index, maxhealthAfterBuffs)
 			self.damage = damageAfterBuffs
 			self.fireDamage = fire_damage_before_buffs + fire_damage_grease_buffs
+			self.max_health_with_buffs = maxhealthAfterBuffs
+			
+			PlayerStats.emit_signal("health_changed", health)
 
 func callStaminaRegen():
 	timer.start(staminaRegenDelay)

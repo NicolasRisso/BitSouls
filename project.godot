@@ -100,6 +100,7 @@ config/icon="res://icon.png"
 
 PlayerStats="*res://prefabs/Mechanics/PlayerStats.tscn"
 Signals="*res://prefabs/Mechanics/Signals.tscn"
+Singleton="*res://Scripts/global/singleton.gd"
 
 [display]
 

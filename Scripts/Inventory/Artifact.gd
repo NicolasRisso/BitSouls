@@ -3,6 +3,7 @@ class_name Artifact
 
 enum BuffType{
 	DAMAGE,
+	HEALTH
 }
 
 export(int) var effect_index = -1
@@ -15,3 +16,9 @@ func damageBuffs(index, damage):
 		print(damage * 1.1)
 		return damage * 1.1
 	return damage
+	
+func healthBuffs(index, health):
+	if index == 0:
+		print(health * 1.05)
+		return health * 1.05
+	return health

@@ -49,10 +49,9 @@ custom_fonts/font = ExtResource( 1 )
 text = "Health"
 script = ExtResource( 2 )
 useTwoVariables = true
-typeOfUpdate = "HealthChanged"
 textBase = "Health: "
 selectedVariable = "health"
-selectedVariable2 = "max_health"
+selectedVariable2 = "max_health_with_buffs"
 
 [node name="Stats" type="Label" parent="."]
 margin_top = -7.0
@@ -176,7 +175,7 @@ margin_top = 91.0
 margin_right = 81.0
 margin_bottom = 106.0
 custom_fonts/font = ExtResource( 1 )
-text = "Selected NAME
+text = "
 "
 script = ExtResource( 3 )
 
@@ -186,7 +185,7 @@ margin_top = 98.0
 margin_right = 120.0
 margin_bottom = 148.0
 custom_fonts/font = ExtResource( 1 )
-text = "Selected Description
+text = "
 "
 autowrap = true
 script = ExtResource( 3 )

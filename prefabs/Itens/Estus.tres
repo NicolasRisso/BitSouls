@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "Estus"
-description = "A magic potion capable of healing wounds."
+name = "Pure Blood"
+description = "A magic potion capable of healing wounds. Don't fear to use it, all lost totems can bleed."
 texture = ExtResource( 2 )
 type = 1
 isStackable = true
