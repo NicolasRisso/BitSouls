@@ -49,7 +49,6 @@ func _ready():
 	healthBar.stats = stats
 	healthBar.loaded()
 	startPosition = position
-	PlayerStats.connect("died", self, "respawn")
 
 func _physics_process(delta):
 	knockbackVector = knockbackVector.move_toward(Vector2.ZERO, KNOCKBACK_FORCE * delta)

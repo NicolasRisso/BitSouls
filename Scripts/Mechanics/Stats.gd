@@ -210,7 +210,6 @@ func itemRead():
 			self.damage = damageAfterBuffs
 			self.fireDamage = fire_damage_before_buffs + fire_damage_grease_buffs
 			self.max_health_with_buffs = maxhealthAfterBuffs
-			
 			PlayerStats.emit_signal("health_changed", health)
 
 func callStaminaRegen():

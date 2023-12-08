@@ -110,6 +110,7 @@ texture = ExtResource( 2 )
 material = SubResource( 14 )
 frames = SubResource( 1 )
 animation = "Fly"
+frame = 3
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -124,7 +125,7 @@ position = Vector2( 0, -13 )
 shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
-max_health = 16.0
+max_health = 20.0
 damage = 25.0
 physicalDamageNegation = 0.1
 KNOCKBACK_FORCE_APPLIED = 60.0
