@@ -59,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Inventory/Potion.gd"
 }, {
+"base": "Node2D",
+"class": "State",
+"language": "GDScript",
+"path": "res://Scripts/Bosses/state.gd"
+}, {
 "base": "Item",
 "class": "Sword",
 "language": "GDScript",
@@ -85,6 +90,7 @@ _global_script_class_icons={
 "Inventory": "",
 "Item": "",
 "Potion": "",
+"State": "",
 "Sword": "",
 "TextStorage": "",
 "Usable": ""
