@@ -2015,6 +2015,7 @@ shape = SubResource( 101 )
 
 [node name="KeyFeedback" parent="." instance=ExtResource( 4 )]
 position = Vector2( 0.5, -35 )
+frame = 1
 
 [node name="InteractDetect" parent="." instance=ExtResource( 16 )]
 

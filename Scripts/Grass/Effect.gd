@@ -6,6 +6,8 @@ export(float) var explosionPierce = 0.0
 export(float) var knockbackForce = 0.0
 export(float) var knockbackSpeed = 0.0
 
+export(float) var frameToExplode = 7
+
 var hitbox
 var collisionShape
 
@@ -22,11 +24,14 @@ func _ready():
 		hitbox.knockbackSpeed = knockbackSpeed
 
 func _on_animation_finished():
+		call_deferred("_destroy_self")
+
+func _destroy_self():
 	queue_free()
 
 func _on_EnemyDeathEffect_frame_changed():
 	if !explosive: return
-	if frame == 7:
+	if frame == frameToExplode:
 		collisionShape.disabled = false
-	if frame == 8:
+	if frame == frameToExplode + 1:
 		collisionShape.disabled = true

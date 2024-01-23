@@ -8,7 +8,7 @@ func _ready():
 	previous_state = current_state
 	current_state.enter()
 
-func change(state):
+func change_state(state):
 	current_state = find_node(state) as State
 	current_state.enter()
 	

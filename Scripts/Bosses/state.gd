@@ -2,7 +2,7 @@ extends Node2D
 class_name State
 
 onready var debug = owner.find_node("Debug")
-onready var player = owner.get_parent().find_node("Player")
+onready var player = get_tree().current_scene.get_node("YSort").find_node("Player")
 onready var animation_player = owner.find_node("AnimationPlayer")
 
 func _ready():
