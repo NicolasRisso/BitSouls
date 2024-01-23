@@ -15,6 +15,8 @@ export var TIME_RANGE = [1.0, 3.0]
 
 export(bool) var useDiferentDeathEffect = false
 
+export(bool) var respawn = true
+
 const AltDeathEffectPath = preload("res://prefabs/Effects/EnemyDeathEffectExplosion.tscn")
 
 const DeathEffect = preload("res://prefabs/Effects/EnemyDeathEffect.tscn")
@@ -49,6 +51,7 @@ func _ready():
 	healthBar.stats = stats
 	healthBar.loaded()
 	startPosition = position
+	Signals.connect("lostTotemInteracted", self, "respawn")
 
 func _physics_process(delta):
 	knockbackVector = knockbackVector.move_toward(Vector2.ZERO, KNOCKBACK_FORCE * delta)
@@ -134,6 +137,7 @@ func die():
 	state = DEAD
 
 func respawn():
+	if !respawn: return
 	self.visible = true
 	state = pickRandomState([IDLE, WANDER])
 	stats.minorRefreash()
