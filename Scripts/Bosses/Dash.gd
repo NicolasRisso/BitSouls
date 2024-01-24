@@ -25,5 +25,4 @@ func transition():
 
 
 func _on_Timer_timeout():
-	print(can_transition)
 	can_transition = true

@@ -40,7 +40,6 @@ func set_invincible(value):
 func _on_Timer_timeout():
 	self.invincible = false
 
-
 func _on_Hurtbox_invencibility_started():
 	set_deferred("monitoring", false)
 

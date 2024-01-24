@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://prefabs/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/Player.tscn" type="PackedScene" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://prefabs/Itens/RustySword.tres" type="Resource" id=24]
 [ext_resource path="res://prefabs/Itens/Estus.tres" type="Resource" id=25]
 [ext_resource path="res://prefabs/Bosses/StoneGolem.tscn" type="PackedScene" id=26]
+[ext_resource path="res://prefabs/UI/BossHealthBar.tscn" type="PackedScene" id=27]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -591,7 +592,7 @@ inventoryUI_path = NodePath("../../CanvasLayer/InventoryUI")
 parameters/playback = SubResource( 105 )
 
 [node name="KeyFeedback" parent="YSort/Player" index="11"]
-frame = 1
+frame = 0
 
 [node name="Camera2D" parent="YSort/Player" index="13"]
 limit_left = -32
@@ -3424,56 +3425,56 @@ position = Vector2( 249, 910 )
 
 [node name="ItemDrop" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 16, 602 )
-frame = 18
+frame = 0
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop" index="0"]
 item = ExtResource( 14 )
 
 [node name="ItemDrop2" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 113, 535 )
-frame = 18
+frame = 0
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop2" index="0"]
 item = ExtResource( 14 )
 
 [node name="ItemDrop3" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 15, 1256 )
-frame = 18
+frame = 0
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop3" index="0"]
 item = ExtResource( 21 )
 
 [node name="ItemDrop4" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 677, 1220 )
-frame = 17
+frame = 25
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop4" index="0"]
 item = ExtResource( 24 )
 
 [node name="ItemDrop5" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 462, 1365 )
-frame = 17
+frame = 25
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop5" index="0"]
 item = ExtResource( 25 )
 
 [node name="ItemDrop6" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 7, 1098 )
-frame = 17
+frame = 25
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop6" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop7" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 311, 1283 )
-frame = 16
+frame = 24
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop7" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop8" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 1014, 1431 )
-frame = 16
+frame = 24
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop8" index="0"]
 item = ExtResource( 13 )
@@ -3897,6 +3898,8 @@ margin_right = 41.0
 margin_bottom = 157.0
 
 [node name="LostTotemFound" parent="CanvasLayer" instance=ExtResource( 18 )]
+
+[node name="BossHealthBar" parent="CanvasLayer" instance=ExtResource( 27 )]
 
 [node name="NavigationPolygonInstance2" type="NavigationPolygonInstance" parent="."]
 navpoly = SubResource( 111 )

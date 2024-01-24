@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Art/Bosses/Stone Golem/Character_sheet.png" type="Texture" id=1]
 [ext_resource path="res://Art/Bosses/Stone Golem/Laser_sheet.png" type="Texture" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://prefabs/Bosses/BossesUtils/Missile.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scripts/Bosses/Dash.gd" type="Script" id=16]
 [ext_resource path="res://Scripts/Bosses/LaserBeam.gd" type="Script" id=17]
+[ext_resource path="res://Scripts/Bosses/ArmorBuff.gd" type="Script" id=18]
+[ext_resource path="res://Art/Shadows/LargeShadow.png" type="Texture" id=19]
 
 [sub_resource type="Animation" id=1]
 resource_name = "ArmorBuff"
@@ -57,6 +59,20 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("../../FiniteStateMachine/ArmorBuff")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.25 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "animation_ended"
+} ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -256,6 +272,18 @@ tracks/1/keys = {
 "method": "anim_laser_ended"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitbox/CollisionShape2D2:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.125, 1.875 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "LaserCast"
@@ -314,9 +342,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "MeleeAttack"
-length = 0.4375
+length = 1.3
 loop = true
-step = 0.0625
 tracks/0/type = "value"
 tracks/0/path = NodePath("../../Sprite:frame")
 tracks/0/interp = 1
@@ -324,10 +351,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 40, 41, 42, 43, 44, 45, 46 ]
+"values": [ 40, 41, 42, 43, 44, 45, 46, 45, 44, 43, 42, 41, 40 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:frame")
@@ -348,7 +375,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.375, 0.4375 ),
+"times": PoolRealArray( 0, 0.6, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -360,11 +387,39 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.4375 ),
+"times": PoolRealArray( 1.3 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "animation_ended"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("../..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "aim_attack"
+} ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath("../../HitboxPivot/Hitbox")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ true ],
+"method": "set_triggerInvincibility"
 } ]
 }
 
@@ -401,6 +456,18 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Hitbox/CollisionShape2D2:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -462,14 +529,91 @@ tracks/3/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=19]
+resource_name = "TripleAttack"
+length = 1.625
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/path = NodePath("../../Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.4375, 0.5, 0.5625, 0.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375, 1, 1.1875, 1.3125, 1.4375, 1.5, 1.5625 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 44, 45, 46, 44, 45, 46, 44, 45, 46, 45, 44, 43, 42, 41, 40 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../../HitboxPivot/Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5625, 0.625, 0.75, 0.8125, 0.9375, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true, false, true ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4375 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "aim_attack"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("../../FiniteStateMachine/MeleeAttack")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.625 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "animation_ended"
+} ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("../../HitboxPivot/Hitbox")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4375, 0.875 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ false ],
+"method": "set_triggerInvincibility"
+}, {
+"args": [ true ],
+"method": "set_triggerInvincibility"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 129, 9.5 )
+
 [sub_resource type="CircleShape2D" id=11]
 radius = 8.0
 
-[sub_resource type="CapsuleShape2D" id=12]
-radius = 12.0
-height = 16.0
+[sub_resource type="CapsuleShape2D" id=18]
 
 [sub_resource type="CapsuleShape2D" id=13]
+radius = 7.0
+height = 16.0
 
 [sub_resource type="CircleShape2D" id=14]
 radius = 6.08276
@@ -482,6 +626,9 @@ height = 21.9999
 
 [node name="StoneGolem" type="KinematicBody2D"]
 script = ExtResource( 12 )
+
+[node name="Shadow" type="Sprite" parent="."]
+texture = ExtResource( 19 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -20 )
@@ -503,6 +650,7 @@ anims/LaserCast = SubResource( 7 )
 anims/MeleeAttack = SubResource( 8 )
 anims/RESET = SubResource( 9 )
 anims/RangedAttack = SubResource( 10 )
+anims/TripleAttack = SubResource( 19 )
 
 [node name="Pivot" type="Node2D" parent="."]
 position = Vector2( 2, -37 )
@@ -512,6 +660,17 @@ position = Vector2( 98, 18 )
 texture = ExtResource( 2 )
 vframes = 15
 frame = 1
+
+[node name="Hitbox" parent="Pivot/Sprite" instance=ExtResource( 5 )]
+position = Vector2( -98, -17 )
+collision_mask = 4
+knockbackForce = 50.0
+knockbackSpeed = 60.0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pivot/Sprite/Hitbox"]
+position = Vector2( 119, 0.5 )
+shape = SubResource( 17 )
+disabled = true
 
 [node name="Debug" type="Label" parent="."]
 margin_left = -20.0
@@ -530,15 +689,16 @@ shape = SubResource( 11 )
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
 collision_layer = 8
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 0, -20 )
-shape = SubResource( 12 )
+shape = SubResource( 18 )
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
+position = Vector2( 0, -3 )
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 0, -20 )
+position = Vector2( 0, -16 )
 shape = SubResource( 13 )
 
 [node name="SoftCollision" parent="." instance=ExtResource( 6 )]
@@ -575,7 +735,7 @@ bullet_node = ExtResource( 15 )
 script = ExtResource( 17 )
 
 [node name="ArmorBuff" type="Node2D" parent="FiniteStateMachine"]
-script = ExtResource( 8 )
+script = ExtResource( 18 )
 
 [node name="Dash" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource( 16 )
@@ -592,13 +752,17 @@ rotation = 3.14159
 [node name="Hitbox" parent="HitboxPivot" instance=ExtResource( 5 )]
 position = Vector2( -22, -5.53131e-05 )
 collision_mask = 4
+knockbackForce = 25.0
+knockbackSpeed = 30.0
 
 [node name="CollisionShape2D" parent="HitboxPivot/Hitbox" index="0"]
 position = Vector2( -1.90735e-06, -2.99994 )
 shape = SubResource( 16 )
 disabled = true
 
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/Idle" method="_on_PlayerDetection_body_entered"]
 [connection signal="timeout" from="FiniteStateMachine/Dash/Timer" to="FiniteStateMachine/Dash" method="_on_Timer_timeout"]
 
+[editable path="Hurtbox"]
 [editable path="HitboxPivot/Hitbox"]

@@ -294,7 +294,7 @@ func _update_hitbox():
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage * (1 - stats.physicalDamageNegation + area.armorPierce)
 	stats.health -= area.fireDamage * (1 - stats.fireDamageNegation + area.firePierce)
-	hurtbox.start_invincibility(0.5)
+	if area.triggerInvincibility: hurtbox.start_invincibility(0.35)
 	hurtbox.create_hitEffect(area.damage, area.fireDamage)
 	knockback(area)
 	if (stats.health <= 0):

@@ -15,3 +15,4 @@ func transition():
 
 func _on_PlayerDetection_body_entered(body):
 	player_entered = true
+	get_parent().get_parent().callHealthBar()
