@@ -1,5 +1,7 @@
 extends TextureProgress
 
+onready var label = $Label
+
 var max_Health = 0
 
 func set_bar(value):
@@ -14,3 +16,4 @@ func connect_boss_healthBar(boss):
 	visible = true
 	max_value = boss.maxHealth
 	value = boss.health
+	label.text = boss.name

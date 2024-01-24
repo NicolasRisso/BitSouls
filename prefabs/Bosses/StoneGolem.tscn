@@ -7,7 +7,7 @@
 [ext_resource path="res://prefabs/Collision/Hitbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefabs/Collision/SoftCollision.tscn" type="PackedScene" id=6]
 [ext_resource path="res://prefabs/Collision/PlayerDetection.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scripts/Bosses/state.gd" type="Script" id=8]
+[ext_resource path="res://Scripts/Bosses/Death.gd" type="Script" id=8]
 [ext_resource path="res://prefabs/Bosses/FiniteStateMachine.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Bosses/Idle.gd" type="Script" id=10]
 [ext_resource path="res://Scripts/Bosses/Follow.gd" type="Script" id=11]
@@ -181,6 +181,42 @@ tracks/3/keys = {
 "update": 1,
 "values": [ 0 ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../Shadow:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 20 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../../Hitbox/CollisionShape2D2:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("../../CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ), Vector2( 0, 14 ) ]
+}
 
 [sub_resource type="Animation" id=21]
 resource_name = "ForceField"
@@ -342,6 +378,30 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../../ForceFieldHitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../../CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -8 ) ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -626,6 +686,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("../../CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 14 ) ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "RangedAttack"
@@ -802,10 +874,11 @@ radius = 128.0
 height = 21.9999
 
 [sub_resource type="CircleShape2D" id=20]
-radius = 42.0
+radius = 62.0725
 
-[node name="StoneGolem" type="KinematicBody2D"]
+[node name="Stone Golem" type="KinematicBody2D"]
 script = ExtResource( 12 )
+maxHealth = 300.0
 
 [node name="Shadow" type="Sprite" parent="."]
 texture = ExtResource( 19 )
@@ -819,7 +892,7 @@ frame = 1
 
 [node name="ForceField" type="Sprite" parent="."]
 position = Vector2( 1, -21 )
-scale = Vector2( 1.5, 1.5 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 20 )
 hframes = 5
 frame = 1
@@ -852,6 +925,9 @@ frame = 1
 [node name="Hitbox" parent="Pivot/Sprite" instance=ExtResource( 5 )]
 position = Vector2( -98, -17 )
 collision_mask = 4
+damage = 0.0
+fireDamage = 35.0
+firePierce = 0.25
 knockbackForce = 50.0
 knockbackSpeed = 60.0
 
@@ -861,6 +937,7 @@ shape = SubResource( 17 )
 disabled = true
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 margin_left = -20.0
 margin_top = -57.0
 margin_right = 21.0
@@ -871,7 +948,7 @@ align = 1
 valign = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -8 )
+position = Vector2( 0, 14 )
 shape = SubResource( 11 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 4 )]
@@ -884,6 +961,7 @@ shape = SubResource( 18 )
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -3 )
 collision_mask = 4
+damage = 20.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( 0, -16 )
@@ -911,6 +989,9 @@ script = ExtResource( 10 )
 [node name="Follow" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource( 11 )
 distanceToShoot = 100.0
+forceFieldChanceIncresePerTry = 0.05
+
+[node name="Timer" type="Timer" parent="FiniteStateMachine/Follow"]
 
 [node name="MeleeAttack" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource( 13 )
@@ -943,6 +1024,7 @@ rotation = 3.14159
 [node name="Hitbox" parent="HitboxPivot" instance=ExtResource( 5 )]
 position = Vector2( -22, -5.53131e-05 )
 collision_mask = 4
+damage = 20.0
 knockbackForce = 25.0
 knockbackSpeed = 30.0
 
@@ -954,16 +1036,18 @@ disabled = true
 [node name="ForceFieldHitbox" parent="." instance=ExtResource( 5 )]
 position = Vector2( 0, -20 )
 collision_mask = 4
-damage = 15.0
+damage = 5.0
+fireDamage = 20.0
 knockbackForce = 250.0
 knockbackSpeed = 300.0
 
 [node name="CollisionShape2D" parent="ForceFieldHitbox" index="0"]
-position = Vector2( 0, -3 )
+position = Vector2( 2, 0 )
 shape = SubResource( 20 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/Idle" method="_on_PlayerDetection_body_entered"]
+[connection signal="timeout" from="FiniteStateMachine/Follow/Timer" to="FiniteStateMachine/Follow" method="_on_Timer_timeout"]
 [connection signal="timeout" from="FiniteStateMachine/Dash/Timer" to="FiniteStateMachine/Dash" method="_on_Timer_timeout"]
 
 [editable path="Hurtbox"]

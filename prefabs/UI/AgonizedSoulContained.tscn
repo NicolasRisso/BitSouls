@@ -2,7 +2,7 @@
 
 [ext_resource path="res://prefabs/Fonts/PixelRPGBIG.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Art/Music and Sounds/lostTotemFound.wav" type="AudioStream" id=2]
-[ext_resource path="res://Scripts/UI/LostTotemFound.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/UI/AgonizedSoulContained.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -109,7 +109,7 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 
-[node name="LostTotemFound" type="Node2D"]
+[node name="AgonizedSoulContained" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
@@ -119,7 +119,7 @@ margin_bottom = 180.0
 custom_colors/font_color = Color( 0.898039, 0.788235, 0.2, 0 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 1 )
-text = "LOST TOTEM RESTORED"
+text = "AGONIZED SOUL CONTAINED"
 align = 1
 valign = 1
 
