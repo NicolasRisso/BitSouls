@@ -1,6 +1,7 @@
 extends State
 
 export(float) var distanceToAttack = 27.5
+export(float) var distanceToForceField = 50
 export(float) var distanceToShoot = 130
 
 func enter():
@@ -17,6 +18,8 @@ func transition():
 	
 	if distance < distanceToAttack:
 		get_parent().change_state("MeleeAttack")
+	if distance >= distanceToAttack and distance <= distanceToForceField:
+		get_parent().change_state("ForceField")
 	if distance > distanceToShoot:
 		var chance = randi() % 2
 		match chance:

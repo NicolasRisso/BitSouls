@@ -25,10 +25,10 @@ func _on_Timer_timeout():
 	explode()
 	
 func explode():
-	var _explosionEffect = explosionEffect.instance()
-	get_tree().current_scene.add_child(_explosionEffect)
-	_explosionEffect.global_position = global_position
 	call_deferred("_destroy_self")
 
 func _destroy_self():
+	var _explosionEffect = explosionEffect.instance()
+	get_tree().current_scene.add_child(_explosionEffect)
+	_explosionEffect.global_position = global_position
 	queue_free()
