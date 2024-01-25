@@ -3,9 +3,14 @@ extends State
 export var bullet_node: PackedScene
 var can_transition: bool = false
 
+export(float) var chanceToTripleMissile = 0.45
+
 func enter():
 	set_physics_process(true)
-	animation_player.play("RangedAttack")
+	if randf() <= chanceToTripleMissile:
+		animation_player.play("TripleMissile")
+	else:
+		animation_player.play("RangedAttack")
 
 func shoot():
 	var bullet = bullet_node.instance()
@@ -18,5 +23,4 @@ func transition():
 		get_parent().change_state("Dash")
 		
 func animation_ended():
-	shoot()
 	can_transition = true

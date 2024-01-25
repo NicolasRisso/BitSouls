@@ -77,4 +77,5 @@ func reloadScene():
 	if armorBuffed:
 		physicalArmor -= physicalArmorBuff
 		fireArmor -= fireArmorBuff
+	armorBuffed = false
 	find_node("FiniteStateMachine").change_state("Idle")

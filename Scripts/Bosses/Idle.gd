@@ -4,9 +4,6 @@ onready var collision = $"../../PlayerDetection/CollisionShape2D"
 
 var player_entered : bool = false setget set_player_entered
 
-func _ready():
-	PlayerStats.connect("no_health", self, "killedPlayer")
-
 func set_player_entered(value):
 	player_entered = value
 	collision.set_deferred("disabled", value)
@@ -19,6 +16,3 @@ func transition():
 func _on_PlayerDetection_body_entered(body):
 	player_entered = true
 	get_parent().get_parent().callHealthBar()
-
-func killedPlayer():
-	player_entered = false

@@ -3,6 +3,8 @@ extends State
 onready var pivot = $"../../Pivot"
 var can_transition: bool = false
 
+export(float) var chanceLongLaser = 0.25
+
 func enter():
 	set_physics_process(true)
 	play_animation("LaserCast")
@@ -19,7 +21,10 @@ func transition():
 		get_parent().change_state("Dash")
 	
 func anim_laserCast_ended():
-	play_animation("Laser")
+	if randf() <= chanceLongLaser:
+		play_animation("LongLaser")
+	else:
+		play_animation("Laser")
 
 func anim_laser_ended():
 	can_transition = true

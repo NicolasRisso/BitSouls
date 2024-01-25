@@ -24,13 +24,15 @@ func _ready():
 		hitbox.knockbackSpeed = knockbackSpeed
 
 func _on_animation_finished():
-		call_deferred("_destroy_self")
+	call_deferred("_destroy_self")
 
 func _destroy_self():
 	queue_free()
 
 func _on_EnemyDeathEffect_frame_changed():
-	if !explosive: return
+	if !explosive: 
+		collisionShape.disable = true
+		return
 	if frame == frameToExplode:
 		collisionShape.disabled = false
 	if frame == frameToExplode + 1:
