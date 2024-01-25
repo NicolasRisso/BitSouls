@@ -11,7 +11,7 @@ export(float) var staminaRegenPerSecond = 45.0
 export(float) var physicalDamageNegation = 0.2
 export(float) var fireDamageNegation = 0.0
 export(float) var max_weight = 50.0
-export(PoolRealArray) var rollInvulnerability = PoolRealArray([0.45, 0.35, 0.2])
+export(PoolRealArray) var rollInvulnerability = PoolRealArray([0.4, 0.3, 0.2])
 export(PoolRealArray) var speedAdjustment = PoolRealArray([80, 75, 70, 35])
 export(PoolRealArray) var rollSpeedAdjustment = PoolRealArray([90, 82.25, 75, 45])
 export(bool) var useEquipment = false
@@ -194,6 +194,8 @@ func itemRead():
 			self.damage = damage_before_buffs
 			self.fireDamage = fire_damage_before_buffs + fire_damage_grease_buffs
 			self.max_health_with_buffs = max_health
+			if (self.health >= max_health_with_buffs):
+				self.health = max_health_with_buffs
 		else:
 			var damageAfterBuffs = damage_before_buffs
 			var maxhealthAfterBuffs = max_health;
@@ -210,6 +212,8 @@ func itemRead():
 			self.damage = damageAfterBuffs
 			self.fireDamage = fire_damage_before_buffs + fire_damage_grease_buffs
 			self.max_health_with_buffs = maxhealthAfterBuffs
+			if (self.health >= max_health_with_buffs):
+				self.health = max_health_with_buffs
 			PlayerStats.emit_signal("health_changed", health)
 
 func callStaminaRegen():
@@ -239,7 +243,7 @@ func emitInventoryUpdate():
 	inventory.emit_signal("items_changed", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
 
 func refreash():
-	self.health = max_health
+	self.health = max_health_with_buffs
 	self.stamina = max_stamina
 	inventory.resetHealPotion()
 	extraUsable.resetHealPotion()

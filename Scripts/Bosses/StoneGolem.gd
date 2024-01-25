@@ -13,9 +13,14 @@ export(float) var physicalArmor = 0.3
 export(float) var physicalArmorBuff = 0.2
 export(float) var fireArmor = 0.15
 export(float) var fireArmorBuff = 0.7
+export(float) var blockDamageNegation = 0.5
+export(int) var movementsBeforeOverload = 20
+
+var movs : int = 0
 
 var armorBuffed : bool = false
 var isAlive : bool = true
+var is_blocking : bool = false
 
 var originalPos : Vector2
 var direction : Vector2
@@ -43,6 +48,9 @@ func aim_attack():
 	hitboxPivot.rotation_degrees = 180 + round(rad2deg(atan2(direction.y, direction.x)))
 
 func _physics_process(delta):
+	if (movs >= movementsBeforeOverload):
+		movs = 0
+		find_node("FiniteStateMachine").change_state("Overloaded")
 	var velocity = direction.normalized() * 40
 	move_and_collide(velocity * delta)
 	
@@ -63,13 +71,22 @@ func set_health(value):
 func callHealthBar():
 	healthBar.connect_boss_healthBar(self)
 
+func is_blocking(value : bool):
+	is_blocking = value
+
 func _on_Hurtbox_area_entered(area):
 	if !isAlive: return
+	var damage_multi = 1
+	if is_blocking: damage_multi = 1 - blockDamageNegation
 	var damageNegation = 1 - physicalArmor + area.armorPierce
 	if (damageNegation > 1): damageNegation = 1
-	self.health -= area.damage * (damageNegation)
-	self.health -= area.fireDamage * (1 - fireArmor + area.firePierce)
+	self.health -= area.damage * (damageNegation) * damage_multi
+	self.health -= area.fireDamage * (1 - fireArmor + area.firePierce) * damage_multi
 	hurtbox.create_hitEffect(area.damage, area.fireDamage)
+	
+func did_movement():
+	movs += 1
+	print(movs)
 	
 func reloadScene():
 	self.health = maxHealth
