@@ -17,118 +17,242 @@ inventory = ExtResource( 3 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 80.0
-margin_bottom = 45.0
+margin_bottom = 23.0
 
 [node name="InventorySlotDisplay2" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 80.0
 margin_right = 160.0
-margin_bottom = 45.0
+margin_bottom = 23.0
 
 [node name="InventorySlotDisplay3" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 160.0
 margin_right = 240.0
-margin_bottom = 45.0
+margin_bottom = 23.0
 
 [node name="InventorySlotDisplay4" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
 margin_right = 320.0
-margin_bottom = 45.0
+margin_bottom = 23.0
 
 [node name="InventorySlotDisplay5" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 45.0
+margin_top = 23.0
 margin_right = 80.0
-margin_bottom = 90.0
+margin_bottom = 46.0
 
 [node name="InventorySlotDisplay6" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 80.0
-margin_top = 45.0
+margin_top = 23.0
 margin_right = 160.0
-margin_bottom = 90.0
+margin_bottom = 46.0
 
 [node name="InventorySlotDisplay7" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 160.0
-margin_top = 45.0
+margin_top = 23.0
 margin_right = 240.0
-margin_bottom = 90.0
+margin_bottom = 46.0
 
 [node name="InventorySlotDisplay8" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
-margin_top = 45.0
+margin_top = 23.0
 margin_right = 320.0
-margin_bottom = 90.0
+margin_bottom = 46.0
 
 [node name="InventorySlotDisplay9" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 90.0
+margin_top = 46.0
 margin_right = 80.0
-margin_bottom = 135.0
+margin_bottom = 69.0
 
 [node name="InventorySlotDisplay10" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 80.0
-margin_top = 90.0
+margin_top = 46.0
 margin_right = 160.0
-margin_bottom = 135.0
+margin_bottom = 69.0
 
 [node name="InventorySlotDisplay11" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 160.0
-margin_top = 90.0
+margin_top = 46.0
 margin_right = 240.0
-margin_bottom = 135.0
+margin_bottom = 69.0
 
 [node name="InventorySlotDisplay12" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
-margin_top = 90.0
+margin_top = 46.0
 margin_right = 320.0
-margin_bottom = 135.0
+margin_bottom = 69.0
 
 [node name="InventorySlotDisplay13" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 135.0
+margin_top = 69.0
 margin_right = 80.0
-margin_bottom = 180.0
+margin_bottom = 92.0
 
 [node name="InventorySlotDisplay14" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 80.0
-margin_top = 135.0
+margin_top = 69.0
 margin_right = 160.0
-margin_bottom = 180.0
+margin_bottom = 92.0
 
 [node name="InventorySlotDisplay15" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 160.0
-margin_top = 135.0
+margin_top = 69.0
 margin_right = 240.0
-margin_bottom = 180.0
+margin_bottom = 92.0
 
 [node name="InventorySlotDisplay16" parent="." instance=ExtResource( 1 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 240.0
-margin_top = 135.0
+margin_top = 69.0
+margin_right = 320.0
+margin_bottom = 92.0
+
+[node name="InventorySlotDisplay17" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 92.0
+margin_right = 80.0
+margin_bottom = 114.0
+
+[node name="InventorySlotDisplay18" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 80.0
+margin_top = 92.0
+margin_right = 160.0
+margin_bottom = 114.0
+
+[node name="InventorySlotDisplay19" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 160.0
+margin_top = 92.0
+margin_right = 240.0
+margin_bottom = 114.0
+
+[node name="InventorySlotDisplay20" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 240.0
+margin_top = 92.0
+margin_right = 320.0
+margin_bottom = 114.0
+
+[node name="InventorySlotDisplay21" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 114.0
+margin_right = 80.0
+margin_bottom = 136.0
+
+[node name="InventorySlotDisplay22" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 80.0
+margin_top = 114.0
+margin_right = 160.0
+margin_bottom = 136.0
+
+[node name="InventorySlotDisplay23" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 160.0
+margin_top = 114.0
+margin_right = 240.0
+margin_bottom = 136.0
+
+[node name="InventorySlotDisplay24" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 240.0
+margin_top = 114.0
+margin_right = 320.0
+margin_bottom = 136.0
+
+[node name="InventorySlotDisplay25" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 136.0
+margin_right = 80.0
+margin_bottom = 158.0
+
+[node name="InventorySlotDisplay26" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 80.0
+margin_top = 136.0
+margin_right = 160.0
+margin_bottom = 158.0
+
+[node name="InventorySlotDisplay27" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 160.0
+margin_top = 136.0
+margin_right = 240.0
+margin_bottom = 158.0
+
+[node name="InventorySlotDisplay28" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 240.0
+margin_top = 136.0
+margin_right = 320.0
+margin_bottom = 158.0
+
+[node name="InventorySlotDisplay29" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 158.0
+margin_right = 80.0
+margin_bottom = 180.0
+
+[node name="InventorySlotDisplay30" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 80.0
+margin_top = 158.0
+margin_right = 160.0
+margin_bottom = 180.0
+
+[node name="InventorySlotDisplay31" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 160.0
+margin_top = 158.0
+margin_right = 240.0
+margin_bottom = 180.0
+
+[node name="InventorySlotDisplay32" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 240.0
+margin_top = 158.0
 margin_right = 320.0
 margin_bottom = 180.0
