@@ -3426,56 +3426,56 @@ position = Vector2( 249, 910 )
 
 [node name="ItemDrop" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 16, 602 )
-frame = 23
+frame = 11
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop" index="0"]
 item = ExtResource( 14 )
 
 [node name="ItemDrop2" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 113, 535 )
-frame = 23
+frame = 11
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop2" index="0"]
 item = ExtResource( 14 )
 
 [node name="ItemDrop3" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 15, 1256 )
-frame = 23
+frame = 11
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop3" index="0"]
 item = ExtResource( 21 )
 
 [node name="ItemDrop4" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 677, 1220 )
-frame = 22
+frame = 10
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop4" index="0"]
 item = ExtResource( 24 )
 
 [node name="ItemDrop5" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 462, 1365 )
-frame = 22
+frame = 10
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop5" index="0"]
 item = ExtResource( 25 )
 
 [node name="ItemDrop6" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 7, 1098 )
-frame = 22
+frame = 10
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop6" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop7" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 311, 1283 )
-frame = 21
+frame = 9
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop7" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop8" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 1014, 1431 )
-frame = 21
+frame = 9
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop8" index="0"]
 item = ExtResource( 13 )

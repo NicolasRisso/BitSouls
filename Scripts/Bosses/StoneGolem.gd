@@ -13,7 +13,7 @@ export(float) var physicalArmor = 0.3
 export(float) var physicalArmorBuff = 0.2
 export(float) var fireArmor = 0.15
 export(float) var fireArmorBuff = 0.7
-export(float) var blockDamageNegation = 0.5
+export(float) var blockDamageNegation = 0.75
 export(int) var movementsBeforeOverload = 20
 
 var movs : int = 0
@@ -55,6 +55,7 @@ func _physics_process(delta):
 	move_and_collide(velocity * delta)
 	
 func set_health(value):
+	print(health - value)
 	health = value
 	emit_signal("health_changed", health)
 	if health <= 0 and isAlive:
@@ -91,8 +92,9 @@ func did_movement():
 func reloadScene():
 	self.health = maxHealth
 	position = originalPos
+	movs = 0
 	if armorBuffed:
 		physicalArmor -= physicalArmorBuff
 		fireArmor -= fireArmorBuff
 	armorBuffed = false
-	find_node("FiniteStateMachine").change_state("Idle")
+	find_node("FiniteStateMachine").change_state("Follow")

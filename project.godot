@@ -250,6 +250,7 @@ grab_item={
 2d_physics/layer_8="LostTotemInteract"
 2d_physics/layer_9="MessageInteract"
 2d_physics/layer_10="MessageZoneDetection"
+2d_physics/layer_11="GrassBossDestroy"
 
 [physics]
 

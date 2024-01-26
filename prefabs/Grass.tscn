@@ -14,7 +14,7 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 3 )]
-collision_layer = 8
+collision_layer = 1032
 showHit = false
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
