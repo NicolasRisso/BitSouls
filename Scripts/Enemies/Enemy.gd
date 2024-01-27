@@ -52,6 +52,7 @@ func _ready():
 	healthBar.loaded()
 	startPosition = position
 	Signals.connect("lostTotemInteracted", self, "respawn")
+	PlayerStats.connect("died", self, "respawn")
 
 func _physics_process(delta):
 	knockbackVector = knockbackVector.move_toward(Vector2.ZERO, KNOCKBACK_FORCE * delta)

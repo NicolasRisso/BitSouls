@@ -5,6 +5,11 @@ onready var collision = $"../../PlayerDetection/CollisionShape2D"
 var player_entered : bool = false setget set_player_entered
 var called_barrier_once : bool = false
 
+func _ready():
+	collision.disabled = true
+	yield(get_tree().create_timer(0.1), "timeout")  # Espera 0.1 segundo
+	collision.disabled = false
+
 func set_player_entered(value):
 	player_entered = value
 	collision.set_deferred("disabled", value)

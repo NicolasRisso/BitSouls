@@ -32,13 +32,15 @@ func exit():
 	
 func transition():
 	var distance = owner.direction.length()
+	var parent = get_parent()
 	
+	if parent.get_parent().overloadIncoming : parent.change_state("Overloaded")
 	if distance < distanceToAttack:
-		get_parent().change_state("MeleeAttack")
+		parent.change_state("MeleeAttack")
 	if distance >= distanceToAttack and distance <= distanceToForceField and canForceField:
 		if randf() <= actualForceFieldChance:
 			actualForceFieldChance = forceFieldChance
-			get_parent().change_state("ForceField")
+			parent.change_state("ForceField")
 		else:
 			timer.wait_time = 0.5
 			canForceField = false
@@ -47,9 +49,9 @@ func transition():
 		var chance = randi() % 2
 		match chance:
 			0:
-				get_parent().change_state("HomingMissile")
+				parent.change_state("HomingMissile")
 			1:
-				get_parent().change_state("LaserBeam")
+				parent.change_state("LaserBeam")
 
 func _on_Timer_timeout():
 	canForceField = true

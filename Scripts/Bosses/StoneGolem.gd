@@ -7,6 +7,7 @@ onready var sprite = $Sprite
 onready var hitboxPivot = $HitboxPivot
 onready var hurtbox = $Hurtbox
 
+export var boss_path = "res://prefabs/Bosses/StoneGolem.tscn"
 export(float) var maxHealth = 500
 onready var health : float = maxHealth setget set_health
 export(float) var physicalArmor = 0.3
@@ -21,6 +22,7 @@ var movs : int = 0
 var armorBuffed : bool = false
 var isAlive : bool = true
 var is_blocking : bool = false
+var overloadIncoming : bool = false
 
 var originalPos : Vector2
 var direction : Vector2
@@ -48,12 +50,11 @@ func aim_attack():
 	hitboxPivot.rotation_degrees = 180 + round(rad2deg(atan2(direction.y, direction.x)))
 
 func _physics_process(delta):
-	print("A")
 	var velocity = direction.normalized() * 40
 	move_and_collide(velocity * delta)
 	if (movs >= movementsBeforeOverload):
 		movs = 0
-		find_node("FiniteStateMachine").change_state("Overloaded")
+		overloadIncoming = true
 	
 func set_health(value):
 	health = value
@@ -85,15 +86,19 @@ func _on_Hurtbox_area_entered(area):
 	self.health -= area.fireDamage * (1 - fireArmor + area.firePierce) * damage_multi
 	hurtbox.create_hitEffect(area.damage, area.fireDamage)
 	
+func overloadPlayed():
+	overloadIncoming = false
+	
 func did_movement():
 	movs += 1
+	print(movs)
 	
 func reloadScene():
-	self.health = maxHealth
-	position = originalPos
-	movs = 0
-	if armorBuffed:
-		physicalArmor -= physicalArmorBuff
-		fireArmor -= fireArmorBuff
-	armorBuffed = false
-	find_node("FiniteStateMachine").change_state("Follow")
+	call_deferred("createNewBoss")
+
+func createNewBoss():
+	self.name = "oldBoss"
+	var new_boss = load(boss_path).instance()
+	new_boss.position = originalPos
+	get_parent().add_child(new_boss)
+	queue_free()
