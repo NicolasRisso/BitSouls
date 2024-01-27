@@ -1254,6 +1254,7 @@ shape = SubResource( 17 )
 disabled = true
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 margin_left = -20.0
 margin_top = -57.0
 margin_right = 21.0
@@ -1344,6 +1345,8 @@ script = ExtResource( 8 )
 [node name="ForceField" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource( 21 )
 
+[node name="BugTimer" type="Timer" parent="FiniteStateMachine/ForceField"]
+
 [node name="Overloaded" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource( 22 )
 
@@ -1382,6 +1385,7 @@ shape = SubResource( 20 )
 [connection signal="timeout" from="FiniteStateMachine/MeleeAttack/Timer" to="FiniteStateMachine/MeleeAttack" method="_on_Timer_timeout"]
 [connection signal="timeout" from="FiniteStateMachine/MeleeAttack/Timer2" to="FiniteStateMachine/MeleeAttack" method="_on_Timer2_timeout"]
 [connection signal="timeout" from="FiniteStateMachine/Dash/Timer" to="FiniteStateMachine/Dash" method="_on_Timer_timeout"]
+[connection signal="timeout" from="FiniteStateMachine/ForceField/BugTimer" to="FiniteStateMachine/ForceField" method="_on_BugTimer_timeout"]
 
 [editable path="Hurtbox"]
 [editable path="HitboxPivot/Hitbox"]

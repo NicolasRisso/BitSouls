@@ -17,6 +17,7 @@ var actualForceFieldChance = forceFieldChance
 var canForceField : bool = true
 
 func enter():
+	forceChangeStateTimer.stop()
 	forceChangeStateTimer.wait_time = maxFollowTime
 	forceChangeStateTimer.start()
 	set_physics_process(true)

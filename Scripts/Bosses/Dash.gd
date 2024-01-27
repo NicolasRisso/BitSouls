@@ -13,6 +13,11 @@ func enter():
 	animation_player.play("Glowing")
 	dash()
 	
+func exit():
+	set_physics_process(false)
+	owner.set_physics_process(false)
+	timer.stop()
+	
 func dash():
 	var tween = create_tween()
 	var dash_time = get_dash_duration_based_on_distance()
@@ -30,7 +35,6 @@ func transition():
 		can_transition = false
 		
 		get_parent().change_state("Follow")
-
 
 func _on_Timer_timeout():
 	can_transition = true

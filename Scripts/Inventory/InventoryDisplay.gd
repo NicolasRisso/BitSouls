@@ -44,10 +44,8 @@ func adjust_slots_late():
 func ajust_slots():
 	var slots_atuais = get_child_count()
 	var fileiras_atuais = slots_atuais / SLOTS_PER_ROW
-	var canDeleteLastRow = false
+	var canDeleteLastRow = verify_last_10_empty()
 	var canCreateNewRow = false
-
-	canDeleteLastRow = verify_last_10_empty()
 	
 	for i in range(slots_atuais - SLOTS_PER_ROW, slots_atuais):
 		if slot_esta_ocupado(i):
@@ -73,7 +71,7 @@ func verify_last_10_empty():
 	for i in range(inventory.items.size() - (2 * SLOTS_PER_ROW), inventory.items.size()):
 		if slot_esta_ocupado(i):
 			return false
-		elif inventory.items.size() > 20: return true
+	return true
 
 func slot_esta_ocupado(slot_index):
 	if slot_index < inventory.items.size():

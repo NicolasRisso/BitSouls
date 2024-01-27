@@ -20,6 +20,12 @@ func enter():
 	else:
 		animation_player.play("MeleeAttack")
 
+func exit():
+	set_physics_process(false)
+	owner.set_physics_process(false)
+	timer.stop()
+	timer2.stop()
+
 func transition():
 	if owner.direction.length() > distanceToFollowBack and attackedAtLeastOnce:
 		timer.stop()
