@@ -1254,7 +1254,6 @@ shape = SubResource( 17 )
 disabled = true
 
 [node name="Debug" type="Label" parent="."]
-visible = false
 margin_left = -20.0
 margin_top = -57.0
 margin_right = 21.0
@@ -1315,6 +1314,7 @@ forceFieldChanceIncresePerTry = 0.05
 
 [node name="MeleeAttack" type="Node2D" parent="FiniteStateMachine"]
 script = ExtResource( 13 )
+maxDistanceTollerance = 75.0
 
 [node name="Timer" type="Timer" parent="FiniteStateMachine/MeleeAttack"]
 

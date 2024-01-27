@@ -17,7 +17,6 @@ func set_item(item_index, item, inventory):
 	inventory.items[item_index] = item
 	emit_signal("items_changed", [item_index])
 	emit_signal("item_setted")
-	print("Item Setted")
 	return previousItem
 	
 func remove_item(item_index, inventory):
@@ -60,7 +59,6 @@ func resetHealPotion():
 func add_new_slots(quantidade):
 	for i in range(quantidade):
 		items.append(null)
-	print(items.size())
 
 func remove_newest_slots(quantidade):
 	for i in range(quantidade):

@@ -48,14 +48,14 @@ func aim_attack():
 	hitboxPivot.rotation_degrees = 180 + round(rad2deg(atan2(direction.y, direction.x)))
 
 func _physics_process(delta):
+	print("A")
+	var velocity = direction.normalized() * 40
+	move_and_collide(velocity * delta)
 	if (movs >= movementsBeforeOverload):
 		movs = 0
 		find_node("FiniteStateMachine").change_state("Overloaded")
-	var velocity = direction.normalized() * 40
-	move_and_collide(velocity * delta)
 	
 func set_health(value):
-	print(health - value)
 	health = value
 	emit_signal("health_changed", health)
 	if health <= 0 and isAlive:
@@ -87,7 +87,6 @@ func _on_Hurtbox_area_entered(area):
 	
 func did_movement():
 	movs += 1
-	print(movs)
 	
 func reloadScene():
 	self.health = maxHealth

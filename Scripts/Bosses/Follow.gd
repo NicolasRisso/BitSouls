@@ -20,8 +20,7 @@ func enter():
 	forceChangeStateTimer.stop()
 	forceChangeStateTimer.wait_time = maxFollowTime
 	forceChangeStateTimer.start()
-	set_physics_process(true)
-	owner.set_physics_process(true)
+	call_deferred("force_physics_process", true)
 	animation_player.play("Idle")
 	canForceField = true
 	#debug.text = str(actualForceFieldChance)
@@ -59,3 +58,7 @@ func _on_Timer_timeout():
 
 func _on_ForceChangeState_timeout():
 	get_parent().change_state("ForceField")
+
+func force_physics_process(value : bool):
+	set_physics_process(value)
+	owner.set_physics_process(value)

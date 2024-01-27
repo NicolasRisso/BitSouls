@@ -52,20 +52,20 @@ func ajust_slots():
 			canCreateNewRow = true
 			break
 	
-	print(str(canCreateNewRow) + ", " + str(canDeleteLastRow))
+	#print(str(canCreateNewRow) + ", " + str(canDeleteLastRow))
 
 	if canDeleteLastRow and inventory.items.size() > 20:
 		delete()
 	
 	if canCreateNewRow:
-		print("CREATE")
+		#print("CREATE")
 		inventory.add_new_slots(5)
 		for i in range(SLOTS_PER_ROW):
 			var slot = slot_prefab.instance()
 			slot.setInventory(inventory)
 			add_child(slot)
 			slot.itemAmountLabel.text = ""
-		print("size: " + str(inventory.items.size()))
+		#print("size: " + str(inventory.items.size()))
 
 func verify_last_10_empty():
 	for i in range(inventory.items.size() - (2 * SLOTS_PER_ROW), inventory.items.size()):
@@ -79,7 +79,7 @@ func slot_esta_ocupado(slot_index):
 	return false
 	
 func delete():
-	print("DELETE")
+	#print("DELETE")
 	for i in range(SLOTS_PER_ROW):
 		var ultimo_slot = get_child(inventory.items.size() - i - 1)
 		ultimo_slot.queue_free()

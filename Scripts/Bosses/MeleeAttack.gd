@@ -1,6 +1,7 @@
 extends State
 
 export(float) var distanceToFollowBack = 28.5
+export(float) var maxDistanceTollerance = 60
 export(float) var chanceToTripleAttack = 0.3
 
 export(float) var maxTimeToForcedForceField = 7
@@ -22,12 +23,11 @@ func enter():
 
 func exit():
 	set_physics_process(false)
-	owner.set_physics_process(false)
 	timer.stop()
 	timer2.stop()
 
 func transition():
-	if owner.direction.length() > distanceToFollowBack and attackedAtLeastOnce:
+	if (owner.direction.length() > distanceToFollowBack and attackedAtLeastOnce) or owner.direction.length() > maxDistanceTollerance:
 		timer.stop()
 		timer2.stop()
 		get_parent().change_state("Follow")
