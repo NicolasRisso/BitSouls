@@ -34,6 +34,7 @@ func transition():
 	var distance = owner.direction.length()
 	var parent = get_parent()
 	
+	parent.change_state("LaserShow")
 	if parent.get_parent().overloadIncoming : parent.change_state("Overloaded")
 	if distance < distanceToAttack:
 		parent.change_state("MeleeAttack")
