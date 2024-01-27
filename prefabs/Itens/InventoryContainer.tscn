@@ -14,6 +14,8 @@ region_rect = Rect2( 0, 0, 5, 5 )
 margin_right = 5.0
 margin_top = 2.0
 margin_bottom = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 modulate_color = Color( 0.298039, 0.298039, 0.298039, 1 )
@@ -24,9 +26,11 @@ region_rect = Rect2( 0, 0, 5, 5 )
 margin_right = 5.0
 margin_top = 2.0
 margin_bottom = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-modulate_color = Color( 0.737255, 0.737255, 0.737255, 1 )
+modulate_color = Color( 0.52549, 0.52549, 0.52549, 1 )
 
 [sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 7 )
@@ -34,9 +38,11 @@ region_rect = Rect2( 0, 0, 5, 5 )
 margin_right = 5.0
 margin_top = 2.0
 margin_bottom = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-modulate_color = Color( 0.52549, 0.52549, 0.52549, 1 )
+modulate_color = Color( 0.435294, 0.435294, 0.435294, 1 )
 
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 7 )
@@ -84,28 +90,28 @@ margin_bottom = 54.0
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 18.0
-margin_right = -102.0
+margin_left = 36.0
+margin_right = -84.0
 mouse_filter = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer"]
-margin_left = 61.0
+margin_left = 55.0
 margin_top = 53.0
-margin_right = 139.0
+margin_right = 145.0
 margin_bottom = 127.0
 rect_min_size = Vector2( 78, 74 )
 theme = SubResource( 2 )
 scroll_horizontal_enabled = false
 
 [node name="CenterContainer" type="CenterContainer" parent="CenterContainer/ScrollContainer"]
-margin_right = 72.0
-margin_bottom = 144.0
+margin_right = 90.0
+margin_bottom = 72.0
 
 [node name="InventoryDisplay" parent="CenterContainer/ScrollContainer/CenterContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 72.0
-margin_bottom = 144.0
+margin_right = 90.0
+margin_bottom = 72.0
 
 [node name="EquipmentContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -125,8 +131,8 @@ margin_bottom = 144.0
 [node name="ArtifactContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 18.0
-margin_right = -102.0
+margin_left = 33.0
+margin_right = -87.0
 margin_bottom = -100.0
 mouse_filter = 2
 
@@ -139,3 +145,5 @@ margin_right = 118.0
 margin_bottom = 49.0
 
 [node name="Texts" parent="." instance=ExtResource( 6 )]
+margin_left = 198.0
+margin_right = 238.0

@@ -5,6 +5,8 @@ var drag_data = null
 var displayRect = null
 
 signal items_changed(indexes)
+signal item_setted
+signal inventory_opened
 
 export(Array, Resource) var items = [
 	null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null
@@ -14,6 +16,8 @@ func set_item(item_index, item, inventory):
 	var previousItem = inventory.items[item_index]
 	inventory.items[item_index] = item
 	emit_signal("items_changed", [item_index])
+	emit_signal("item_setted")
+	print("Item Setted")
 	return previousItem
 	
 func remove_item(item_index, inventory):
@@ -52,3 +56,12 @@ func resetHealPotion():
 		if item is Potion:
 			if item.isReusable:
 				item.amount = 5
+				
+func add_new_slots(quantidade):
+	for i in range(quantidade):
+		items.append(null)
+	print(items.size())
+
+func remove_newest_slots(quantidade):
+	for i in range(quantidade):
+		items.pop_back()

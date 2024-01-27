@@ -241,6 +241,7 @@ func emitInventoryUpdate():
 	extraUsable.emit_signal("items_changed", [0, 1])
 	artifacts.emit_signal("items_changed", [0, 1])
 	inventory.emit_signal("items_changed", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+	inventory.emit_signal("inventory_opened")
 
 func refreash():
 	self.health = max_health_with_buffs
