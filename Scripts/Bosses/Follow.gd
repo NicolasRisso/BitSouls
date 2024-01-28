@@ -34,8 +34,15 @@ func transition():
 	var distance = owner.direction.length()
 	var parent = get_parent()
 	
-	parent.change_state("LaserShow")
-	if parent.get_parent().overloadIncoming : parent.change_state("Overloaded")
+	#parent.change_state("LaserShow")
+	print(parent.get_parent().armorBuffed)
+	if parent.get_parent().armorBuffed:
+		parent.get_parent().armorBuffEffect()
+		parent.change_state("ArmorBuff")
+		return
+	if parent.get_parent().overloadIncoming:
+		parent.change_state("Overloaded")
+		return
 	if distance < distanceToAttack:
 		parent.change_state("MeleeAttack")
 	if distance >= distanceToAttack and distance <= distanceToForceField and canForceField:

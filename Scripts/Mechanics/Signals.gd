@@ -5,3 +5,4 @@ signal lostTotemInteracted
 signal signInteract(values)
 signal interactArea(value)
 signal startBossFight
+signal bossDefeated

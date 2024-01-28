@@ -20,6 +20,7 @@ export(int) var movementsBeforeOverload = 20
 var movs : int = 0
 
 var armorBuffed : bool = false
+var alreadyArmorBuffed : bool = false
 var isAlive : bool = true
 var is_blocking : bool = false
 var overloadIncoming : bool = false
@@ -62,13 +63,11 @@ func set_health(value):
 	if health <= 0 and isAlive:
 		find_node("FiniteStateMachine").change_state("Death")
 		emit_signal("death")
+		Signals.emit_signal("bossDefeated")
 		isAlive = false
 	elif health <= maxHealth / 2:
-		if !armorBuffed:
+		if !alreadyArmorBuffed:
 			armorBuffed = true
-			physicalArmor += physicalArmorBuff
-			fireArmor += fireArmorBuff
-			find_node("FiniteStateMachine").change_state("ArmorBuff")
 
 func callHealthBar():
 	healthBar.connect_boss_healthBar(self)
@@ -88,6 +87,12 @@ func _on_Hurtbox_area_entered(area):
 	
 func overloadPlayed():
 	overloadIncoming = false
+	
+func armorBuffEffect():
+	physicalArmor += physicalArmorBuff
+	fireArmor += fireArmorBuff
+	alreadyArmorBuffed = true
+	armorBuffed = false
 	
 func did_movement():
 	movs += 1
