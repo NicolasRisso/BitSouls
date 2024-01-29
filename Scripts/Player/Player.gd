@@ -138,6 +138,7 @@ func bufferRead():
 	if Input.is_action_just_pressed("FullScreen"):
 		fullscreen = !fullscreen
 		OS.set_window_fullscreen(fullscreen)
+	if Input.is_action_just_pressed("Suicide"): reloadScene()
 	if Input.is_action_just_pressed("inventory") or (Input.is_action_just_pressed("close") and inventory):
 		inventory = !inventory
 		inventoryContainer.visible = inventory

@@ -39,7 +39,7 @@ frameToExplode = 2.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -8.0
+volume_db = -10.0
 autoplay = true
 
 [node name="Hitbox" parent="." instance=ExtResource( 5 )]

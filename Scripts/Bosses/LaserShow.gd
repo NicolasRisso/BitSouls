@@ -1,7 +1,5 @@
 extends State
 
-onready var tween = $Tween
-
 var can_transition: bool = false
 
 func enter():

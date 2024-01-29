@@ -60,6 +60,8 @@ func drop_data(_position, data):
 	var my_item = inventory.items[my_item_index]
 	if my_item is Item and my_item.name == data.item.name and my_item.isStackable:
 		my_item.amount += data.item.amount
+		print(my_item.amount)
+		print(data.item.amount)
 		inventory.emit_signal("items_changed", [my_item_index])
 	else:
 		inventory.swap_itens(my_item_index, inventory, data.item_index, data.inventory)
