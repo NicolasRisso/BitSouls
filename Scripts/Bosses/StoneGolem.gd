@@ -32,6 +32,7 @@ signal health_changed(value)
 signal death
 
 func _ready():
+	if name != "Stone Golem": queue_free()
 	set_physics_process(false)
 	slainedMessage.boss_conection(self)
 	PlayerStats.connect("no_health", self, "reloadScene")

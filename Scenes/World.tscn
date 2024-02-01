@@ -593,7 +593,7 @@ tile_data = PoolIntArray( -65538, 1, 0, -65537, 1, 1, -131072, 1, 1, -131071, 1,
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 1262, 383 )
+position = Vector2( 167, 1501 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -7914,105 +7914,105 @@ position = Vector2( 249, 910 )
 
 [node name="ItemDrop" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 16, 602 )
-frame = 12
+frame = 19
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop" index="0"]
 item = ExtResource( 30 )
 
 [node name="ItemDrop9" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 513, 866 )
-frame = 11
+frame = 18
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop9" index="0"]
 item = ExtResource( 31 )
 
 [node name="ItemDrop10" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 499, 243 )
-frame = 11
+frame = 18
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop10" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop11" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 45, 113 )
-frame = 10
+frame = 17
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop11" index="0"]
 item = ExtResource( 32 )
 
 [node name="ItemDrop12" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 367, 186 )
-frame = 10
+frame = 17
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop12" index="0"]
 item = ExtResource( 33 )
 
 [node name="ItemDrop13" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 374, 181 )
-frame = 9
+frame = 16
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop13" index="0"]
 item = ExtResource( 33 )
 
 [node name="ItemDrop14" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 724, 57 )
-frame = 9
+frame = 16
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop14" index="0"]
 item = ExtResource( 34 )
 
 [node name="ItemDrop15" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 1408, 267 )
-frame = 8
+frame = 15
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop15" index="0"]
 item = ExtResource( 35 )
 
 [node name="ItemDrop2" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 113, 535 )
-frame = 12
+frame = 19
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop2" index="0"]
 item = ExtResource( 14 )
 
 [node name="ItemDrop3" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 15, 1256 )
-frame = 12
+frame = 19
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop3" index="0"]
 item = ExtResource( 21 )
 
 [node name="ItemDrop4" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 677, 1220 )
-frame = 11
+frame = 18
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop4" index="0"]
 item = ExtResource( 24 )
 
 [node name="ItemDrop5" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 462, 1365 )
-frame = 11
+frame = 18
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop5" index="0"]
 item = ExtResource( 25 )
 
 [node name="ItemDrop6" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 7, 1098 )
-frame = 11
+frame = 18
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop6" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop7" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 311, 1283 )
-frame = 10
+frame = 17
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop7" index="0"]
 item = ExtResource( 13 )
 
 [node name="ItemDrop8" parent="YSort/Drops" instance=ExtResource( 5 )]
 position = Vector2( 1014, 1431 )
-frame = 10
+frame = 17
 
 [node name="ItemPickUpBox" parent="YSort/Drops/ItemDrop8" index="0"]
 item = ExtResource( 13 )
