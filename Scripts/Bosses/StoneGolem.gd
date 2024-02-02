@@ -21,6 +21,7 @@ var movs : int = 0
 
 var armorBuffed : bool = false
 var alreadyArmorBuffed : bool = false
+var secondPhase : bool = false
 var isAlive : bool = true
 var is_blocking : bool = false
 var overloadIncoming : bool = false
@@ -66,7 +67,7 @@ func set_health(value):
 		emit_signal("death")
 		Signals.emit_signal("bossDefeated")
 		isAlive = false
-	elif health <= maxHealth / 2:
+	elif health <= maxHealth * 0.55:
 		if !alreadyArmorBuffed:
 			armorBuffed = true
 
@@ -94,6 +95,7 @@ func armorBuffEffect():
 	fireArmor += fireArmorBuff
 	alreadyArmorBuffed = true
 	armorBuffed = false
+	secondPhase = true
 	
 func did_movement():
 	movs += 1

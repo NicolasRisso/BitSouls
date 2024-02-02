@@ -4,7 +4,7 @@ var can_transition: bool = false
 
 func enter():
 	set_physics_process(true)
-	play_animation("LaserCast")
+	play_animation("LaserShowCast")
 
 func play_animation(anim_name):
 	animation_player.play(anim_name)

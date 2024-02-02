@@ -10,9 +10,13 @@ export(float) var distanceToShoot = 130
 export(float) var forceFieldChance = 0.2
 export(float) var forceFieldChanceIncresePerTry = 0.1
 
+export(float) var LaserShowChance = 0.1
+export(float) var laserShowCastIncreasePerTry = 0.025
+
 export(float) var maxFollowTime = 7.5
 
 var actualForceFieldChance = forceFieldChance
+var actualLaserShowChance = LaserShowChance
 
 var canForceField : bool = true
 
@@ -35,7 +39,6 @@ func transition():
 	var parent = get_parent()
 	
 	#parent.change_state("LaserShow")
-	print(parent.get_parent().armorBuffed)
 	if parent.get_parent().armorBuffed:
 		parent.get_parent().armorBuffEffect()
 		parent.change_state("ArmorBuff")
@@ -46,7 +49,10 @@ func transition():
 	if distance < distanceToAttack:
 		parent.change_state("MeleeAttack")
 	if distance >= distanceToAttack and distance <= distanceToForceField and canForceField:
-		if randf() <= actualForceFieldChance:
+		if randf() <= actualLaserShowChance and parent.get_parent().secondPhase:
+			actualLaserShowChance = LaserShowChance
+			parent.change_state("LaserShow")
+		elif randf() <= actualForceFieldChance:
 			actualForceFieldChance = forceFieldChance
 			parent.change_state("ForceField")
 		else:
@@ -64,7 +70,10 @@ func transition():
 func _on_Timer_timeout():
 	canForceField = true
 	actualForceFieldChance += forceFieldChanceIncresePerTry
-	#debug.text = str(actualForceFieldChance)
+	actualLaserShowChance += laserShowCastIncreasePerTry
+	print(str(LaserShowChance) + " " + str(laserShowCastIncreasePerTry))
+	print(actualLaserShowChance)
+	#debug.text = str(actualLaserShowChance)
 
 func _on_ForceChangeState_timeout():
 	get_parent().change_state("ForceField")

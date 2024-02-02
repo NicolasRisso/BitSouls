@@ -769,10 +769,25 @@ tracks/3/keys = {
 "update": 0,
 "values": [ 0.0, 0.0, 270.0, 0.0 ]
 }
+tracks/4/type = "method"
+tracks/4/path = NodePath("../../FiniteStateMachine/LaserShow")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 5.125 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "anim_laser_ended"
+} ]
+}
 
 [sub_resource type="Animation" id=27]
 resource_name = "LaserShowCast"
-length = 0.7
+length = 0.875
+step = 0.125
 tracks/0/type = "value"
 tracks/0/path = NodePath("../../Sprite:frame")
 tracks/0/interp = 1
@@ -780,7 +795,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 50, 51, 52, 53, 54, 55, 56 ]
@@ -820,6 +835,20 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("../../FiniteStateMachine/LaserShow")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.875 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "anim_laserCast_ended"
+} ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -1572,6 +1601,8 @@ script = ExtResource( 10 )
 script = ExtResource( 11 )
 distanceToShoot = 100.0
 forceFieldChanceIncresePerTry = 0.05
+LaserShowChance = 0.05
+laserShowCastIncreasePerTry = 0.013
 
 [node name="Timer" type="Timer" parent="FiniteStateMachine/Follow"]
 
